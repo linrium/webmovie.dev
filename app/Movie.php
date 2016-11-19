@@ -11,9 +11,29 @@ class Movie extends Model
     public $timestamp = false;
 
     public function year() {
-        return $this->belongsTo('App/Year');
+        return $this->belongsTo('App\Year');
     }
     public function season() {
-        return $this->belongsTo('App/Season');
+        return $this->belongsTo('App\Season');
+    }
+    public function genre() {
+        return $this->belongsToMany('App\Genre')->withTimestamps();
+    }
+
+    public function movie_image() {
+        return $this->hasMany('App\MovieImage');
+    }
+    public function producer() {
+        return $this->belongsTo('App\Producer');
+    }
+    public function episode() {
+        return $this->hasMany('App\Episode');
+    }
+
+    public function fansub() {
+        return $this->belongsToMany('App\Fansub')->withTimestamps();
+    }
+    public function keywords() {
+        return $this->belongsToMany('App\Keyword')->withTimestamps();
     }
 }

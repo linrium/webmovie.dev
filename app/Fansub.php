@@ -9,4 +9,8 @@ class Fansub extends Model
     protected $table = 'fansubs';
     protected $fillable = ['name', 'alias'];
     public $timestamp = false;
+
+    public function movie() {
+        return $this->belongsToMany('App\Movie')->withTimestamps();
+    }
 }
