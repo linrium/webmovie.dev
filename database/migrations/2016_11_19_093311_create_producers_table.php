@@ -17,8 +17,6 @@ class CreateProducersTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('alias');
-            $table->integer('movie_id')->unsigned();
-            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->timestamps();
         });
     }
