@@ -26,7 +26,8 @@
                         <thead>
                             <th>#</th>
                             <th>Year</th>
-                            <th>Operation</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </thead>
                         <tbody>
                             <?php $stt = 0; ?>
@@ -37,7 +38,14 @@
                                     <td>{!! $item['name'] !!}</td>
                                     <td>
                                         <a class="btn btn-default" href="{!! URL::route('year.edit', $item['id']) !!}">Edit</a>
-                                        <a class="btn btn-default" href="{!! URL::route('year.destroy', $item['id']) !!}">Delete</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('year.destroy', $item['id']) }}" method="post">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="id" value="{{ $item['id'] }}">
+                                            <button type="submit" class="btn btn-error">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

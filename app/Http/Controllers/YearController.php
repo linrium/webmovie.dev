@@ -90,8 +90,7 @@ class YearController extends Controller
      */
     public function destroy($id)
     {
-        $year = Year::find($id);
-        $year->delete();
+        $year = Year::destroy($id);
 
         return redirect()->route('year.index')->with([
             'flash_level'=>'success',
