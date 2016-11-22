@@ -3,23 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\YearRequest;
-use App\Year;
+use App\Http\Requests\ProducerRequest;
+use App\Producer;
 
-class YearController extends Controller
+class ProducerController extends Controller
 {
-
-    private function transformCollection($years) {
-        return array_map([$this, 'transform'], $years->toArray());
-    }
-
-    private function transform($year) {
-        return [
-            'objectId' => $year['id'],
-            'name' => $year['name'],
-            'alias' => $year['alias'],
-        ];
-    }
     /**
      * Display a listing of the resource.
      *
@@ -27,13 +15,13 @@ class YearController extends Controller
      */
     public function index()
     {
-        $years = Year::all();
+        $producers = Producer::all();
         $statusCode = 200;
-        $response = $years;
+        $response = $producers;
 
-        if(!$years) {
+        if(!$producers) {
             $response = [
-                'error' => 'Year does not exist'
+                'error' => 'Producer does not exist'
             ];
             $statusCode = 404;
         }
@@ -64,10 +52,10 @@ class YearController extends Controller
             ];
             $statusCode = 422;
         } else {
-            $year = Year::create($request->all());
+            $producer = Producer::create($request->all());
             $response = [
-                "message" => "Year created succesfully",
-                "data" => $year
+                "message" => "Producer created succesfully",
+                "data" => $producer
             ];
             $statusCode = 201;
         }
@@ -84,13 +72,13 @@ class YearController extends Controller
      */
     public function show($id)
     {
-        $year = Year::find($id);
+        $producer = Producer::find($id);
         $statusCode = 200;
-        $response = $year;
+        $response = $producer;
 
-        if(!$year) {
+        if(!$producer) {
             $response = [
-                'error' => 'Year does not exist'
+                'error' => 'Producer does not exist'
             ];
             $statusCode = 404;
         }
@@ -123,13 +111,13 @@ class YearController extends Controller
             ];
             $statusCode = 422;
         } else {
-            $year = Year::find($id);
-            $year->name = $request->name;
-            $year->alias = $request->alias;
-            $year->save();
+            $producer = Producer::find($id);
+            $producer->name = $request->name;
+            $producer->alias = $request->alias;
+            $producer->save();
 
             $response = [
-                "message" => "Year updated succesfully"
+                "message" => "Producer updated succesfully"
             ];
             $statusCode = 422;
         }
@@ -145,16 +133,16 @@ class YearController extends Controller
      */
     public function destroy($id)
     {
-        $checkId = Year::find($id);
+        $checkId = Producer::find($id);
         if(!$checkId) {
             $response = [
-                "error" => "Year does not exits"
+                "error" => "Producer does not exits"
             ];
             $statusCode = 404;
         } else {
-            Year::destroy($id);
+            Producer::destroy($id);
             $response = [
-                "message" => "Year deleted succesfully"
+                "message" => "Producer deleted succesfully"
             ];
             $statusCode = 200;
         }

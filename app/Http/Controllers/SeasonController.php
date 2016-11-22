@@ -3,23 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\YearRequest;
-use App\Year;
+use App\Http\Requests\SeasonRequest;
+use App\Season;
 
-class YearController extends Controller
+class SeasonController extends Controller
 {
-
-    private function transformCollection($years) {
-        return array_map([$this, 'transform'], $years->toArray());
-    }
-
-    private function transform($year) {
-        return [
-            'objectId' => $year['id'],
-            'name' => $year['name'],
-            'alias' => $year['alias'],
-        ];
-    }
     /**
      * Display a listing of the resource.
      *
@@ -27,13 +15,13 @@ class YearController extends Controller
      */
     public function index()
     {
-        $years = Year::all();
+        $seasons = Season::all();
         $statusCode = 200;
-        $response = $years;
+        $response = $seasons;
 
-        if(!$years) {
+        if(!$seasons) {
             $response = [
-                'error' => 'Year does not exist'
+                'error' => 'Season does not exist'
             ];
             $statusCode = 404;
         }
@@ -64,10 +52,10 @@ class YearController extends Controller
             ];
             $statusCode = 422;
         } else {
-            $year = Year::create($request->all());
+            $season = Season::create($request->all());
             $response = [
-                "message" => "Year created succesfully",
-                "data" => $year
+                "message" => "Season created succesfully",
+                "data" => $season
             ];
             $statusCode = 201;
         }
@@ -84,13 +72,13 @@ class YearController extends Controller
      */
     public function show($id)
     {
-        $year = Year::find($id);
+        $season = Season::find($id);
         $statusCode = 200;
-        $response = $year;
+        $response = $season;
 
-        if(!$year) {
+        if(!$season) {
             $response = [
-                'error' => 'Year does not exist'
+                'error' => 'Season does not exist'
             ];
             $statusCode = 404;
         }
@@ -123,13 +111,13 @@ class YearController extends Controller
             ];
             $statusCode = 422;
         } else {
-            $year = Year::find($id);
-            $year->name = $request->name;
-            $year->alias = $request->alias;
-            $year->save();
+            $season = Season::find($id);
+            $season->name = $request->name;
+            $season->alias = $request->alias;
+            $season->save();
 
             $response = [
-                "message" => "Year updated succesfully"
+                "message" => "Season updated succesfully"
             ];
             $statusCode = 422;
         }
@@ -145,16 +133,16 @@ class YearController extends Controller
      */
     public function destroy($id)
     {
-        $checkId = Year::find($id);
+        $checkId = Season::find($id);
         if(!$checkId) {
             $response = [
-                "error" => "Year does not exits"
+                "error" => "Season does not exits"
             ];
             $statusCode = 404;
         } else {
-            Year::destroy($id);
+            Season::destroy($id);
             $response = [
-                "message" => "Year deleted succesfully"
+                "message" => "Season deleted succesfully"
             ];
             $statusCode = 200;
         }

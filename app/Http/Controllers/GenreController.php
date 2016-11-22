@@ -3,23 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\YearRequest;
-use App\Year;
+use App\Http\Requests\GenreRequest;
+use App\Genre;
 
-class YearController extends Controller
+class GenreController extends Controller
 {
-
-    private function transformCollection($years) {
-        return array_map([$this, 'transform'], $years->toArray());
-    }
-
-    private function transform($year) {
-        return [
-            'objectId' => $year['id'],
-            'name' => $year['name'],
-            'alias' => $year['alias'],
-        ];
-    }
     /**
      * Display a listing of the resource.
      *
@@ -27,13 +15,13 @@ class YearController extends Controller
      */
     public function index()
     {
-        $years = Year::all();
+        $genres = Genre::all();
         $statusCode = 200;
-        $response = $years;
+        $response = $genres;
 
-        if(!$years) {
+        if(!$genres) {
             $response = [
-                'error' => 'Year does not exist'
+                'error' => 'Genre does not exist'
             ];
             $statusCode = 404;
         }
@@ -64,10 +52,10 @@ class YearController extends Controller
             ];
             $statusCode = 422;
         } else {
-            $year = Year::create($request->all());
+            $genre = Genre::create($request->all());
             $response = [
-                "message" => "Year created succesfully",
-                "data" => $year
+                "message" => "Genre created succesfully",
+                "data" => $genre
             ];
             $statusCode = 201;
         }
@@ -84,13 +72,13 @@ class YearController extends Controller
      */
     public function show($id)
     {
-        $year = Year::find($id);
+        $genre = Genre::find($id);
         $statusCode = 200;
-        $response = $year;
+        $response = $genre;
 
-        if(!$year) {
+        if(!$genre) {
             $response = [
-                'error' => 'Year does not exist'
+                'error' => 'Genre does not exist'
             ];
             $statusCode = 404;
         }
@@ -123,13 +111,13 @@ class YearController extends Controller
             ];
             $statusCode = 422;
         } else {
-            $year = Year::find($id);
-            $year->name = $request->name;
-            $year->alias = $request->alias;
-            $year->save();
+            $genre = Genre::find($id);
+            $genre->name = $request->name;
+            $genre->alias = $request->alias;
+            $genre->save();
 
             $response = [
-                "message" => "Year updated succesfully"
+                "message" => "Genre updated succesfully"
             ];
             $statusCode = 422;
         }
@@ -145,16 +133,16 @@ class YearController extends Controller
      */
     public function destroy($id)
     {
-        $checkId = Year::find($id);
+        $checkId = Genre::find($id);
         if(!$checkId) {
             $response = [
-                "error" => "Year does not exits"
+                "error" => "Genre does not exits"
             ];
             $statusCode = 404;
         } else {
-            Year::destroy($id);
+            Genre::destroy($id);
             $response = [
-                "message" => "Year deleted succesfully"
+                "message" => "Genre deleted succesfully"
             ];
             $statusCode = 200;
         }
