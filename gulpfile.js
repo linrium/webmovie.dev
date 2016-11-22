@@ -27,12 +27,9 @@ elixir(mix => {
     .copy('node_modules/zone.js', 'public/zone.js')
 
     .typescript(
-        [
-            'app.component.ts',
-            'app.module.ts',
-            'main.ts'
-        ],
+        'app.js',
         'public/app',
+        '/**/*.ts',
         {
             "target": "es5",
             "module": "system",

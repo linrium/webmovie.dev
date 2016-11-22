@@ -19,6 +19,6 @@ Route::get('admin', function() {
     return view('admin.index');
 });
 
-Route::get('test', function() {
-    return view('test');
+Route::group(['prefix'=>'admin'], function() {
+    Route::resource('year', 'YearController');
 });
