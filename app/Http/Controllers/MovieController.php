@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\MovieRequest;
 use App\Movie;
+use App\Year;
+use App\Genre;
+use App\Keyword;
 
 class MovieController extends Controller
 {
@@ -68,9 +71,20 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        $movie = DB::table('movies')->join('years',"movies.year_id",'=',"years.id")->get();
+        // $response = Movie::join('movie_keywords','movies.id','=','movie_keywords.movie_id')
+        // ->join('keywords','keywords.id','=','movie_keywords.keyword_id')
+        // ->join('genre_movies','movies.id','=','genre_movies.movie_id')
+        // ->join('genres','genres.id','=','genre_movies.genre_id')
+        // ->join('years','years.id','=','movies.id')
+        // ->join('seasons','seasons.id','=','movies.id')
+        // ->where('movies.id',$id)
+        // ->get();
 
-        return response($movie, 200)->header('Content-Type','application/json');
+        $movie = Movie::find($id)->keywords()->get();
+
+        $response = $movie;
+
+        return response($response, 200)->header('Content-Type','application/json');
     }
 
     /**

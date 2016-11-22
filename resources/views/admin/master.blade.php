@@ -16,7 +16,7 @@
 <![endif]-->
 
 <!--angular 2-->
-<script src="{{ url('public/core-js/client/shim.min.js') }}"></script>
+<!--<script src="{{ url('public/core-js/client/shim.min.js') }}"></script>
 <script src="{{ url('public/zone.js/dist/zone.js') }}"></script>
 <script src="{{ url('public/reflect-metadata/Reflect.js') }}"></script>
 <script src="{{ url('public/systemjs/dist/system.src.js') }}"></script>
@@ -26,7 +26,7 @@
 	System.import('app').catch(function(err) { 
 		console.error(err);
 	});
-</script>
+</script>-->
 <!--end angular 2-->
 
 </head>
@@ -38,16 +38,15 @@
 
 	<!--left sidebar-->
 	@include('admin.component.left-sidebar')
-	
+
 	<!--main-->
 	@yield('content')
 	<!--end main-->
 
-	<movie-app></movie-app>
-
 	<script src="{{ url('public/js/jquery-1.11.1.min.js') }}"></script>
 	<script src="{{ url('public/js/bootstrap.min.js') }}"></script>
 	<script src="{{ url('public/js/chart.min.js') }}"></script>
+	<script src="{{ url('public/js/myscript.js') }}"></script>
 </body>
 
 </html>

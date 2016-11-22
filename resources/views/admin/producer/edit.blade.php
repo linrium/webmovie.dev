@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Create new year</div>
+                <div class="panel-heading">Edit year</div>
                 <div class="panel-body">
                     <div class="col-lg-7">
                         @if(count($errors) > 0)
@@ -39,7 +39,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default">Create</button>
+                                    <button type="submit" class="btn btn-default">Update</button>
                                 </div>
                             </div>
                         </form>

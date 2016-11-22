@@ -24,13 +24,13 @@ class YearRequest extends FormRequest
     public function rules()
     {
         return [
-            'textName'=>'required|unique:years,name'
+            'txtName'=>'required|unique:years,name'
         ];
     }
     public function messages() {
         return [
-            'textName.required'=>'Please name of year',
-            'textName.unique'=>'This name of year is exist'
+            'txtName.required'=>'Please name of year',
+            'txtName.unique'=>'This name of year is exist'
         ];
     }
 }

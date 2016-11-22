@@ -8,18 +8,6 @@ use App\Year;
 
 class YearController extends Controller
 {
-
-    private function transformCollection($years) {
-        return array_map([$this, 'transform'], $years->toArray());
-    }
-
-    private function transform($year) {
-        return [
-            'objectId' => $year['id'],
-            'name' => $year['name'],
-            'alias' => $year['alias'],
-        ];
-    }
     /**
      * Display a listing of the resource.
      *
@@ -27,17 +15,8 @@ class YearController extends Controller
      */
     public function index()
     {
-        $years = Year::all();
-        $statusCode = 200;
-        $response = $years;
-
-        if(!$years) {
-            $response = [
-                'error' => 'Year does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        $data = Year::select('id','name')->orderBy('id', 'DESC')->get()->toArray();
+        return view('admin.year.index', compact('data'));
     }
 
     /**
@@ -47,7 +26,7 @@ class YearController extends Controller
      */
     public function create(Request $request)
     {
-        
+        return view('admin.year.create');
     }
 
     /**
@@ -56,24 +35,17 @@ class YearController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(YearRequest $request)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $year = Year::create($request->all());
-            $response = [
-                "message" => "Year created succesfully",
-                "data" => $year
-            ];
-            $statusCode = 201;
-        }
-        
+        $year = new Year();
+        $year->name = $request->txtName;
+        $year->alias = changeTitle($request->txtName);
+        $year->save();
 
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('year.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Year created succesfully'
+        ]);
     }
 
     /**
@@ -84,17 +56,7 @@ class YearController extends Controller
      */
     public function show($id)
     {
-        $year = Year::find($id);
-        $statusCode = 200;
-        $response = $year;
-
-        if(!$year) {
-            $response = [
-                'error' => 'Year does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        
     }
 
     /**
@@ -105,7 +67,7 @@ class YearController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo $id;
     }
 
     /**
@@ -117,24 +79,7 @@ class YearController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $year = Year::find($id);
-            $year->name = $request->name;
-            $year->alias = $request->alias;
-            $year->save();
-
-            $response = [
-                "message" => "Year updated succesfully"
-            ];
-            $statusCode = 422;
-        }
-
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        
     }
 
     /**
@@ -145,20 +90,12 @@ class YearController extends Controller
      */
     public function destroy($id)
     {
-        $checkId = Year::find($id);
-        if(!$checkId) {
-            $response = [
-                "error" => "Year does not exits"
-            ];
-            $statusCode = 404;
-        } else {
-            Year::destroy($id);
-            $response = [
-                "message" => "Year deleted succesfully"
-            ];
-            $statusCode = 200;
-        }
-        
-        return response($response, $statusCode)->header('Content-Type', 'application/json');
+        $year = Year::find($id);
+        $year->delete();
+
+        return redirect()->route('year.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Year created succesfully'
+        ]);
     }
 }

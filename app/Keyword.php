@@ -11,6 +11,9 @@ class Keyword extends Model
     public $timestamp = false;
 
     public function movie() {
-        return $this->belongsToMany('App\Movie')->withTimestamps();
+        return $this->belongsToMany('App\Movie', 'movie_keywords')->withTimestamps();
+    }
+    public function episode() {
+        return $this->belongsToMany('App\Episode', 'episode_keywords')->withTimestamps();
     }
 }

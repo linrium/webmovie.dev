@@ -11,6 +11,6 @@ class Fansub extends Model
     public $timestamp = false;
 
     public function movie() {
-        return $this->belongsToMany('App\Movie')->withTimestamps();
+        return $this->belongsToMany('App\Movie', 'fansub_movies')->withTimestamps();
     }
 }

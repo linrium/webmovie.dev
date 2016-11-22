@@ -17,7 +17,7 @@ class Movie extends Model
         return $this->belongsTo('App\Season');
     }
     public function genre() {
-        return $this->belongsToMany('App\Genre')->withTimestamps();
+        return $this->belongsToMany('App\Genre', 'genre_movies')->withTimestamps();
     }
 
     public function movie_image() {
@@ -31,9 +31,9 @@ class Movie extends Model
     }
 
     public function fansub() {
-        return $this->belongsToMany('App\Fansub')->withTimestamps();
+        return $this->belongsToMany('App\Fansub', 'fansub_movies')->withTimestamps();
     }
     public function keywords() {
-        return $this->belongsToMany('App\Keyword')->withTimestamps();
+        return $this->belongsToMany('App\Keyword', 'movie_keywords')->withTimestamps();
     }
 }

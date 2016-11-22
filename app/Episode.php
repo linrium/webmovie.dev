@@ -19,4 +19,7 @@ class Episode extends Model
     public function episode_image() {
         return $this->hasMany('App\EpisodeImage');
     }
+    public function keywords() {
+        return $this->belongsToMany('App\Keyword', 'episode_keywords')->withTimestamps();
+    }
 }

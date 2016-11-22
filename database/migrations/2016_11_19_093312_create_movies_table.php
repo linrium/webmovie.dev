@@ -18,7 +18,6 @@ class CreateMoviesTable extends Migration
             $table->string('name');
             $table->string('alias');
             $table->string('trailer');
-            $table->string('keywords');
             $table->integer('views')->unsigned();
             $table->integer('rank')->unsigned();
             $table->integer('total_episodes')->unsigned();
