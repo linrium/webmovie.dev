@@ -13,7 +13,7 @@ class ProducerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class ProducerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtName'=>'required|unique:producers,name'
+        ];
+    }
+    public function message() {
+        return [
+            'txtName.required'=>'Please enter the name of producer',
+            'txtName.unique'=>'This name of producer is exist'
         ];
     }
 }

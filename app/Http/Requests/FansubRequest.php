@@ -13,7 +13,7 @@ class FansubRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class FansubRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtName'=>'required|unique:fansubs,name'
+        ];
+    }
+    public function message() {
+        return [
+            'txtName.required'=>'Please enter the name of fansub',
+            'txtName.unique'=>'This name of fansub is exist'
         ];
     }
 }

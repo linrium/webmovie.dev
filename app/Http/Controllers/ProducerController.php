@@ -15,17 +15,9 @@ class ProducerController extends Controller
      */
     public function index()
     {
-        $producers = Producer::all();
-        $statusCode = 200;
-        $response = $producers;
+        $data = Producer::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
 
-        if(!$producers) {
-            $response = [
-                'error' => 'Producer does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return view('admin.producer.index', compact('data'));
     }
 
     /**
@@ -35,7 +27,7 @@ class ProducerController extends Controller
      */
     public function create(Request $request)
     {
-        
+        return view('admin.producer.create');
     }
 
     /**
@@ -44,24 +36,17 @@ class ProducerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProducerRequest $request)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $producer = Producer::create($request->all());
-            $response = [
-                "message" => "Producer created succesfully",
-                "data" => $producer
-            ];
-            $statusCode = 201;
-        }
-        
+        $producer = new Producer();
+        $producer->name = $request->txtName;
+        $producer->alias = changeTitle($request->txtName);
+        $producer->save();
 
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('producer.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Producer created succesfully'
+        ]);
     }
 
     /**
@@ -72,17 +57,7 @@ class ProducerController extends Controller
      */
     public function show($id)
     {
-        $producer = Producer::find($id);
-        $statusCode = 200;
-        $response = $producer;
-
-        if(!$producer) {
-            $response = [
-                'error' => 'Producer does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        $producer = Producer::find($id)->toArray();
     }
 
     /**
@@ -93,7 +68,9 @@ class ProducerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $producer = Producer::find($id)->toArray();
+
+        return view('admin.producer.edit', compact('producer'));
     }
 
     /**
@@ -103,26 +80,17 @@ class ProducerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProducerRequest $request, $id)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $producer = Producer::find($id);
-            $producer->name = $request->name;
-            $producer->alias = $request->alias;
-            $producer->save();
+        $producer = Producer::find($id);
+        $producer->name = $request->txtName;
+        $producer->alias = changeTitle($request->txtName);
+        $producer->save();
 
-            $response = [
-                "message" => "Producer updated succesfully"
-            ];
-            $statusCode = 422;
-        }
-
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('producer.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Producer updated succesfully'
+        ]);
     }
 
     /**
@@ -133,20 +101,11 @@ class ProducerController extends Controller
      */
     public function destroy($id)
     {
-        $checkId = Producer::find($id);
-        if(!$checkId) {
-            $response = [
-                "error" => "Producer does not exits"
-            ];
-            $statusCode = 404;
-        } else {
-            Producer::destroy($id);
-            $response = [
-                "message" => "Producer deleted succesfully"
-            ];
-            $statusCode = 200;
-        }
-        
-        return response($response, $statusCode)->header('Content-Type', 'application/json');
+        $producer = Producer::destroy($id);
+
+        return redirect()->route('producer.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Producer deleted succesfully'
+        ]);
     }
 }

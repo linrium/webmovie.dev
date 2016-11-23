@@ -17,24 +17,18 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit year</div>
+                <div class="panel-heading">Update year</div>
                 <div class="panel-body">
                     <div class="col-lg-7">
-                        @if(count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{!! $error !!}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form class="form-horizontal" action="{!! route('year.store') !!}" method="post">
+                        @include('admin.component.alertForm')
+                        <form class="form-horizontal" action="{!! route('year.update', $year['id']) !!}" method="post">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="id" value="{{ $year['id'] }}">
                             <div class="form-group">
                                 <label for="txtName" class="col-sm-2 control-label">Year name</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="txtName" name="txtName" placeholder="Please enter year name">
+                                    <input type="number" class="form-control" id="txtName" name="txtName" value="{!! old('txtName', isset($year) ? $year['name'] : null) !!}" placeholder="Please enter year name">
                                 </div>
                             </div>
                             <div class="form-group">

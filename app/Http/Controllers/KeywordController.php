@@ -15,17 +15,9 @@ class KeywordController extends Controller
      */
     public function index()
     {
-        $keywords = Keyword::all();
-        $statusCode = 200;
-        $response = $keywords;
+        $data = Keyword::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
 
-        if(!$keywords) {
-            $response = [
-                'error' => 'Keyword does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return view('admin.keyword.index', compact('data'));
     }
 
     /**
@@ -35,7 +27,7 @@ class KeywordController extends Controller
      */
     public function create(Request $request)
     {
-        
+        return view('admin.keyword.create');
     }
 
     /**
@@ -44,24 +36,17 @@ class KeywordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KeywordRequest $request)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $keyword = Keyword::create($request->all());
-            $response = [
-                "message" => "Keyword created succesfully",
-                "data" => $keyword
-            ];
-            $statusCode = 201;
-        }
-        
+        $keyword = new Keyword();
+        $keyword->name = $request->txtName;
+        $keyword->alias = changeTitle($request->txtName);
+        $keyword->save();
 
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('keyword.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Keyword created succesfully'
+        ]);
     }
 
     /**
@@ -72,17 +57,7 @@ class KeywordController extends Controller
      */
     public function show($id)
     {
-        $keyword = Keyword::find($id);
-        $statusCode = 200;
-        $response = $keyword;
-
-        if(!$keyword) {
-            $response = [
-                'error' => 'Keyword does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        $keyword = Keyword::find($id)->toArray();
     }
 
     /**
@@ -93,7 +68,9 @@ class KeywordController extends Controller
      */
     public function edit($id)
     {
-        //
+        $keyword = Keyword::find($id)->toArray();
+
+        return view('admin.keyword.edit', compact('keyword'));
     }
 
     /**
@@ -103,26 +80,17 @@ class KeywordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(KeywordRequest $request, $id)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $keyword = Keyword::find($id);
-            $keyword->name = $request->name;
-            $keyword->alias = $request->alias;
-            $keyword->save();
+        $keyword = Keyword::find($id);
+        $keyword->name = $request->txtName;
+        $keyword->alias = changeTitle($request->txtName);
+        $keyword->save();
 
-            $response = [
-                "message" => "Keyword updated succesfully"
-            ];
-            $statusCode = 422;
-        }
-
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('keyword.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Keyword updated succesfully'
+        ]);
     }
 
     /**
@@ -133,20 +101,11 @@ class KeywordController extends Controller
      */
     public function destroy($id)
     {
-        $checkId = Keyword::find($id);
-        if(!$checkId) {
-            $response = [
-                "error" => "Keyword does not exits"
-            ];
-            $statusCode = 404;
-        } else {
-            Keyword::destroy($id);
-            $response = [
-                "message" => "Keyword deleted succesfully"
-            ];
-            $statusCode = 200;
-        }
-        
-        return response($response, $statusCode)->header('Content-Type', 'application/json');
+        $keyword = Keyword::destroy($id);
+
+        return redirect()->route('keyword.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Keyword deleted succesfully'
+        ]);
     }
 }

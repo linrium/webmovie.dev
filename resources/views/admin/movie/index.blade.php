@@ -10,7 +10,7 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Producers manager</h1>
+            <h1 class="page-header">Movies manager</h1>
             @include('admin.component.alert')
         </div>
     </div><!--/.row-->
@@ -19,13 +19,17 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-success" href="{!! route('producer.create') !!}">Create Producer</a>
+                    <a class="btn btn-success" href="{!! route('movie.create') !!}">Create Movie</a>
                 </div>
                 <div class="panel-body">
                     <table class="table table-hover">
                         <thead>
                             <th>#</th>
-                            <th>Producer</th>
+                            <th>Name</th>
+                            <th>Views</th>
+                            <th>Total Episode</th>
+                            <th>Year</th>
+                            <th>Season</th>
                             <th>Edit</th>
                             <th>View</th>
                             <th>Delete</th>
@@ -37,14 +41,28 @@
                                 <tr>
                                     <th>{!! $stt !!}</th>
                                     <td>{!! $item['name'] !!}</td>
+                                    <td>{!! $item['views'] !!}</td>
+                                    <td>{!! $item['total_episodes'] !!}</td>
                                     <td>
-                                        <a class="btn btn-default" href="{!! URL::route('producer.edit', $item['id']) !!}">Edit</a>
+                                        <?php
+                                        $year = DB::table('years')->where('id', $item['year_id'])->first();
+                                        echo $year->name;
+                                        ?>
                                     </td>
                                     <td>
-                                        <a class="btn btn-default" href="{!! URL::route('producer.show', $item['id']) !!}">View</a>
+                                         <?php
+                                        $season = DB::table('seasons')->where('id', $item['season_id'])->first();
+                                        echo $season->name;
+                                        ?>
                                     </td>
                                     <td>
-                                        <form action="{{ route('producer.destroy', $item['id']) }}" method="post">
+                                        <a class="btn btn-default" href="{!! URL::route('movie.edit', $item['id']) !!}">Edit</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-default" href="{!! URL::route('movie.show', $item['id']) !!}">View</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('movie.destroy', $item['id']) }}" method="post">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="id" value="{{ $item['id'] }}">

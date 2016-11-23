@@ -15,17 +15,9 @@ class FansubController extends Controller
      */
     public function index()
     {
-        $fansubs = Fansub::all();
-        $statusCode = 200;
-        $response = $fansubs;
+        $data = Fansub::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
 
-        if(!$fansubs) {
-            $response = [
-                'error' => 'Fansub does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return view('admin.fansub.index', compact('data'));
     }
 
     /**
@@ -35,7 +27,7 @@ class FansubController extends Controller
      */
     public function create(Request $request)
     {
-        
+        return view('admin.fansub.create');
     }
 
     /**
@@ -44,24 +36,17 @@ class FansubController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FansubRequest $request)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $fansub = Fansub::create($request->all());
-            $response = [
-                "message" => "Fansub created succesfully",
-                "data" => $fansub
-            ];
-            $statusCode = 201;
-        }
-        
+        $fansub = new Fansub();
+        $fansub->name = $request->txtName;
+        $fansub->alias = changeTitle($request->txtName);
+        $fansub->save();
 
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('fansub.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Fansub created succesfully'
+        ]);
     }
 
     /**
@@ -72,17 +57,7 @@ class FansubController extends Controller
      */
     public function show($id)
     {
-        $fansub = Fansub::find($id);
-        $statusCode = 200;
-        $response = $fansub;
-
-        if(!$fansub) {
-            $response = [
-                'error' => 'Fansub does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        $fansub = Fansub::find($id)->toArray();
     }
 
     /**
@@ -93,7 +68,9 @@ class FansubController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fansub = Fansub::find($id)->toArray();
+
+        return view('admin.fansub.edit', compact('fansub'));
     }
 
     /**
@@ -103,26 +80,17 @@ class FansubController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FansubRequest $request, $id)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $fansub = Fansub::find($id);
-            $fansub->name = $request->name;
-            $fansub->alias = $request->alias;
-            $fansub->save();
+        $fansub = Fansub::find($id);
+        $fansub->name = $request->txtName;
+        $fansub->alias = changeTitle($request->txtName);
+        $fansub->save();
 
-            $response = [
-                "message" => "Fansub updated succesfully"
-            ];
-            $statusCode = 422;
-        }
-
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('fansub.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Fansub updated succesfully'
+        ]);
     }
 
     /**
@@ -133,20 +101,11 @@ class FansubController extends Controller
      */
     public function destroy($id)
     {
-        $checkId = Fansub::find($id);
-        if(!$checkId) {
-            $response = [
-                "error" => "Fansub does not exits"
-            ];
-            $statusCode = 404;
-        } else {
-            Fansub::destroy($id);
-            $response = [
-                "message" => "Fansub deleted succesfully"
-            ];
-            $statusCode = 200;
-        }
-        
-        return response($response, $statusCode)->header('Content-Type', 'application/json');
+        $fansub = Fansub::destroy($id);
+
+        return redirect()->route('fansub.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Fansub deleted succesfully'
+        ]);
     }
 }

@@ -15,17 +15,9 @@ class SeasonController extends Controller
      */
     public function index()
     {
-        $seasons = Season::all();
-        $statusCode = 200;
-        $response = $seasons;
+        $data = Season::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
 
-        if(!$seasons) {
-            $response = [
-                'error' => 'Season does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return view('admin.season.index', compact('data'));
     }
 
     /**
@@ -35,7 +27,7 @@ class SeasonController extends Controller
      */
     public function create(Request $request)
     {
-        
+        return view('admin.season.create');
     }
 
     /**
@@ -44,24 +36,17 @@ class SeasonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SeasonRequest $request)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $season = Season::create($request->all());
-            $response = [
-                "message" => "Season created succesfully",
-                "data" => $season
-            ];
-            $statusCode = 201;
-        }
-        
+        $season = new Season();
+        $season->name = $request->txtName;
+        $season->alias = changeTitle($request->txtName);
+        $season->save();
 
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('season.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Season created succesfully'
+        ]);
     }
 
     /**
@@ -72,17 +57,7 @@ class SeasonController extends Controller
      */
     public function show($id)
     {
-        $season = Season::find($id);
-        $statusCode = 200;
-        $response = $season;
-
-        if(!$season) {
-            $response = [
-                'error' => 'Season does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        $season = Season::find($id)->toArray();
     }
 
     /**
@@ -93,7 +68,9 @@ class SeasonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $season = Season::find($id)->toArray();
+
+        return view('admin.season.edit', compact('season'));
     }
 
     /**
@@ -103,26 +80,17 @@ class SeasonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SeasonRequest $request, $id)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $season = Season::find($id);
-            $season->name = $request->name;
-            $season->alias = $request->alias;
-            $season->save();
+        $season = Season::find($id);
+        $season->name = $request->txtName;
+        $season->alias = changeTitle($request->txtName);
+        $season->save();
 
-            $response = [
-                "message" => "Season updated succesfully"
-            ];
-            $statusCode = 422;
-        }
-
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('season.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Season updated succesfully'
+        ]);
     }
 
     /**
@@ -133,20 +101,11 @@ class SeasonController extends Controller
      */
     public function destroy($id)
     {
-        $checkId = Season::find($id);
-        if(!$checkId) {
-            $response = [
-                "error" => "Season does not exits"
-            ];
-            $statusCode = 404;
-        } else {
-            Season::destroy($id);
-            $response = [
-                "message" => "Season deleted succesfully"
-            ];
-            $statusCode = 200;
-        }
-        
-        return response($response, $statusCode)->header('Content-Type', 'application/json');
+        $season = Season::destroy($id);
+
+        return redirect()->route('season.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Season deleted succesfully'
+        ]);
     }
 }

@@ -10,35 +10,29 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Years manager</h1>
+            <h1 class="page-header">Genres manager</h1>
         </div>
     </div><!--/.row-->
     
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit year</div>
+                <div class="panel-heading">Update genre</div>
                 <div class="panel-body">
                     <div class="col-lg-7">
-                        @if(count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{!! $error !!}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form class="form-horizontal" action="{!! route('year.store') !!}" method="post">
+                        @include('admin.component.alertForm')
+                        <form class="form-horizontal" action="{!! route('genre.update', $genre['id']) !!}" method="post">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="id" value="{{ $genre['id'] }}">
                             <div class="form-group">
-                                <label for="txtName" class="col-sm-2 control-label">Year name</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="txtName" name="txtName" placeholder="Please enter year name">
+                                <label for="txtName" class="col-sm-3 control-label">Genre name</label>
+                                <div class="col-sm-9">
+                                    <input type="txt" class="form-control" id="txtName" name="txtName" value="{!! old('txtName', isset($genre) ? $genre['name'] : null) !!}" placeholder="Please enter genre name">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
+                                <div class="col-sm-offset-3 col-sm-9">
                                     <button type="submit" class="btn btn-default">Update</button>
                                 </div>
                             </div>

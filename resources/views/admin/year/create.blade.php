@@ -20,15 +20,7 @@
                 <div class="panel-heading">Create new year</div>
                 <div class="panel-body">
                     <div class="col-lg-7">
-                        @if(count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{!! $error !!}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        @include('admin.component.alertForm')
                         <form class="form-horizontal" action="{!! route('year.store') !!}" method="post">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                             <div class="form-group">

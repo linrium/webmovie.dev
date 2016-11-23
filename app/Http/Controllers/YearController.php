@@ -16,6 +16,7 @@ class YearController extends Controller
     public function index()
     {
         $data = Year::select('id','name')->orderBy('id', 'DESC')->get()->toArray();
+        
         return view('admin.year.index', compact('data'));
     }
 
@@ -56,7 +57,9 @@ class YearController extends Controller
      */
     public function show($id)
     {
-        
+        $year = Year::find($id)->toArray();
+
+        print_r($year);
     }
 
     /**
@@ -67,7 +70,9 @@ class YearController extends Controller
      */
     public function edit($id)
     {
-        echo $id;
+        $year = Year::find($id)->toArray();
+
+        return view('admin.year.edit', compact('year'));
     }
 
     /**
@@ -77,9 +82,17 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(YearRequest $request, $id)
     {
-        
+        $year = Year::find($id);
+        $year->name = $request->txtName;
+        $year->alias = changeTitle($request->txtName);
+        $year->save();
+
+        return redirect()->route('year.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Year updated succesfully'
+        ]);
     }
 
     /**
@@ -94,7 +107,7 @@ class YearController extends Controller
 
         return redirect()->route('year.index')->with([
             'flash_level'=>'success',
-            'flash_message'=>'Year created succesfully'
+            'flash_message'=>'Year deleted succesfully'
         ]);
     }
 }

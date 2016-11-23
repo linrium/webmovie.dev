@@ -29,7 +29,7 @@ class YearRequest extends FormRequest
     }
     public function messages() {
         return [
-            'txtName.required'=>'Please name of year',
+            'txtName.required'=>'Please enter the name of year',
             'txtName.unique'=>'This name of year is exist'
         ];
     }

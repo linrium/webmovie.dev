@@ -19,19 +19,12 @@ class MovieController extends Controller
      */
     public function index()
     {
-        // $movies = Movie::all();
-        // $statusCode = 200;
-        // $response = $movies;
+        $data = Movie::select('id', 'name', 'trailer', 'views', 'rank', 'total_episodes', 'duration', 'description', 'year_id', 'season_id', 'producer_id')
+        ->orderBy('id', 'DESC')
+        ->get()
+        ->toArray();
 
-        // if(!$movies) {
-        //     $response = [
-        //         'error' => 'Movie does not exist'
-        //     ];
-        //     $statusCode = 404;
-        // }
-        // return response($response, $statusCode)->header('Content-Type','application/json');
-
-        $movie = DB::table('movies')->join('years','movies.year_id','=','years.id')->get();
+        return view('admin.movie.index', compact('data'));
     }
 
     /**
@@ -39,9 +32,9 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('admin.movie.create');
     }
 
     /**
@@ -50,17 +43,17 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MovieRequest $request)
     {
-        $movie = Movie::create($request->all());
-        $response = [
-            "message" => "Movie created succesfully",
-            "data" => $movie
-        ];
-        $statusCode = 201;
-        
+        $movie = new Movie();
+        $movie->name = $request->txtName;
+        $movie->alias = changeTitle($request->txtName);
+        $movie->save();
 
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('movie.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Movie created succesfully'
+        ]);
     }
 
     /**
@@ -71,20 +64,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        // $response = Movie::join('movie_keywords','movies.id','=','movie_keywords.movie_id')
-        // ->join('keywords','keywords.id','=','movie_keywords.keyword_id')
-        // ->join('genre_movies','movies.id','=','genre_movies.movie_id')
-        // ->join('genres','genres.id','=','genre_movies.genre_id')
-        // ->join('years','years.id','=','movies.id')
-        // ->join('seasons','seasons.id','=','movies.id')
-        // ->where('movies.id',$id)
-        // ->get();
-
-        $movie = Movie::find($id)->keywords()->get();
-
-        $response = $movie;
-
-        return response($response, 200)->header('Content-Type','application/json');
+        $movie = Movie::find($id)->toArray();
     }
 
     /**
@@ -95,7 +75,9 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $movie = Movie::find($id)->toArray();
+
+        return view('admin.movie.edit', compact('movie'));
     }
 
     /**
@@ -105,9 +87,17 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MovieRequest $request, $id)
     {
-        //
+        $movie = Movie::find($id);
+        $movie->name = $request->txtName;
+        $movie->alias = changeTitle($request->txtName);
+        $movie->save();
+
+        return redirect()->route('movie.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Movie updated succesfully'
+        ]);
     }
 
     /**
@@ -118,6 +108,11 @@ class MovieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $movie = Movie::destroy($id);
+
+        return redirect()->route('movie.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Movie deleted succesfully'
+        ]);
     }
 }

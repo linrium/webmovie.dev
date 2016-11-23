@@ -21,10 +21,10 @@ Route::get('admin', function() {
 
 Route::group(['prefix'=>'admin'], function() {
     Route::resource('year', 'YearController');
-    // Route::resource('season', 'SeasonController');
-    // Route::resource('genre', 'GenreController');
-    // Route::resource('keyword', 'KeywordController');
-    // Route::resource('producer', 'ProducerController');
-    // Route::resource('fansub', 'FansubController');
-    // Route::resource('movie', 'MovieController');
+    Route::resource('season', 'SeasonController');
+    Route::resource('genre', 'GenreController');
+    Route::resource('keyword', 'KeywordController');
+    Route::resource('producer', 'ProducerController');
+    Route::resource('fansub', 'FansubController');
+    Route::resource('movie', 'MovieController');
 });

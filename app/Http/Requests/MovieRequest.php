@@ -13,7 +13,7 @@ class MovieRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class MovieRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtName'=>'required|unique:movies,name'
+        ];
+    }
+    public function message() {
+        return [
+            'txtName.required'=>'Please enter the name of movie',
+            'txtName.unique'=>'This name of movie is exist'
         ];
     }
 }

@@ -13,7 +13,7 @@ class GenreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class GenreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtName'=>'required|unique:genres,name'
+        ];
+    }
+    public function message() {
+        return [
+            'txtName.required'=>'Please enter the name of genre',
+            'txtName.unique'=>'This name of genre is exist'
         ];
     }
 }

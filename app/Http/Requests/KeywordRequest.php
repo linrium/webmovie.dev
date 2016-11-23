@@ -13,7 +13,7 @@ class KeywordRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class KeywordRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtName'=>'required|unique:keywords,name'
+        ];
+    }
+    public function message() {
+        return [
+            'txtName.required'=>'Please enter the name of keyword',
+            'txtName.unique'=>'This name of keyword is exist'
         ];
     }
 }

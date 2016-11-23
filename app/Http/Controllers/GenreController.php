@@ -15,17 +15,9 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genres = Genre::all();
-        $statusCode = 200;
-        $response = $genres;
+        $data = Genre::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
 
-        if(!$genres) {
-            $response = [
-                'error' => 'Genre does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return view('admin.genre.index', compact('data'));
     }
 
     /**
@@ -35,7 +27,7 @@ class GenreController extends Controller
      */
     public function create(Request $request)
     {
-        
+        return view('admin.genre.create');
     }
 
     /**
@@ -44,24 +36,17 @@ class GenreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GenreRequest $request)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $genre = Genre::create($request->all());
-            $response = [
-                "message" => "Genre created succesfully",
-                "data" => $genre
-            ];
-            $statusCode = 201;
-        }
-        
+        $genre = new Genre();
+        $genre->name = $request->txtName;
+        $genre->alias = changeTitle($request->txtName);
+        $genre->save();
 
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('genre.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Genre created succesfully'
+        ]);
     }
 
     /**
@@ -72,17 +57,7 @@ class GenreController extends Controller
      */
     public function show($id)
     {
-        $genre = Genre::find($id);
-        $statusCode = 200;
-        $response = $genre;
-
-        if(!$genre) {
-            $response = [
-                'error' => 'Genre does not exist'
-            ];
-            $statusCode = 404;
-        }
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        $genre = Genre::find($id)->toArray();
     }
 
     /**
@@ -93,7 +68,9 @@ class GenreController extends Controller
      */
     public function edit($id)
     {
-        //
+        $genre = Genre::find($id)->toArray();
+
+        return view('admin.genre.edit', compact('genre'));
     }
 
     /**
@@ -103,26 +80,17 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GenreRequest $request, $id)
     {
-        if(!$request->name or !$request->alias) {
-            $response = [
-                "error" => "Please provide name and alias"
-            ];
-            $statusCode = 422;
-        } else {
-            $genre = Genre::find($id);
-            $genre->name = $request->name;
-            $genre->alias = $request->alias;
-            $genre->save();
+        $genre = Genre::find($id);
+        $genre->name = $request->txtName;
+        $genre->alias = changeTitle($request->txtName);
+        $genre->save();
 
-            $response = [
-                "message" => "Genre updated succesfully"
-            ];
-            $statusCode = 422;
-        }
-
-        return response($response, $statusCode)->header('Content-Type','application/json');
+        return redirect()->route('genre.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Genre updated succesfully'
+        ]);
     }
 
     /**
@@ -133,20 +101,11 @@ class GenreController extends Controller
      */
     public function destroy($id)
     {
-        $checkId = Genre::find($id);
-        if(!$checkId) {
-            $response = [
-                "error" => "Genre does not exits"
-            ];
-            $statusCode = 404;
-        } else {
-            Genre::destroy($id);
-            $response = [
-                "message" => "Genre deleted succesfully"
-            ];
-            $statusCode = 200;
-        }
-        
-        return response($response, $statusCode)->header('Content-Type', 'application/json');
+        $genre = Genre::destroy($id);
+
+        return redirect()->route('genre.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Genre deleted succesfully'
+        ]);
     }
 }

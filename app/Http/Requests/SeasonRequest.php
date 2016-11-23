@@ -13,7 +13,7 @@ class SeasonRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class SeasonRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'txtName'=>'required|unique:seasons,name'
+        ];
+    }
+    public function message() {
+        return [
+            'txtName.required'=>'Please enter the name of season',
+            'txtName.unique'=>'This name of season is exist'
         ];
     }
 }
