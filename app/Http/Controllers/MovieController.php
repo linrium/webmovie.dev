@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\MovieRequest;
 use App\Movie;
 use App\Year;
-use App\Genre;
-use App\Keyword;
+use App\Season;
+use App\Producer;
 
 class MovieController extends Controller
 {
@@ -19,7 +19,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $data = Movie::select('id', 'name', 'trailer', 'views', 'rank', 'total_episodes', 'duration', 'description', 'year_id', 'season_id', 'producer_id')
+        $data = Movie::select('id', 'name', 'alias', 'status', 'thumb', 'views', 'total_episodes', 'description', 'year_id', 'season_id', 'producer_id')
         ->orderBy('id', 'DESC')
         ->get()
         ->toArray();
@@ -34,7 +34,11 @@ class MovieController extends Controller
      */
     public function create(Request $request)
     {
-        return view('admin.movie.create');
+        $years = Year::all();
+        $seasons = Season::all();
+        $producers = Producer::all();
+
+        return view('admin.movie.create', compact('years', 'seasons', 'producers'));
     }
 
     /**

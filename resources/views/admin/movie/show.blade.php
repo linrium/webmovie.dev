@@ -10,7 +10,7 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Producers manager</h1>
+            <h1 class="page-header">Years manager</h1>
             @include('admin.component.alert')
         </div>
     </div><!--/.row-->
@@ -19,13 +19,13 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-success" href="{!! route('producer.create') !!}">Create Producer</a>
+                    <a class="btn btn-success" href="{!! route('year.create') !!}">Create Year</a>
                 </div>
                 <div class="panel-body">
                     <table class="table table-hover">
                         <thead>
                             <th>#</th>
-                            <th>Producer</th>
+                            <th>Year</th>
                             <th>Edit</th>
                             <th>View</th>
                             <th>Delete</th>
@@ -38,13 +38,13 @@
                                     <th>{!! $stt !!}</th>
                                     <td>{!! $item['name'] !!}</td>
                                     <td>
-                                        <a class="btn btn-default" href="{!! URL::route('producer.edit', $item['id']) !!}">Edit</a>
+                                        <a class="btn btn-default" href="{!! URL::route('year.edit', $item['id']) !!}">Edit</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-default" href="{!! URL::route('producer.show', $item['id']) !!}">View</a>
+                                        <a class="btn btn-default" href="{!! URL::route('year.show', $item['id']) !!}">View</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('producer.destroy', $item['id']) }}" method="post">
+                                        <form action="{{ route('year.destroy', $item['id']) }}" method="post">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="id" value="{{ $item['id'] }}">
