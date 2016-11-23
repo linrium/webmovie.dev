@@ -8,7 +8,7 @@ class Season extends Model
 {
     protected $table = 'seasons';
     protected $fillable = ['name', 'alias'];
-    public $timestamp = false;
+    public $timestamp = true;
 
     public function movie() {
         return $this->hasMany('App\Year');

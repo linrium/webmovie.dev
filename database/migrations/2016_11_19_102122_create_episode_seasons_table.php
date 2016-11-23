@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMovieImagesTable extends Migration
+class CreateEpisodeSeasonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateMovieImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('movie_images', function (Blueprint $table) {
+        Schema::create('episode_seasons', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image');
+            $table->string('name')->unique();
+            $table->string('alias');
             $table->integer('movie_id')->unsigned();
             $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->timestamps();
@@ -29,6 +30,6 @@ class CreateMovieImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movie_images');
+        Schema::dropIfExists('episode_seasons');
     }
 }

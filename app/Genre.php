@@ -8,7 +8,7 @@ class Genre extends Model
 {
     protected $table = 'genres';
     protected $fillable = ['name', 'alias'];
-    public $timestamp = false;
+    public $timestamp = true;
 
     public function movie() {
         return $this->belongsToMany('App\Movie', 'genre_movies')->withTimestamps();
