@@ -66,7 +66,7 @@
                             <div class="form-group">
                                 <label for="txtSeason" class="col-sm-3 control-label">Season</label>
                                 <div class="col-sm-9">
-                                    <select name="txtYear" id="txtYear" class="form-control">
+                                    <select name="txtSeason" id="txtSeason" class="form-control">
                                         @foreach($seasons as $season)
                                             <option value="{!! $season['id'] !!}">{!! $season['name'] !!}</option>
                                         @endforeach
@@ -76,7 +76,7 @@
                             <div class="form-group">
                                 <label for="txtProducer" class="col-sm-3 control-label">Producer</label>
                                 <div class="col-sm-9">
-                                    <select name="txtYear" id="txtYear" class="form-control">
+                                    <select name="txtProducer" id="txtProducer" class="selectpicker" multiple>
                                         @foreach($producers as $producer)
                                             <option value="{!! $producer['id'] !!}">{!! $producer['name'] !!}</option>
                                         @endforeach

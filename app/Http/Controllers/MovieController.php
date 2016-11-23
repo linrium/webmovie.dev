@@ -9,6 +9,8 @@ use App\Movie;
 use App\Year;
 use App\Season;
 use App\Producer;
+use App\Genre;
+use App\Keyword;
 
 class MovieController extends Controller
 {
@@ -37,8 +39,10 @@ class MovieController extends Controller
         $years = Year::all();
         $seasons = Season::all();
         $producers = Producer::all();
+        $genres = Genre::all();
+        $keywords = Keyword::all();
 
-        return view('admin.movie.create', compact('years', 'seasons', 'producers'));
+        return view('admin.movie.create', compact('years', 'seasons', 'producers', 'genres', 'keywords'));
     }
 
     /**

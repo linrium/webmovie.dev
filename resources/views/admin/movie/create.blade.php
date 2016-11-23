@@ -76,11 +76,27 @@
                             <div class="form-group">
                                 <label for="txtProducer" class="col-sm-3 control-label">Producer</label>
                                 <div class="col-sm-9">
-                                    <select name="txtYear" id="txtYear" class="form-control">
+                                    <select name="txtProducer" id="txtProducer" class="selectpicker form-control" data-live-search="true" multiple>
                                         @foreach($producers as $producer)
                                             <option value="{!! $producer['id'] !!}">{!! $producer['name'] !!}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtGenre" class="col-sm-3 control-label">Genre</label>
+                                <div class="col-sm-9">
+                                    <select name="txtGenre" id="txtGenre" class="selectpicker form-control" data-live-search="true" multiple>
+                                        @foreach($genres as $genre)
+                                            <option value="{!! $genre['id'] !!}">{!! $genre['name'] !!}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtGenre" class="col-sm-3 control-label">Keywords</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control tokenfield" id="tokenfield-typeahead" value="" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -95,4 +111,19 @@
         </div>
     </div><!--/.row-->
 </div>	<!--/.main-->
+<?php
+    $a = [];
+?>
+@foreach($keywords as $keyword)
+    {!! array_push($a, $keyword['name']) !!}
+@endforeach
+
+<script>
+    window.onload = function() {
+        var dataPHP = <?php echo json_encode($a, JSON_UNESCAPED_UNICODE); ?>;
+        var dataJS = [];
+        dataPHP.map(item => dataJS.push({value: item}));
+        tokenfield(dataJS);
+    }
+</script>
 @endsection()

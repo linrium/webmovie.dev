@@ -7,6 +7,10 @@
 
 <link href="{{ url('public/assets/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ url('public/assets/styles.css') }}" rel="stylesheet">
+<link href="{{ url('public/assets/bootstrap-select.min.css') }}" rel="stylesheet">
+<link href="{{ url('public/assets/tokenfield-typeahead.min.css') }}" rel="stylesheet">
+<link href="{{ url('public/assets/bootstrap-tokenfield.min.css') }}" rel="stylesheet">
+
 <!--Icons-->
 <script src="{{ url('public/js/lumino.glyphs.js') }}"></script>
 
@@ -46,6 +50,9 @@
 	<script src="{{ url('public/js/jquery-1.11.1.min.js') }}"></script>
 	<script src="{{ url('public/js/bootstrap.min.js') }}"></script>
 	<script src="{{ url('public/js/chart.min.js') }}"></script>
+	<script src="{{ url('public/js/bootstrap-select.min.js') }}"></script>
+	<script src="{{ url('public/js/bootstrap-tokenfield.min.js') }}"></script>
+	<script src="{{ url('public/js/typeahead.bundle.min.js') }}"></script>
 	<script src="{{ url('public/js/myscript.js') }}"></script>
 </body>
 
