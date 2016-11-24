@@ -32,7 +32,11 @@
                             <div class="form-group">
                                 <label for="txtStatus" class="col-sm-3 control-label">Status</label>
                                 <div class="col-sm-9">
-                                    <input type="txt" class="form-control" id="txtStatus" name="txtStatus" placeholder="Please enter movie name">
+                                    <select name="txtYear" id="txtYear" class="form-control">
+                                        <option value="stoped">Stoped</option>
+                                        <option value="continue">Continue</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -44,13 +48,13 @@
                             <div class="form-group">
                                 <label for="txtNumber" class="col-sm-3 control-label">Total Episodes</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="txtNumber" name="txtNumber" placeholder="Please enter movie name">
+                                    <input type="number" class="form-control" id="txtNumber" name="txtNumber" placeholder="Please enter total episode">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtDescription" class="col-sm-3 control-label">Description</label>
                                 <div class="col-sm-9">
-                                    <textarea id="txtDescription" name="txtDescription" class="form-control" rows="5" id="comment"></textarea>
+                                    <textarea id="txtDescription" name="txtDescription" class="form-control" rows="5" id="comment" placeholder="Please enter description"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">

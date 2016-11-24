@@ -53,15 +53,16 @@ class MovieController extends Controller
      */
     public function store(MovieRequest $request)
     {
-        $movie = new Movie();
-        $movie->name = $request->txtName;
-        $movie->alias = changeTitle($request->txtName);
-        $movie->save();
+        // $movie = new Movie();
+        // $movie->name = $request->txtName;
+        // $movie->alias = changeTitle($request->txtName);
+        // $movie->save();
 
-        return redirect()->route('movie.index')->with([
-            'flash_level'=>'success',
-            'flash_message'=>'Movie created succesfully'
-        ]);
+        // return redirect()->route('movie.index')->with([
+        //     'flash_level'=>'success',
+        //     'flash_message'=>'Movie created succesfully'
+        // ]);
+        print_r($request->txtYear);
     }
 
     /**
