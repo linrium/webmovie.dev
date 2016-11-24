@@ -26,7 +26,6 @@
                         <thead>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Movie</th>
                             <th>Status</th>
                             <th>Thumb</th>
                             <th>Views</th>
@@ -47,27 +46,24 @@
                                     <td>{!! $item['name'] !!}</td>
                                     <td>{!! $item['status'] !!}</td>
                                     <td>
-                                        <img src="{!! $item['thumb'] !!}" alt="{!! $item['name'] !!}">
+                                        <img class="img-preview" src="{!! url('public/upload/'.$item['thumb']) !!}" alt="{!! $item['name'] !!}">
                                     </td>
                                     <td>{!! $item['views'] !!}</td>
                                     <td>{!! $item['total_episodes'] !!}</td>
                                     <td>
                                         <?php
-                                        $year = DB::table('years')->where('id', $item['year'])->first();
-                                        echo $year->name
+                                        $year = DB::table('years')->where('id', $item['year_id'])->first();
+                                        echo $year->name;
                                         ?>
                                     </td>
                                     <td>
                                         <?php
-                                        $season = DB::table('seasons')->where('id', $item['season'])->first();
-                                        echo $season->name
+                                        $year = DB::table('seasons')->where('id', $item['season_id'])->first();
+                                        echo $year->name;
                                         ?>
                                     </td>
                                     <td>
-                                        <?php
-                                        $producer = DB::table('producers')->where('id', $item['producer'])->first();
-                                        echo $producer->name
-                                        ?>
+                                        hello
                                     </td>
                                     <td>
                                         <a class="btn btn-default" href="{!! URL::route('movie.edit', $item['id']) !!}">Edit</a>

@@ -26,8 +26,6 @@ class CreateMoviesTable extends Migration
             $table->foreign('year_id')->references('id')->on('years')->onDelete('cascade');
             $table->integer('season_id')->unsigned();
             $table->foreign('season_id')->references('id')->on('seasons')->onDelete('cascade');
-            $table->integer('producer_id')->unsigned();
-            $table->foreign('producer_id')->references('id')->on('producers')->onDelete('cascade');
             $table->timestamps();
         });
     }

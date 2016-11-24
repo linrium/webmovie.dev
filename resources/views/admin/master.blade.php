@@ -7,6 +7,7 @@
 
 <link href="{{ url('public/assets/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ url('public/assets/styles.css') }}" rel="stylesheet">
+<link href="{{ url('public/css/customs.css') }}" rel="stylesheet">
 <link href="{{ url('public/assets/bootstrap-select.min.css') }}" rel="stylesheet">
 <link href="{{ url('public/assets/tokenfield-typeahead.min.css') }}" rel="stylesheet">
 <link href="{{ url('public/assets/bootstrap-tokenfield.min.css') }}" rel="stylesheet">

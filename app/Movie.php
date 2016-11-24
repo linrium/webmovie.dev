@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model
 {
     protected $table = 'movies';
-    protected $fillable = ['name', 'alias', 'status', 'thumb', 'views', 'total_episodes', 'description', 'year_id', 'season_id', 'producer_id'];
+    protected $fillable = ['name', 'alias', 'status', 'thumb', 'views', 'total_episodes', 'description', 'year_id', 'season_id'];
     public $timestamp = true;
 
     public function year() {
@@ -21,7 +21,7 @@ class Movie extends Model
     }
 
     public function producer() {
-        return $this->belongsTo('App\Producer');
+        return $this->belongsToMany('App\Producer', 'producer_movies')->withTimestamps();
     }
     public function episode_season() {
         return $this->hasMany('App\EpisodeSeason');
@@ -30,7 +30,7 @@ class Movie extends Model
     public function fansub() {
         return $this->belongsToMany('App\Fansub', 'fansub_movies')->withTimestamps();
     }
-    public function keywords() {
+    public function keyword() {
         return $this->belongsToMany('App\Keyword', 'movie_keywords')->withTimestamps();
     }
 }

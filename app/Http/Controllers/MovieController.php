@@ -21,7 +21,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $data = Movie::select('id', 'name', 'alias', 'status', 'thumb', 'views', 'total_episodes', 'description', 'year_id', 'season_id', 'producer_id')
+        $data = Movie::select('id', 'name', 'alias', 'status', 'thumb', 'views', 'total_episodes', 'description', 'year_id', 'season_id')
         ->orderBy('id', 'DESC')
         ->get()
         ->toArray();
@@ -38,9 +38,9 @@ class MovieController extends Controller
     {
         $years = Year::all();
         $seasons = Season::all();
-        $producers = Producer::all();
         $genres = Genre::all();
         $keywords = Keyword::all();
+        $producers = Producer::all();
 
         return view('admin.movie.create', compact('years', 'seasons', 'producers', 'genres', 'keywords'));
     }
@@ -51,18 +51,34 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MovieRequest $request)
+    public function store(Request $request)
     {
-        // $movie = new Movie();
-        // $movie->name = $request->txtName;
-        // $movie->alias = changeTitle($request->txtName);
-        // $movie->save();
+        // movie request
+        $fileName = $request->file('fileThumb')->getClientOriginalName();
 
-        // return redirect()->route('movie.index')->with([
-        //     'flash_level'=>'success',
-        //     'flash_message'=>'Movie created succesfully'
-        // ]);
-        print_r($request->txtYear);
+        $movie = new Movie();
+        $movie->name = $request->txtName;
+        $movie->alias = changeTitle($request->txtName);
+        $movie->status =$request->txtStatus;
+        $movie->thumb = $fileName;
+        $movie->views = 0;
+        $movie->total_episodes = 1;
+        $movie->description = $request->txtDescription;
+        $movie->year_id = 1;
+        $movie->season_id = 1;
+        $movie->save();
+        // save file
+        $request->file('fileThumb')->move('public/upload/', $fileName);
+        // producer request
+        $insertId = $movie->id;
+        $movie->producer()->attach($request->txtProducer);
+        $movie->genre()->attach($request->txtGenre);
+        $movie->keyword()->attach(explode(',', $request->txtKeyword));
+        
+        return redirect()->route('movie.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Movie created succesfully'
+        ]);
     }
 
     /**
