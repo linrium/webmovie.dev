@@ -21,21 +21,23 @@
                 <div class="panel-body">
                     <div class="col-lg-7">
                         @include('admin.component.alertForm')
-                        <form class="form-horizontal" action="{!! route('movie.store') !!}" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="{!! route('movie.update', $movie['id']) !!}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="id" value="{{ $movie['id'] }}">
                             <div class="form-group">
                                 <label for="txtName" class="col-sm-3 control-label">Movie name</label>
                                 <div class="col-sm-9">
-                                    <input type="txt" class="form-control" id="txtName" name="txtName" value="{!! $movie['name'] !!}" placeholder="Please enter movie name">
+                                    <input type="txt" class="form-control" id="txtName" name="txtName" value="{!! old('txtName', isset($movie) ? $movie['name'] : null) !!}" placeholder="Please enter movie name">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtStatus" class="col-sm-3 control-label">Status</label>
                                 <div class="col-sm-9">
                                     <select name="txtStatus" id="txtStatus" class="form-control">
-                                        <option value="stoped" selected="{!! $movie['status'] === 'stoped' !!}">Stoped</option>
-                                        <option value="continue" selected="{!! $movie['status'] === 'continue' !!}">Continue</option>
-                                        <option value="completed" selected="{!! $movie['status'] === 'completed' !!}">Completed</option>
+                                        <option value="stoped" {!! $movie['status'] === 'stoped' ? 'selected' : '' !!}>Stoped</option>
+                                        <option value="continue" {!! $movie['status'] === 'continue' ? 'selected' : '' !!}>Continue</option>
+                                        <option value="completed" {!! $movie['status'] === 'completed' ? 'selected' : '' !!}>Completed</option>
                                     </select>
                                     <!--<input type="text" class="form-control" name="txtStatus" id="">-->
                                 </div>
@@ -52,13 +54,13 @@
                             <div class="form-group">
                                 <label for="txtNumber" class="col-sm-3 control-label">Total Episodes</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="txtNumber" value="{!! $movie['total_episodes'] !!}" name="txtNumber" placeholder="Please enter total episode">
+                                    <input type="number" class="form-control" id="txtNumber" value="{!! old('txtNumber', isset($movie) ? $movie['total_episodes'] : 0) !!}" name="txtNumber" placeholder="Please enter total episode">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtDescription" class="col-sm-3 control-label">Description</label>
                                 <div class="col-sm-9">
-                                    <textarea id="txtDescription" name="txtDescription" class="form-control" rows="5" id="comment" placeholder="Please enter description">{!! $movie['description'] !!}</textarea>
+                                    <textarea id="txtDescription" name="txtDescription" class="form-control" rows="5" id="comment" placeholder="Please enter description">{!! old('txtDescription', isset($movie) ? $movie['description'] : '') !!}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -66,7 +68,7 @@
                                 <div class="col-sm-9">
                                     <select name="txtYear" id="txtYear" class="selectpicker form-control" data-live-search="true">
                                         @foreach($years as $year)
-                                            <option value="{!! $year['id'] !!}" selected="{!! $year['id'] === $movie['year_id'] !!}">{!! $year['name'] !!}</option>
+                                            <option value="{!! $year['id'] !!}" {!! ($year['id'] === $movie['year_id'] ? 'selected' : '') !!}>{!! $year['name'] !!}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -76,7 +78,7 @@
                                 <div class="col-sm-9">
                                     <select name="txtSeason" id="txtSeason" class="selectpicker form-control" data-live-search="true">
                                         @foreach($seasons as $season)
-                                            <option value="{!! $season['id'] !!}" selected="{!! $season['id'] === $movie['season_id'] !!}">{!! $season['name'] !!}</option>
+                                            <option value="{!! $season['id'] !!}" {!! $season['id'] === $movie['season_id'] ? 'selected' : '' !!}>{!! $season['name'] !!}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -114,12 +116,16 @@
                             <div class="form-group">
                                 <label for="txtKeyword" class="col-sm-3 control-label">Keywords</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="txtKeyword" class="form-control tokenfield" id="tokenfield-typeahead" value="{!! implode(',',$arr_keywords) !!}" />
+                                    <select name="txtKeyword[]" data-selected-text-format="count > 3" id="txtKeyword" class="selectpicker form-control" data-live-search="true" multiple>
+                                        @foreach($keywords as $keyword)
+                                            <option value="{!! $keyword['id'] !!}">{!! $keyword['name'] !!}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
-                                    <button type="submit" class="btn btn-default">Create</button>
+                                    <button type="submit" class="btn btn-default">Update</button>
                                 </div>
                             </div>
                         </form>
@@ -131,14 +137,12 @@
 </div>	<!--/.main-->
 <?php
     $arrayKeywords = [];
-    $arrayIds = [];
     $arrayProducers = [];
     $arrayGenres = [];
     $arrayFansubs = [];
 ?>
-@foreach($keywords as $keyword)
-    {!! array_push($arrayKeywords, $keyword['name']) !!}
-    {!! array_push($arrayIds, $keyword['id']) !!}
+@foreach($movie_keywords as $movie_keyword)
+    {!! array_push($arrayKeywords, $movie_keyword['id']) !!}
 @endforeach
 
 @foreach($producer_movies as $producer_movie)
@@ -155,15 +159,6 @@
 
 <script>
     window.onload = function() {
-        // tranform php data to js and pass to tokenfield
-        var dataKeywords = <?php echo json_encode($arrayKeywords, JSON_UNESCAPED_UNICODE); ?>;
-        var dataIds = <?php echo json_encode($arrayIds, JSON_UNESCAPED_UNICODE); ?>;
-        var dataJS = [];
-        for(let i = 0; i < dataKeywords.length; i++) {
-            dataJS.push({value: dataIds[i], label: dataKeywords[i]});
-        }
-        tokenfield(dataJS);
-
         // upload file image preview
         $.uploadPreview({
             input_field: "#image-upload",
@@ -182,6 +177,10 @@
         // fansub seleted default
         var dataFansub = <?php echo json_encode($arrayFansubs, JSON_UNESCAPED_UNICODE); ?>;
         $('#txtFansub').selectpicker('val', dataFansub);
+
+        // keyword seleted default
+        var dataKeyword = <?php echo json_encode($arrayKeywords, JSON_UNESCAPED_UNICODE); ?>;
+        $('#txtKeyword').selectpicker('val', dataKeyword);
     }
 </script>
 @endsection()

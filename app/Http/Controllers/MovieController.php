@@ -79,13 +79,14 @@ class MovieController extends Controller
         // fansub request
         $movie->fansub()->attach($request->txtFansub);
         // keyword request
-        $movie->keyword()->attach(explode(',', $request->txtKeyword));
+        // $movie->keyword()->attach(explode(',', $request->txtKeyword));
+        $movie->keyword()->attach($request->txtKeyword);
         
         return redirect()->route('movie.index')->with([
             'flash_level'=>'success',
             'flash_message'=>'Movie created succesfully'
         ]);
-        // print_r(explode(',', $request->txtKeyword));
+        // echo($request->txtKeyword);
     }
 
     /**
@@ -121,12 +122,8 @@ class MovieController extends Controller
 
         // convert array name to string
         $movie_keywords  = Movie::find($id)->keyword()->get()->toArray();
-        $arr_keywords = [];
-        foreach($movie_keywords as $val) {
-            array_push($arr_keywords, $val['name']);
-        }
 
-        return view('admin.movie.edit', compact('producer_movies', 'genre_movies', 'fansub_movies', 'arr_keywords','movie', 'years', 'seasons', 'producers', 'genres', 'fansubs','keywords'));
+        return view('admin.movie.edit', compact('movie_keywords','producer_movies', 'genre_movies', 'fansub_movies', 'arr_keywords','movie', 'years', 'seasons', 'producers', 'genres', 'fansubs','keywords'));
         // echo '<pre>';
         // print_r(implode(',',$arr));
     }
@@ -140,15 +137,47 @@ class MovieController extends Controller
      */
     public function update(MovieRequest $request, $id)
     {
-        $movie = Movie::find($id);
-        $movie->name = $request->txtName;
-        $movie->alias = changeTitle($request->txtName);
+        //movie request
+        $fileOriginalName = $request->file('fileThumb');
+        if($fileOriginalName !== null) {
+            $fileName = $request->file('fileThumb')->getClientOriginalName();
+             // save file
+            $fileOriginalName->move('public/upload/', $fileName);
+        }
+        
+        $movie                 = Movie::find($id);
+        $movie->name           = $request->txtName;
+        $movie->alias          = changeTitle($request->txtName);
+        $movie->status         = $request->txtStatus;
+        $movie->views          = $movie->views;
+        $movie->total_episodes = $request->txtNumber;
+        $movie->description    = $request->txtDescription;
+        $movie->year_id        = $request->txtYear;
+        $movie->season_id      = $request->txtSeason;
+
+        if($fileOriginalName === null) {
+            $movie->thumb = $movie->thumb;
+        } else {
+            $movie->thumb = $fileName;
+        }
+
         $movie->save();
 
+        // producer request
+        $movie->producer()->sync($request->txtProducer);
+        // genre request
+        $movie->genre()->sync($request->txtGenre);
+        // fansub request
+        $movie->fansub()->sync($request->txtFansub);
+        // keyword request
+        $movie->keyword()->sync($request->txtKeyword);
+        
         return redirect()->route('movie.index')->with([
             'flash_level'=>'success',
             'flash_message'=>'Movie updated succesfully'
         ]);
+        // echo '<pre>';
+        // print_r(explode(',', $request->txtKeyword));
     }
 
     /**

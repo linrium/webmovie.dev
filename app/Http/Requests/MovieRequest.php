@@ -24,13 +24,12 @@ class MovieRequest extends FormRequest
     public function rules()
     {
         return [
-            'txtName'=>'required|unique:movies,name'
+            'txtName'=>'required'
         ];
     }
     public function message() {
         return [
-            'txtName.required'=>'Please enter the name of movie',
-            'txtName.unique'=>'This name of movie is exist'
+            'txtName.required'=>'Please enter the name of movie'
         ];
     }
 }

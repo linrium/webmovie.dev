@@ -114,7 +114,12 @@
                             <div class="form-group">
                                 <label for="txtKeyword" class="col-sm-3 control-label">Keywords</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="txtKeyword" class="form-control tokenfield" id="tokenfield-typeahead" value="" />
+                                    <!--<input type="text" name="txtKeyword" class="form-control tokenfield" id="tokenfield-typeahead" value="" />-->
+                                    <select name="txtKeyword[]" data-selected-text-format="count > 3" id="txtKeyword" class="selectpicker form-control" data-live-search="true" multiple>
+                                        @foreach($keywords as $keyword)
+                                            <option value="{!! $keyword['id'] !!}">{!! $keyword['name'] !!}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -129,26 +134,9 @@
         </div>
     </div><!--/.row-->
 </div>	<!--/.main-->
-<?php
-    $arrayKeywords = [];
-    $arrayIds = [];
-?>
-@foreach($keywords as $keyword)
-    {!! array_push($arrayKeywords, $keyword['name']) !!}
-    {!! array_push($arrayIds, $keyword['id']) !!}
-@endforeach
 
 <script>
     window.onload = function() {
-        // tranform php data to js and pass to tokenfield
-        var dataKeywords = <?php echo json_encode($arrayKeywords, JSON_UNESCAPED_UNICODE); ?>;
-        var dataIds = <?php echo json_encode($arrayIds, JSON_UNESCAPED_UNICODE); ?>;
-        var dataJS = [];
-        for(let i = 0; i < dataKeywords.length; i++) {
-            dataJS.push({value: dataIds[i], label: dataKeywords[i]});
-        }
-        tokenfield(dataJS);
-
         // upload file image preview
         $.uploadPreview({
             input_field: "#image-upload",
