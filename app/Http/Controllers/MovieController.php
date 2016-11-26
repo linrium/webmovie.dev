@@ -11,6 +11,7 @@ use App\Season;
 use App\Producer;
 use App\Genre;
 use App\Keyword;
+use App\Fansub;
 
 class MovieController extends Controller
 {
@@ -40,9 +41,10 @@ class MovieController extends Controller
         $seasons = Season::all();
         $genres = Genre::all();
         $keywords = Keyword::all();
+        $fansubs = Fansub::all();
         $producers = Producer::all();
 
-        return view('admin.movie.create', compact('years', 'seasons', 'producers', 'genres', 'keywords'));
+        return view('admin.movie.create', compact('years', 'seasons', 'producers', 'genres', 'fansubs','keywords'));
     }
 
     /**
@@ -56,29 +58,34 @@ class MovieController extends Controller
         // movie request
         $fileName = $request->file('fileThumb')->getClientOriginalName();
 
-        $movie = new Movie();
-        $movie->name = $request->txtName;
-        $movie->alias = changeTitle($request->txtName);
-        $movie->status =$request->txtStatus;
-        $movie->thumb = $fileName;
-        $movie->views = 0;
-        $movie->total_episodes = 1;
-        $movie->description = $request->txtDescription;
-        $movie->year_id = 1;
-        $movie->season_id = 1;
+        $movie                 = new Movie();
+        $movie->name           = $request->txtName;
+        $movie->alias          = changeTitle($request->txtName);
+        $movie->status         = $request->txtStatus;
+        $movie->thumb          = $fileName;
+        $movie->views          = 0;
+        $movie->total_episodes = $request->txtNumber;
+        $movie->description    = $request->txtDescription;
+        $movie->year_id        = $request->txtYear;
+        $movie->season_id      = $request->txtSeason;
         $movie->save();
+
         // save file
         $request->file('fileThumb')->move('public/upload/', $fileName);
         // producer request
-        $insertId = $movie->id;
         $movie->producer()->attach($request->txtProducer);
+        // genre request
         $movie->genre()->attach($request->txtGenre);
+        // fansub request
+        $movie->fansub()->attach($request->txtFansub);
+        // keyword request
         $movie->keyword()->attach(explode(',', $request->txtKeyword));
         
         return redirect()->route('movie.index')->with([
             'flash_level'=>'success',
             'flash_message'=>'Movie created succesfully'
         ]);
+        // print_r(explode(',', $request->txtKeyword));
     }
 
     /**
@@ -100,9 +107,22 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
-        $movie = Movie::find($id)->toArray();
+        $movie     = Movie::find($id);
+        $years     = Year::all();
+        $seasons   = Season::all();
+        $genres    = Genre::all();
+        $keywords  = Keyword::all();
+        $fansubs   = Fansub::all();
+        $producers = Producer::all();
 
-        return view('admin.movie.edit', compact('movie'));
+        $producer_movies = Movie::find($id)->producer()->get()->toArray();
+        $genre_movies    = Movie::find($id)->genre()->get()->toArray();
+        $fansub_movies   = Movie::find($id)->fansub()->get()->toArray();
+        $movie_keywords  = Movie::find($id)->keyword()->get()->toArray();
+
+        return view('admin.movie.edit', compact('producer_movies', 'genre_movies', 'fansub_movies', 'movie_keywords','movie', 'years', 'seasons', 'producers', 'genres', 'fansubs','keywords'));
+        // echo '<pre>';
+        // print_r($producer_movie);
     }
 
     /**

@@ -43,7 +43,10 @@
                             <div class="form-group">
                                 <label for="fileThumb" class="col-sm-3 control-label">Thumb</label>
                                 <div class="col-sm-9">
-                                    <input type="file" name="fileThumb" id="fileThumb"/>
+                                    <div id="image-preview">
+                                        <label for="image-upload" id="image-label">Choose File</label>
+                                        <input type="file" name="fileThumb" id="image-upload" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -99,6 +102,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="txtFansub" class="col-sm-3 control-label">Fansub</label>
+                                <div class="col-sm-9">
+                                    <select name="txtFansub[]" id="txtFansub" class="selectpicker form-control" data-live-search="true" multiple>
+                                        @foreach($fansubs as $fansub)
+                                            <option value="{!! $fansub['id'] !!}">{!! $fansub['name'] !!}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="txtKeyword" class="col-sm-3 control-label">Keywords</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="txtKeyword" class="form-control tokenfield" id="tokenfield-typeahead" value="" />
@@ -117,18 +130,31 @@
     </div><!--/.row-->
 </div>	<!--/.main-->
 <?php
-    $a = [];
+    $arrayKeywords = [];
+    $arrayIds = [];
 ?>
 @foreach($keywords as $keyword)
-    {!! array_push($a, $keyword['name']) !!}
+    {!! array_push($arrayKeywords, $keyword['name']) !!}
+    {!! array_push($arrayIds, $keyword['id']) !!}
 @endforeach
 
 <script>
     window.onload = function() {
-        var dataPHP = <?php echo json_encode($a, JSON_UNESCAPED_UNICODE); ?>;
+        // tranform php data to js and pass to tokenfield
+        var dataKeywords = <?php echo json_encode($arrayKeywords, JSON_UNESCAPED_UNICODE); ?>;
+        var dataIds = <?php echo json_encode($arrayIds, JSON_UNESCAPED_UNICODE); ?>;
         var dataJS = [];
-        dataPHP.map(item => dataJS.push({value: item}));
+        for(let i = 0; i < dataKeywords.length; i++) {
+            dataJS.push({value: dataIds[i], label: dataKeywords[i]});
+        }
         tokenfield(dataJS);
+
+        // upload file image preview
+        $.uploadPreview({
+            input_field: "#image-upload",
+            preview_box: "#image-preview",
+            label_field: "#image-label"
+        });
     }
 </script>
 @endsection()

@@ -25,14 +25,11 @@
                     <table class="table table-hover">
                         <thead>
                             <th>#</th>
+                            <th>Thumb</th>
                             <th>Name</th>
                             <th>Status</th>
-                            <th>Thumb</th>
                             <th>Views</th>
                             <th>Total Episodes</th>
-                            <th>Year</th>
-                            <th>Season</th>
-                            <th>Producer</th>
                             <th>Edit</th>
                             <th>View</th>
                             <th>Delete</th>
@@ -43,28 +40,13 @@
                                 <?php $stt = $stt + 1; ?>
                                 <tr>
                                     <th>{!! $stt !!}</th>
-                                    <td>{!! $item['name'] !!}</td>
-                                    <td>{!! $item['status'] !!}</td>
                                     <td>
                                         <img class="img-preview" src="{!! url('public/upload/'.$item['thumb']) !!}" alt="{!! $item['name'] !!}">
                                     </td>
+                                    <td>{!! $item['name'] !!}</td>
+                                    <td>{!! $item['status'] !!}</td>
                                     <td>{!! $item['views'] !!}</td>
                                     <td>{!! $item['total_episodes'] !!}</td>
-                                    <td>
-                                        <?php
-                                        $year = DB::table('years')->where('id', $item['year_id'])->first();
-                                        echo $year->name;
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        $year = DB::table('seasons')->where('id', $item['season_id'])->first();
-                                        echo $year->name;
-                                        ?>
-                                    </td>
-                                    <td>
-                                        hello
-                                    </td>
                                     <td>
                                         <a class="btn btn-default" href="{!! URL::route('movie.edit', $item['id']) !!}">Edit</a>
                                     </td>

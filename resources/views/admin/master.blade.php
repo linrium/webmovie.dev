@@ -54,6 +54,7 @@
 	<script src="{{ url('public/js/bootstrap-select.min.js') }}"></script>
 	<script src="{{ url('public/js/bootstrap-tokenfield.min.js') }}"></script>
 	<script src="{{ url('public/js/typeahead.bundle.min.js') }}"></script>
+	<script src="{{ url('public/js/jquery.uploadPreview.min.js') }}"></script>
 	<script src="{{ url('public/js/myscript.js') }}"></script>
 </body>
 
