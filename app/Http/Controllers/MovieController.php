@@ -118,11 +118,17 @@ class MovieController extends Controller
         $producer_movies = Movie::find($id)->producer()->get()->toArray();
         $genre_movies    = Movie::find($id)->genre()->get()->toArray();
         $fansub_movies   = Movie::find($id)->fansub()->get()->toArray();
-        $movie_keywords  = Movie::find($id)->keyword()->get()->toArray();
 
-        return view('admin.movie.edit', compact('producer_movies', 'genre_movies', 'fansub_movies', 'movie_keywords','movie', 'years', 'seasons', 'producers', 'genres', 'fansubs','keywords'));
+        // convert array name to string
+        $movie_keywords  = Movie::find($id)->keyword()->get()->toArray();
+        $arr_keywords = [];
+        foreach($movie_keywords as $val) {
+            array_push($arr_keywords, $val['name']);
+        }
+
+        return view('admin.movie.edit', compact('producer_movies', 'genre_movies', 'fansub_movies', 'arr_keywords','movie', 'years', 'seasons', 'producers', 'genres', 'fansubs','keywords'));
         // echo '<pre>';
-        // print_r($producer_movie);
+        // print_r(implode(',',$arr));
     }
 
     /**
