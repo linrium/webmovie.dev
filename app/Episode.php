@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Episode extends Model
 {
     protected $table = 'episodes';
-    protected $fillable = ['name', 'movie_id'];
+    protected $fillable = ['name', 'alias', 'movie_id'];
     public $timestamp = true;
 
-    public function episode_season() {
+    public function movie() {
         return $this->belongsTo('App\Movie');
     }
     public function link() {

@@ -12,6 +12,7 @@ use App\Producer;
 use App\Genre;
 use App\Keyword;
 use App\Fansub;
+use App\EpisodeSeason;
 
 class MovieController extends Controller
 {
@@ -97,9 +98,8 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        $movie = Movie::find($id)->toArray();
+        return redirect()->route('episode.index', $id);
     }
-
     /**
      * Show the form for editing the specified resource.
      *

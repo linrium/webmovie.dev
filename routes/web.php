@@ -27,4 +27,35 @@ Route::group(['prefix'=>'admin'], function() {
     Route::resource('producer', 'ProducerController');
     Route::resource('fansub', 'FansubController');
     Route::resource('movie', 'MovieController');
+    // Route::resource('episode', 'EpisodeController');
+    Route::group(['prefix'=>'episode'], function() {
+        Route::get('movie/{id}', [
+            'as' => 'episode.index',
+            'uses' => 'EpisodeController@index'
+        ]);
+        Route::get('create/{id}', [
+            'as' => 'episode.create',
+            'uses' => 'EpisodeController@create'
+        ]);
+        Route::post('', [
+            'as' => 'episode.store',
+            'uses' => 'EpisodeController@store'
+        ]);
+        Route::get('{id}', [
+            'as' => 'episode.show',
+            'uses' => 'EpisodeController@show'
+        ]);
+        Route::get('{id}/edit', [
+            'as' => 'episode.edit',
+            'uses' => 'EpisodeController@edit'
+        ]);
+        Route::put('{id}', [
+            'as' => 'episode.update',
+            'uses' => 'EpisodeController@update'
+        ]);
+        Route::delete('{id}', [
+            'as' => 'episode.destroy',
+            'uses' => 'EpisodeController@destroy'
+        ]);
+    });
 });

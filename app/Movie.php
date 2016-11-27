@@ -23,8 +23,8 @@ class Movie extends Model
     public function producer() {
         return $this->belongsToMany('App\Producer', 'producer_movies')->withTimestamps();
     }
-    public function episode_season() {
-        return $this->hasMany('App\EpisodeSeason');
+    public function episode() {
+        return $this->hasMany('App\Episode');
     }
 
     public function fansub() {
