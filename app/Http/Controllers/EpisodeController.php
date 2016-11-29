@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Episode;
+use App\EpisodeLink;
 use App\Movie;
 
 class EpisodeController extends Controller
@@ -46,6 +47,13 @@ class EpisodeController extends Controller
         $episode->movie_id = $request->txtMovieId;
         $episode->save();
 
+        for($i = 0; $i < 5; $i++) {
+            $link = new EpisodeLink();
+            $link->link = $request->txtLink[$i];
+            $link->episode_id = $episode->id;
+            $link->save();
+        }
+
         return redirect()->route('episode.index', $request->txtMovieId)->with([
             'flash_level'=>'success',
             'flash_message'=>'Episode created succesfully'
@@ -72,7 +80,8 @@ class EpisodeController extends Controller
     public function edit($id)
     {
         $episode = Episode::find($id)->toArray();
-        return view('admin.episode.edit', compact('episode'));
+        $links = EpisodeLink::where('episode_id', $id)->get()->toArray();
+        return view('admin.episode.edit', compact('episode','links'));
     }
 
     /**
@@ -88,6 +97,14 @@ class EpisodeController extends Controller
         $episode->name = $request->txtName;
         $episode->alias = changeTitle($request->txtName);
         $episode->save();
+
+        $links = EpisodeLink::where('episode_id', $id)->select('id')->get()->toArray();
+
+        foreach($links as $key => $link) {
+            $data = EpisodeLink::find($link['id']);
+            $data->link = $request->txtLink[$key];
+            $data->save();
+        }
 
         return redirect()->route('episode.index', $episode->movie_id)->with([
             'flash_level'=>'success',

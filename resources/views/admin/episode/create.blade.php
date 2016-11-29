@@ -30,6 +30,14 @@
                                     <input type="txt" class="form-control" id="txtName" name="txtName" placeholder="Please enter episode name">
                                 </div>
                             </div>
+                            @for($i = 0; $i < 5; $i++)
+                            <div class="form-group">
+                                <label for="txtLink" class="col-sm-3 control-label">Episode link {{$i + 1}}</label>
+                                <div class="col-sm-9">
+                                    <input type="txt" class="form-control" id="txtLink" name="txtLink[]" placeholder="Please enter episode link">
+                                </div>
+                            </div>
+                            @endfor
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <button type="submit" class="btn btn-default">Create</button>

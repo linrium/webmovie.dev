@@ -31,6 +31,14 @@
                                     <input type="txt" class="form-control" id="txtName" name="txtName" value="{!! old('txtName', isset($episode) ? $episode['name'] : null) !!}" placeholder="Please enter episode name">
                                 </div>
                             </div>
+                            @foreach($links as $key => $link)
+                            <div class="form-group">
+                                <label for="txtLink" class="col-sm-3 control-label">Episode link {{$key}}</label>
+                                <div class="col-sm-9">
+                                    <input type="txt" value="{!! old('txtLink',$link['link']) !!}" class="form-control" id="txtLink" name="txtLink[]" placeholder="Please enter episode link">
+                                </div>
+                            </div>
+                            @endforeach
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <button type="submit" class="btn btn-default">Update</button>
