@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\LoginRequest;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/year';
 
     /**
      * Create a new controller instance.
@@ -34,6 +36,35 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        // $this->middleware('Admin', ['except' => 'logout']);
+    }
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function guard() {
+        print_r(Auth::guard('guest'));
+    }
+
+    public function login(LoginRequest $request) {
+        $userdata = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+        // echo '<pre>';
+        // print_r(Auth::guard('admin'));
+
+        if(Auth::attempt($userdata)) {
+            return redirect()->route('year.index');
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

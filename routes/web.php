@@ -16,10 +16,10 @@ Route::get('/', function () {
 });
 
 Route::get('admin', function() {
-    return view('admin.year.create');
+    return view('admin.year.index');
 });
 
-Route::group(['prefix'=>'admin'], function() {
+Route::group(['prefix'=>'admin', 'middleware' => 'admin'], function() {
     Route::resource('year', 'YearController');
     Route::resource('season', 'SeasonController');
     Route::resource('genre', 'GenreController');
@@ -58,4 +58,21 @@ Route::group(['prefix'=>'admin'], function() {
             'uses' => 'EpisodeController@destroy'
         ]);
     });
+    Route::resource('user', 'UserController');
 });
+
+// Admin login
+// Route::get('login', [
+//     'as'   => 'showLogin',
+//     'uses' => 'HomeController@showLogin'
+// ]);
+// Route::post('login', [
+//     'as'   => 'doLogin',
+//     'uses' => 'HomeController@doLogin'
+// ]);
+// Route::get('logout', [
+//     'as' => 'doLogout',
+//     'uses' => 'HomeController@doLogout'
+// ]);
+
+Route::Auth();

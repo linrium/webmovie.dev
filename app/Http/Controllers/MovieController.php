@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\MovieRequest;
 use App\Movie;
 use App\Year;
@@ -188,6 +189,9 @@ class MovieController extends Controller
      */
     public function destroy($id)
     {
+        //TODO: cannt delete image without delete movie
+        $thumb_name = Movie::select('thumb')->find($id)->toArray();
+        File::delete('/public/upload/'.$thumb_name['thumb']);
         $movie = Movie::destroy($id);
 
         return redirect()->route('movie.index')->with([

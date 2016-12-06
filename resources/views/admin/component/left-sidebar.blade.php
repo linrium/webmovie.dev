@@ -13,6 +13,7 @@
         <li><a href="{!! route('producer.index') !!}"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Producers</a></li>
         <li><a href="{!! route('fansub.index') !!}"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Fansubs</a></li>
         <li><a href="{!! route('movie.index') !!}"><svg class="glyph stroked video"><use xlink:href="#stroked-video"/></svg> Movies</a></li>
+        <li><a href="{!! route('user.index') !!}"><svg class="glyph stroked user"><use xlink:href="#stroked-video"/></svg> Users</a></li>
     </ul>
 
 </div><!--/.sidebar-->
