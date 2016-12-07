@@ -11,7 +11,7 @@ use App\Movie;
 class HomeController extends Controller
 {
     public function index() {
-        $movies = Movie::select('id', 'name', 'thumb')->orderBy('id', 'DESC')->get()->toArray();
+        $movies = Movie::select('id', 'name', 'thumb')->limit(6)->orderBy('id', 'DESC')->get()->toArray();
 
         return view('home.main', compact('movies'));
     }
