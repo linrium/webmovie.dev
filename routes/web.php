@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'as' => 'home.index',
+    'uses' => 'HomeController@index'
+]);
 
 Route::get('admin', function() {
     return view('admin.year.index');
@@ -60,19 +61,5 @@ Route::group(['prefix'=>'admin', 'middleware' => 'admin'], function() {
     });
     Route::resource('user', 'UserController');
 });
-
-// Admin login
-// Route::get('login', [
-//     'as'   => 'showLogin',
-//     'uses' => 'HomeController@showLogin'
-// ]);
-// Route::post('login', [
-//     'as'   => 'doLogin',
-//     'uses' => 'HomeController@doLogin'
-// ]);
-// Route::get('logout', [
-//     'as' => 'doLogout',
-//     'uses' => 'HomeController@doLogout'
-// ]);
 
 Route::Auth();

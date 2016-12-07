@@ -16,9 +16,12 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::check() or $request->user()->role!='admin') {
-            return redirect()->route('login');
+        if(Auth::check() && $request->user()->role === 'admin') {
+            return $next($request);
         }
-        return $next($request);
+        return redirect()->route('login')->with([
+            'flash_level'=>'error',
+            'flash_message'=>'You are not admin'
+        ]);
     }
 }

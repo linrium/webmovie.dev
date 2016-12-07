@@ -6,46 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Auth;
 
+use App\Movie;
+
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-    }
+    public function index() {
+        $movies = Movie::select('id', 'name', 'thumb')->orderBy('id', 'DESC')->get()->toArray();
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showLogin() {
-        return view('admin.login');
-    }
-
-    public function guard() {
-        return Auth::guard('role');
-    }
-
-    public function doLogin(LoginRequest $request) {
-        $userdata = [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
-
-        if(Auth::attempt($userdata)) {
-            return redirect()->route('year.index');
-        } else {
-            return redirect()->route('showLogin');
-        }
-    }
-
-    public function doLogout() {
-        Auth::logout();
-        return redirect()->route('showLogin');
+        return view('home.main', compact('movies'));
     }
 }

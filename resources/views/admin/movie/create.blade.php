@@ -84,7 +84,7 @@
                             <div class="form-group">
                                 <label for="txtProducer" class="col-sm-3 control-label">Producer</label>
                                 <div class="col-sm-9">
-                                    <select name="txtProducer[]" id="txtProducer" class="selectpicker form-control" data-live-search="true" multiple>
+                                    <select name="txtProducer[]" id="txtProducer" data-selected-text-format="count > 3" class="selectpicker form-control" data-live-search="true" multiple>
                                         @foreach($producers as $producer)
                                             <option value="{!! $producer['id'] !!}">{!! $producer['name'] !!}</option>
                                         @endforeach
@@ -94,7 +94,7 @@
                             <div class="form-group">
                                 <label for="txtGenre" class="col-sm-3 control-label">Genre</label>
                                 <div class="col-sm-9">
-                                    <select name="txtGenre[]" id="txtGenre" class="selectpicker form-control" data-live-search="true" multiple>
+                                    <select name="txtGenre[]" id="txtGenre" data-selected-text-format="count > 3" class="selectpicker form-control" data-live-search="true" multiple>
                                         @foreach($genres as $genre)
                                             <option value="{!! $genre['id'] !!}">{!! $genre['name'] !!}</option>
                                         @endforeach
@@ -104,7 +104,7 @@
                             <div class="form-group">
                                 <label for="txtFansub" class="col-sm-3 control-label">Fansub</label>
                                 <div class="col-sm-9">
-                                    <select name="txtFansub[]" id="txtFansub" class="selectpicker form-control" data-live-search="true" multiple>
+                                    <select name="txtFansub[]" id="txtFansub" data-selected-text-format="count > 3" class="selectpicker form-control" data-live-search="true" multiple>
                                         @foreach($fansubs as $fansub)
                                             <option value="{!! $fansub['id'] !!}">{!! $fansub['name'] !!}</option>
                                         @endforeach
