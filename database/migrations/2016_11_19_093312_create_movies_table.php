@@ -20,6 +20,7 @@ class CreateMoviesTable extends Migration
             $table->string('status');
             $table->string('thumb');
             $table->integer('views')->unsigned();
+            $table->integer('likes')->unsigned();
             $table->integer('total_episodes');
             $table->longText('description');
             $table->integer('year_id')->unsigned();

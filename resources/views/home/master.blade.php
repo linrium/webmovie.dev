@@ -46,7 +46,7 @@
       <div class="main row" ng-controller="MainController">
         <div class="col-md-12">
           <div class="wrapper">
-            @yield('content')
+            <!--@yield('content')-->
           </div>
         </div>
       </div>

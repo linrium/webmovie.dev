@@ -66,6 +66,7 @@ class MovieController extends Controller
         $movie->status         = $request->txtStatus;
         $movie->thumb          = $fileName;
         $movie->views          = 0;
+        $movie->likes          = 0;
         $movie->total_episodes = $request->txtNumber;
         $movie->description    = $request->txtDescription;
         $movie->year_id        = $request->txtYear;

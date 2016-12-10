@@ -5,7 +5,7 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li><a href="{!! route('home') !!}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home</a></li>
+        <li><a href="{!! route('home.index') !!}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home</a></li>
         <li><a href="{!! route('year.index') !!}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Years</a></li>
         <li><a href="{!! route('season.index') !!}"><svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg> Seasons</a></li>
         <li><a href="{!! route('genre.index') !!}"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Genres</a></li>

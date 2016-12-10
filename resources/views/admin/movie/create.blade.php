@@ -34,7 +34,7 @@
                                 <div class="col-sm-9">
                                     <select name="txtStatus" id="txtStatus" class="form-control">
                                         <option value="stoped">Stoped</option>
-                                        <option value="continue">Continue</option>
+                                        <option value="continue" selected>Continue</option>
                                         <option value="completed">Completed</option>
                                     </select>
                                     <!--<input type="text" class="form-control" name="txtStatus" id="">-->
