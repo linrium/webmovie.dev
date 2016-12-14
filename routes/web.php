@@ -16,6 +16,11 @@ Route::get('/', [
     'uses' => 'HomeController@index'
 ]);
 
+Route::get('anime/{id}', [
+    'as' => 'page.index',
+    'uses' => 'PageController@index'
+]);
+
 Route::get('admin', function() {
     return view('admin.year.index');
 });

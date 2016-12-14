@@ -12,7 +12,9 @@
     @foreach($movies as $movie)
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" >
       <div class="main__citem-item">
-        <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
+        <a href="{{ route('page.index', $movie['id']) }}">
+          <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
+        </a>
         <div class="main__citem-des">
           <h2>{{ $movie['name'] }}</h2><span>#700</span>
         </div>
@@ -20,7 +22,84 @@
     </div>
     @endforeach
   </div>
+</div>
 
+<div id="random" class="main__citem animated fadeInDown">
+  <div class="row main__header">
+    <div class="col-md-9 col-sm-7 col-xs-5">
+      <h3>Random Anime For You</h3>
+    </div>
+    <div class="col-md-3 col-sm-5 col-xs-7 main__header--right"><a href="#">view all</a><a href="#"><i class="fa fa-chevron-left"></i></a><a href="#"><i class="fa fa-chevron-right"></i></a></div>
+  </div>
+
+  <div class="row main__citem-content">
+    @foreach($moviesRandom as $movie)
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" >
+      <div class="main__citem-item">
+        <a href="{{ route('page.index', $movie['id']) }}">
+          <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
+        </a>
+        <div class="main__citem-des">
+          <h2>{{ $movie['name'] }}</h2><span>#700</span>
+        </div>
+      </div>
+    </div>
+    @endforeach
+  </div>
+</div>
+
+<div id="trending" class="row animated fadeInDown">
+  <div class="main__ritem col-sm-12 col-md-6">
+    <div class="row main__header">
+      <div class="col-md-10 col-sm-7 col-xs-5">
+        <h3>Most Views</h3>
+      </div>
+    </div>
+    <div class="row main__ritem-content">
+      @foreach($moviesMostViews as $movie)
+      <div class="col-md-12 col-sm-12 col-xs-12" >
+        <div class="row main__ritem-item">
+          <div class="col-md-1 col-sm-1 col-xs-1 main__ritem-numberic"><span>{!! $movie['views'] !!}</span></div>
+          <div class="col-md-2 col-sm-2 col-xs-2 main__ritem-thumb"><img src="{{ url('public/img/'.$movie['thumb']) }}" alt="" /></div>
+          <div class="col-md-5 col-sm-7 col-xs-5 main__ritem-title">
+            <h2>{!! $movie['name'] !!}</h2><span>Movie</span>
+          </div>
+          <div class="col-md-4 col-sm-2 main__ritem-icon">
+            <a class="btn btn-nooutline-primary" href="{{ route('page.index', $movie['id']) }}">PLAY</a>
+            <button class="btn btn-nooutline-primary">LIKE</button>
+          </div>
+        </div>
+      </div>
+      @endforeach
+      <div class="main__ritem-showall col-md-12 col-sm-12 col-xs-12"><span>view all </span><i class="fa fa-chevron-down"></i></div>
+    </div>
+  </div>
+
+  <div class="main__ritem col-sm-12 col-md-6">
+    <div class="row main__header">
+      <div class="col-md-10 col-sm-7 col-xs-5">
+        <h3>Most Likes</h3>
+      </div>
+    </div>
+    <div class="row main__ritem-content">
+      @foreach($moviesMostLikes as $movie)
+      <div class="col-md-12 col-sm-12 col-xs-12" >
+        <div class="row main__ritem-item">
+          <div class="col-md-1 col-sm-1 col-xs-1 main__ritem-numberic"><span>{!! $movie['likes'] !!}</span></div>
+          <div class="col-md-2 col-sm-2 col-xs-2 main__ritem-thumb"><img src="{{ url('public/img/'.$movie['thumb']) }}" alt="" /></div>
+          <div class="col-md-5 col-sm-7 col-xs-5 main__ritem-title">
+            <h2>{!! $movie['name'] !!}</h2><span>Movie</span>
+          </div>
+          <div class="col-md-4 col-sm-2 main__ritem-icon">
+            <a class="btn btn-nooutline-primary" href="{{ route('page.index', $movie['id']) }}">PLAY</a>
+            <button class="btn btn-nooutline-primary">LIKE</button>
+          </div>
+        </div>
+      </div>
+      @endforeach
+      <div class="main__ritem-showall col-md-12 col-sm-12 col-xs-12"><span>view all </span><i class="fa fa-chevron-down"></i></div>
+    </div>
+  </div>
 </div>
 
 <script>

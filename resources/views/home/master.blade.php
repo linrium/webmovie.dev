@@ -16,6 +16,8 @@
   <!-- styles-->
   <link rel="stylesheet" href="{{ url('public/css/main.css')}}" />
   <link rel="stylesheet" href="{{ url('public/css/customs.css')}}" />
+  <link rel="stylesheet" href="{{ url('public/css/customs1.css')}}" />
+
   <link rel="apple-touch-icon" sizes="57x57" href="{{ url('public/img/fav/apple-touch-icon-57x57.png')}}" />
   <link rel="apple-touch-icon" sizes="60x60" href="{{ url('public/img/fav/apple-touch-icon-60x60.png')}}" />
   <link rel="apple-touch-icon" sizes="72x72" href="{{ url('public/img/fav/apple-touch-icon-72x72.png')}}" />
@@ -46,7 +48,7 @@
       <div class="main row" ng-controller="MainController">
         <div class="col-md-12">
           <div class="wrapper">
-            <!--@yield('content')-->
+            @yield('content')
           </div>
         </div>
       </div>
@@ -64,6 +66,9 @@
 
   <!-- My script-->
   <script src="{{ url('public/js/functions.js')}}"></script>
+
+  </div>
+  
 
 </body>
 

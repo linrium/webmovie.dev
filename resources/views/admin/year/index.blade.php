@@ -48,7 +48,8 @@
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="id" value="{{ $item['id'] }}">
-                                            <button type="submit" class="btn btn-error" onlick="return false">Delete</button>
+                                            <button type="button" class="btn btn-error" data-toggle="modal" data-target="#myModal">Delete</button>
+                                            @include('admin.component.modal')
                                         </form>
                                     </td>
                                 </tr>
