@@ -13,7 +13,7 @@
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" >
       <div class="main__citem-item">
         <a href="{{ route('page.index', $episode['id']) }}">
-          <?php $movie = DB::table('movies')->select('name', 'thumb', 'current_episodes')->get(); ?>
+          <?php $movie = DB::table('movies')->where('id', $episode['movie_id'])->select('name', 'thumb', 'current_episodes')->get(); ?>
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie[0]->thumb)}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">
@@ -97,7 +97,7 @@
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">
-          <h2>{{ $movie['name'] }}</h2><span># {{ $movie['current_episodes'] }}</span>
+          <h2>{{ $movie['name'] }}</h2><span># {{ $movie['current_episodes'] }}/{{ $movie['total_episodes'] === 0 ? '???' : $movie['total_episodes'] }}</span>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">
-          <h2>{{ $movie['name'] }}</h2><span># {{ $movie['current_episodes'] }}</span>
+          <h2>{{ $movie['name'] }}</h2><span># {{ $movie['current_episodes'] }}/{{ $movie['total_episodes'] === 0 ? '???' : $movie['total_episodes'] }}</span>
         </div>
       </div>
     </div>

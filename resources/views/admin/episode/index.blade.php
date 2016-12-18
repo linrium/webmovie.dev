@@ -29,7 +29,6 @@
                             <th>#</th>
                             <th>Episode</th>
                             <th>Edit</th>
-                            <th>View</th>
                             <th>Delete</th>
                         </thead>
                         <tbody>
@@ -38,12 +37,9 @@
                                 <?php $stt = $stt + 1; ?>
                                 <tr>
                                     <th>{!! $stt !!}</th>
-                                    <td>{!! $item['name'] !!}</td>
+                                    <td>Episode {!! $item['name'] !!}</td>
                                     <td>
                                         <a class="btn btn-default" href="{!! URL::route('episode.edit', $item['id']) !!}">Edit</a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-default" href="{!! URL::route('episode.show', $item['id']) !!}">View</a>
                                     </td>
                                     <td>
                                         <form action="{{ route('episode.destroy', ['id'=>$item['id'], 'movieId' => $id]) }}" method="post">

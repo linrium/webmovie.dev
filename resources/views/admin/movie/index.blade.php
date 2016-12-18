@@ -33,7 +33,7 @@
                             <th>Current Episodes</th>
                             <th>Total Episodes</th>
                             <th>Edit</th>
-                            <th>View</th>
+                            <th>Episodes</th>
                             <th>Delete</th>
                         </thead>
                         <tbody>
@@ -50,7 +50,7 @@
                                     <td>{!! $item['views'] !!}</td>
                                     <td>{!! $item['likes'] !!}</td>
                                     <td>{!! $item['current_episodes'] !!}</td>
-                                    <td>{!! $item['total_episodes'] !!}</td>
+                                    <td>{!! $item['total_episodes'] === 0 ? '???' : $item['total_episodes'] !!}</td>
                                     <td>
                                         <a class="btn btn-default" href="{!! URL::route('movie.edit', $item['id']) !!}">Edit</a>
                                     </td>
