@@ -65,3 +65,12 @@ html {
 ::-webkit-scrollbar-thumb {
     background: #ed215e;
 }
+
+.active-episode {
+  background: #2098D1;
+  color: white;
+}
+
+.active-episode .main__watch-suggest-episode a{
+  color: white;
+}

@@ -38,7 +38,7 @@ class PageController extends Controller
         $arrGenres = $this->mapArray('genre', $genres);
         $arrProducers = $this->mapArray('producer', $producers);
 
-        return view('home.page', compact('links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'episodeId'));
+        return view('home.page', compact('links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'id', 'episodeId'));
         // echo '<pre>';
         // print_r($episode['views']);
     }

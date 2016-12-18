@@ -1,6 +1,5 @@
 @extends('home.master')
 @section('content')
-<?php header('X-Frame-Options: SAMEORIGIN'); ?>
 <div class="main__watch animated fadeInDown">
     <div class="row main__watch-header">
         <div class="col-md-8 col-sm-12 col-xs-12">
@@ -16,8 +15,8 @@
             <div class="main__watch-episode">
                 <ul>
                     @foreach($episodes as $ep)
-                    <li class="hvr-bounce-to-right list-episode-next">
-                        <a>
+                    <li class="hvr-bounce-to-right list-episode-next {!! $ep['id'] == $episodeId ? 'active-episode' : '' !!}">
+                        <a href="{{ route('page.index', ['id'=>$id, 'episodeId'=>$ep['id']]) }}">
                             <div class="list-video clearfix">
                                 <img src="{{ url('public/img/'.$movie['thumb']) }}" width="100%" alt=""/>
                             </div>
