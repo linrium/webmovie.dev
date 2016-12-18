@@ -16,7 +16,7 @@
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">
-          <h2>{{ $movie['name'] }}</h2><span>#700</span>
+          <h2>{{ $movie['name'] }}</h2><span># {{ $movie['current_episodes'] }}</span>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">
-          <h2>{{ $movie['name'] }}</h2><span>#700</span>
+          <h2>{{ $movie['name'] }}</h2><span># {{ $movie['current_episodes'] }}</span>
         </div>
       </div>
     </div>
@@ -56,13 +56,14 @@
       </div>
     </div>
     <div class="row main__ritem-content">
+      <?php $i = 1; ?>
       @foreach($moviesMostViews as $movie)
       <div class="col-md-12 col-sm-12 col-xs-12" >
         <div class="row main__ritem-item">
-          <div class="col-md-1 col-sm-1 col-xs-1 main__ritem-numberic"><span>{!! $movie['views'] !!}</span></div>
+          <div class="col-md-1 col-sm-1 col-xs-1 main__ritem-numberic"><span>{!! $i++ !!}</span></div>
           <div class="col-md-2 col-sm-2 col-xs-2 main__ritem-thumb"><img src="{{ url('public/img/'.$movie['thumb']) }}" alt="" /></div>
           <div class="col-md-5 col-sm-7 col-xs-5 main__ritem-title">
-            <h2>{!! $movie['name'] !!}</h2><span>Movie</span>
+            <h2>{!! $movie['name'] !!}</h2><span>{{ $movie['views'] }} views</span>
           </div>
           <div class="col-md-4 col-sm-2 main__ritem-icon">
             <a class="btn btn-nooutline-primary" href="{{ route('page.index', $movie['id']) }}">PLAY</a>
@@ -82,13 +83,14 @@
       </div>
     </div>
     <div class="row main__ritem-content">
+      <?php $i = 1; ?>
       @foreach($moviesMostLikes as $movie)
       <div class="col-md-12 col-sm-12 col-xs-12" >
         <div class="row main__ritem-item">
-          <div class="col-md-1 col-sm-1 col-xs-1 main__ritem-numberic"><span>{!! $movie['likes'] !!}</span></div>
+          <div class="col-md-1 col-sm-1 col-xs-1 main__ritem-numberic"><span>{!! $i++ !!}</span></div>
           <div class="col-md-2 col-sm-2 col-xs-2 main__ritem-thumb"><img src="{{ url('public/img/'.$movie['thumb']) }}" alt="" /></div>
           <div class="col-md-5 col-sm-7 col-xs-5 main__ritem-title">
-            <h2>{!! $movie['name'] !!}</h2><span>Movie</span>
+            <h2>{!! $movie['name'] !!}</h2><span>{{ $movie['likes'] }} likes</span>
           </div>
           <div class="col-md-4 col-sm-2 main__ritem-icon">
             <a class="btn btn-nooutline-primary" href="{{ route('page.index', $movie['id']) }}">PLAY</a>
