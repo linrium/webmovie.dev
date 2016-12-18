@@ -7,10 +7,9 @@
                 <div id="navbarResponsive" class="collapse navbar-toggleable-md">
                     <ul class="nav navbar-nav"> 
                         <li class="nav-item active hvr-underline-from-left"><a href="{{ route('home.index') }}" class="nav-link">Home</a></li>
-                        <li class="nav-item hvr-underline-from-left"><a href="#newanime" target="_self" class="nav-link" >New</a></li>
-                        <li class="nav-item hvr-underline-from-left"><a href="#random" target="_self" class="nav-link">Random</a></li>
-                        <li class="nav-item hvr-underline-from-left"><a href="#trending" target="_self" class="nav-link">Trending</a></li>
-                        <li class="nav-item hvr-underline-from-left"><a href="" ui-sref="about" ui-sref-active="active" class="nav-link">About</a></li>
+                        <li class="nav-item hvr-underline-from-left"><a href="#newanime" class="nav-link" >Genres</a></li>
+                        <li class="nav-item hvr-underline-from-left"><a href="#newanime" class="nav-link" >Producers</a></li>
+                        <li class="nav-item hvr-underline-from-left"><a href="#newanime" class="nav-link" >Years</a></li>
                     </ul>
                 </div>
             </nav>

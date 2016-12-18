@@ -21,6 +21,17 @@ Route::get('anime/{id}/episode/{episodeId}', [
     'uses' => 'PageController@index'
 ]);
 
+Route::group(['prefix'=>'genre'], function() {
+    Route::get('', [
+        'as' => 'genre.index',
+        'uses' => 'Home\GenrePageController@index'
+    ]);
+    Route::get('anime', [
+        'as' => 'genre.show',
+        'uses' => 'Home\GenrePageController@index'
+    ]);
+});
+
 Route::get('admin', function() {
     return view('admin.year.index');
 });
