@@ -29,8 +29,9 @@ class EpisodeController extends Controller
      */
     public function create($id)
     {   
+        $movie = Movie::find($id);
 
-        return view('admin.episode.create', compact('id'));
+        return view('admin.episode.create', compact('id', 'movie'));
     }
 
     /**

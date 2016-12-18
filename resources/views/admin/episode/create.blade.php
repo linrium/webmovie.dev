@@ -10,7 +10,7 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Create episode</h1>
+            <h1 class="page-header">Create {{ $movie->name }} episode</h1>
         </div>
     </div><!--/.row-->
     
