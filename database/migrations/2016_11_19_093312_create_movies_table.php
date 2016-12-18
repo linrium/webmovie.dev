@@ -21,6 +21,7 @@ class CreateMoviesTable extends Migration
             $table->string('thumb');
             $table->integer('views')->unsigned();
             $table->integer('likes')->unsigned();
+            $table->integer('current_episodes');
             $table->integer('total_episodes');
             $table->longText('description');
             $table->integer('year_id')->unsigned();
