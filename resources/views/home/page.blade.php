@@ -42,6 +42,8 @@
                 </div>
                 <span class="span-inline"><i class="fa fa-list"></i> Genre: {!! $arrGenres !!}</span>
                 <span class="span-inline"><i class="fa fa-building"></i> Producer: {!! $arrProducers !!}</span>
+                <?php $year = DB::table('years')->where('id','=', $movie['id'])->get()->toArray() ?>
+                <span class="span-inline"><i class="fa fa-clock-o"></i> Year: <span><a href="{!! route('yearpage.show', $movie['id']) !!}">{{ $year[0]->name }}</a></span></span>
                 
                 <div class="description">{!! $movie['description'] !!}</div>
             </div>
