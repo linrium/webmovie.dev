@@ -24,9 +24,9 @@
                         <form class="form-horizontal" action="{!! route('producer.store') !!}" method="post">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                             <div class="form-group">
-                                <label for="txtName" class="col-sm-2 control-label">Producer name</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="txtName" name="txtName" placeholder="Please enter producer name">
+                                <label for="txtName" class="col-sm-3 control-label">Producer name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="txtName" name="txtName" placeholder="Please enter producer name">
                                 </div>
                             </div>
                             <div class="form-group">

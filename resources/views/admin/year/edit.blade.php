@@ -26,8 +26,8 @@
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="id" value="{{ $year['id'] }}">
                             <div class="form-group">
-                                <label for="txtName" class="col-sm-2 control-label">Year name</label>
-                                <div class="col-sm-10">
+                                <label for="txtName" class="col-sm-3 control-label">Year name</label>
+                                <div class="col-sm-9">
                                     <input type="number" class="form-control" id="txtName" name="txtName" value="{!! old('txtName', isset($year) ? $year['name'] : null) !!}" placeholder="Please enter year name">
                                 </div>
                             </div>

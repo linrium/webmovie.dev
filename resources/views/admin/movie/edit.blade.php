@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label for="fileThumb" class="col-sm-3 control-label">Thumb</label>
                                 <div class="col-sm-9">
-                                    <div id="image-preview" style="background: url('/public/upload/<?php echo $movie['thumb'] ?>'); background-size: cover; background-position: center center">
+                                    <div id="image-preview" style="background: url('{{ url('./public/upload/'.$movie['thumb']) }}'); background-size: cover; background-position: center center">
                                         <label for="image-upload" id="image-label">Choose File</label>
                                         <input type="file" accept="image/*" name="fileThumb" id="image-upload" />
                                     </div>
@@ -126,6 +126,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <button type="submit" class="btn btn-default">Update</button>
+                                    <a href="{!! route('movie.index') !!}" class="btn btn-default">Cancel</a>
                                 </div>
                             </div>
                         </form>

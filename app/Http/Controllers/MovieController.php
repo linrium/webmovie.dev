@@ -24,7 +24,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $data = Movie::select('id', 'name', 'alias', 'status', 'thumb', 'views', 'total_episodes', 'description', 'year_id', 'season_id')
+        $data = Movie::select('id', 'name', 'alias', 'status', 'thumb', 'views', 'likes', 'current_episodes', 'total_episodes', 'description', 'year_id', 'season_id')
         ->orderBy('id', 'DESC')
         ->get()
         ->toArray();
@@ -60,17 +60,18 @@ class MovieController extends Controller
         // movie request
         $fileName = $request->file('fileThumb')->getClientOriginalName();
 
-        $movie                 = new Movie();
-        $movie->name           = $request->txtName;
-        $movie->alias          = changeTitle($request->txtName);
-        $movie->status         = $request->txtStatus;
-        $movie->thumb          = $fileName;
-        $movie->views          = 0;
-        $movie->likes          = 0;
-        $movie->total_episodes = $request->txtNumber;
-        $movie->description    = $request->txtDescription;
-        $movie->year_id        = $request->txtYear;
-        $movie->season_id      = $request->txtSeason;
+        $movie                   = new Movie();
+        $movie->name             = $request->txtName;
+        $movie->alias            = changeTitle($request->txtName);
+        $movie->status           = $request->txtStatus;
+        $movie->thumb            = $fileName;
+        $movie->views            = 0;
+        $movie->likes            = 0;
+        $movie->current_episodes = 0;
+        $movie->total_episodes   = $request->txtNumber;
+        $movie->description      = $request->txtDescription;
+        $movie->year_id          = $request->txtYear;
+        $movie->season_id        = $request->txtSeason;
         $movie->save();
 
         // save file
@@ -147,15 +148,16 @@ class MovieController extends Controller
             $fileOriginalName->move('public/upload/', $fileName);
         }
         
-        $movie                 = Movie::find($id);
-        $movie->name           = $request->txtName;
-        $movie->alias          = changeTitle($request->txtName);
-        $movie->status         = $request->txtStatus;
-        $movie->views          = $movie->views;
-        $movie->total_episodes = $request->txtNumber;
-        $movie->description    = $request->txtDescription;
-        $movie->year_id        = $request->txtYear;
-        $movie->season_id      = $request->txtSeason;
+        $movie                   = Movie:: find($id);
+        $movie->name             = $request->txtName;
+        $movie->alias            = changeTitle($request->txtName);
+        $movie->status           = $request->txtStatus;
+        $movie->views            = $movie->views;
+        $movie->current_episodes = $movie->current_episodes;
+        $movie->total_episodes   = $request->txtNumber;
+        $movie->description      = $request->txtDescription;
+        $movie->year_id          = $request->txtYear;
+        $movie->season_id        = $request->txtSeason;
 
         if($fileOriginalName === null) {
             $movie->thumb = $movie->thumb;

@@ -29,6 +29,8 @@
                             <th>Name</th>
                             <th>Status</th>
                             <th>Views</th>
+                            <th>Likes</th>
+                            <th>Current Episodes</th>
                             <th>Total Episodes</th>
                             <th>Edit</th>
                             <th>View</th>
@@ -46,6 +48,8 @@
                                     <td>{!! $item['name'] !!}</td>
                                     <td>{!! $item['status'] !!}</td>
                                     <td>{!! $item['views'] !!}</td>
+                                    <td>{!! $item['likes'] !!}</td>
+                                    <td>{!! $item['current_episodes'] !!}</td>
                                     <td>{!! $item['total_episodes'] !!}</td>
                                     <td>
                                         <a class="btn btn-default" href="{!! URL::route('movie.edit', $item['id']) !!}">Edit</a>

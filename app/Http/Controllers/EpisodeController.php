@@ -41,9 +41,9 @@ class EpisodeController extends Controller
      */
     public function store(Request $request)
     {
-        $episode = new Episode();
-        $episode->name = $request->txtName;
-        $episode->alias = changeTitle($request->txtName);
+        $episode           = new Episode();
+        $episode->name     = $request->txtName;
+        $episode->alias    = changeTitle($request->txtName);
         $episode->movie_id = $request->txtMovieId;
         $episode->save();
 
@@ -53,6 +53,11 @@ class EpisodeController extends Controller
             $link->episode_id = $episode->id;
             $link->save();
         }
+
+        $movie = Movie::find($request->txtMovieId);
+        $movie->current_episodes = $movie->current_episodes + 1;
+        $movie->save();
+
 
         return redirect()->route('episode.index', $request->txtMovieId)->with([
             'flash_level'=>'success',
@@ -118,10 +123,14 @@ class EpisodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $movieId)
     {
         $idMovie = Episode::find($id);
         $episode = Episode::destroy($id);
+
+        $movie = Movie::find($movieId);
+        $movie->current_episodes = $movie->current_episodes - 1;
+        $movie->save();
 
         return redirect()->route('episode.index', $idMovie->movie_id)->with([
             'flash_level'=>'success',

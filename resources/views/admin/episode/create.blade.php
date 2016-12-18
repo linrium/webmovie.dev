@@ -10,7 +10,7 @@
     
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Episode manager</h1>
+            <h1 class="page-header">Create episode</h1>
         </div>
     </div><!--/.row-->
     
@@ -40,7 +40,8 @@
                             @endfor
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
-                                    <button type="submit" class="btn btn-default">Create</button>
+                                    <button type="submit" class="btn btn-success">Create</button>
+                                    <a type="button" class="btn btn-default" href="{!! route('episode.index', $id) !!}">Cancel</a>
                                 </div>
                             </div>
                         </form>

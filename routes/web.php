@@ -59,7 +59,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
             'as' => 'episode.update',
             'uses' => 'EpisodeController@update'
         ]);
-        Route::delete('{id}', [
+        Route::delete('{id}/{movieId}', [
             'as' => 'episode.destroy',
             'uses' => 'EpisodeController@destroy'
         ]);
