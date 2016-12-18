@@ -17,6 +17,8 @@ class CreateEpisodesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('alias');
+            $table->integer('views');
+            $table->integer('likes');
             $table->integer('movie_id')->unsigned();
             $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->timestamps();

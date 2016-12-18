@@ -12,8 +12,8 @@
     @foreach($newEpisodes as $episode)
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" >
       <div class="main__citem-item">
-        <a href="{{ route('page.index', $episode['id']) }}">
-          <?php $movie = DB::table('movies')->where('id', $episode['movie_id'])->select('name', 'thumb', 'current_episodes')->get(); ?>
+        <?php $movie = DB::table('movies')->where('id', $episode['movie_id'])->select('id', 'name', 'thumb', 'current_episodes')->get(); ?>
+        <a href="{{ route('page.index', ['id'=>$movie[0]->id, 'episodeId'=>$movie[0]->current_episodes]) }}">
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie[0]->thumb)}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">
@@ -43,7 +43,7 @@
             <h2>{!! $movie['name'] !!}</h2><span>{{ $movie['views'] }} views</span>
           </div>
           <div class="col-md-4 col-sm-2 main__ritem-icon">
-            <a class="btn btn-nooutline-primary" href="{{ route('page.index', $movie['id']) }}">PLAY</a>
+            <a class="btn btn-nooutline-primary" href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$movie['current_episodes']]) }}">PLAY</a>
             <button class="btn btn-nooutline-primary">LIKE</button>
           </div>
         </div>
@@ -70,7 +70,7 @@
             <h2>{!! $movie['name'] !!}</h2><span>{{ $movie['likes'] }} likes</span>
           </div>
           <div class="col-md-4 col-sm-2 main__ritem-icon">
-            <a class="btn btn-nooutline-primary" href="{{ route('page.index', $movie['id']) }}">PLAY</a>
+            <a class="btn btn-nooutline-primary" href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$movie['current_episodes']]) }}">PLAY</a>
             <button class="btn btn-nooutline-primary">LIKE</button>
           </div>
         </div>
@@ -93,7 +93,7 @@
     @foreach($movies as $movie)
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" >
       <div class="main__citem-item">
-        <a href="{{ route('page.index', $movie['id']) }}">
+        <a href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$movie['current_episodes']]) }}">
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">
@@ -117,7 +117,7 @@
     @foreach($moviesRandom as $movie)
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" >
       <div class="main__citem-item">
-        <a href="{{ route('page.index', $movie['id']) }}">
+        <a href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$movie['current_episodes']]) }}">
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">

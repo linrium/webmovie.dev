@@ -45,6 +45,8 @@ class EpisodeController extends Controller
         $episode           = new Episode();
         $episode->name     = $request->txtName;
         $episode->alias    = changeTitle($request->txtName);
+        $episode->views    = 0;
+        $episode->likes    = 0;
         $episode->movie_id = $request->txtMovieId;
         $episode->save();
 
@@ -99,9 +101,11 @@ class EpisodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $episode = Episode::find($id);
-        $episode->name = $request->txtName;
+        $episode        = Episode:: find($id);
+        $episode->name  = $request->txtName;
         $episode->alias = changeTitle($request->txtName);
+        $episode->views = $episode->views;
+        $episode->likes = $episode->likes;
         $episode->save();
 
         $links = EpisodeLink::where('episode_id', $id)->select('id')->get()->toArray();

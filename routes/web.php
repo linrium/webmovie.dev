@@ -16,7 +16,7 @@ Route::get('/', [
     'uses' => 'HomeController@index'
 ]);
 
-Route::get('anime/{id}', [
+Route::get('anime/{id}/episode/{episodeId}', [
     'as' => 'page.index',
     'uses' => 'PageController@index'
 ]);

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Episode extends Model
 {
     protected $table = 'episodes';
-    protected $fillable = ['name', 'alias', 'movie_id'];
+    protected $fillable = ['name', 'alias', 'views', 'likes', 'movie_id'];
     public $timestamp = true;
 
     public function movie() {
