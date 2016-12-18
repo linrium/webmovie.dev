@@ -1,18 +1,7 @@
 vendor/
 node_modules/
-public/
+public/components
 zone/
-
-!/public/assets/
-!/public/css/
-!/public/fonts/
-!/public/js/
-!/public/img/
-!/public/.htaccess/
-!/public/favicon.ico/
-!/public/index.php/
-!/public/robots.txt/
-!/public/web.config/
 
 # Laravel 4 specific
 bootstrap/compiled.php
