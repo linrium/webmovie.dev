@@ -25,7 +25,7 @@ Route::get('admin', function() {
     return view('admin.year.index');
 });
 
-Route::group(['prefix'=>'admin', 'middleware' => 'admin'], function() {
+Route::group(['prefix'=>'admin'], function() {
     Route::resource('year', 'YearController');
     Route::resource('season', 'SeasonController');
     Route::resource('genre', 'GenreController');
