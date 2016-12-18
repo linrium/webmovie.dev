@@ -1,29 +1,11 @@
-$('.alert').delay(3000).slideUp();
+$(document).ready(() => {
 
-function confirmDelete(message) {
-    console.log(message);
-    if(window.confirm(message)) {
-        return true;
-    }
-    return false;
-}
+    // slide
+    $('.alert').delay(3000).slideUp();
 
-function tokenfield(data) {
-    var engine = new Bloodhound({
-        local: data,
-        datumTokenizer: function(d) {
-            return Bloodhound.tokenizers.whitespace(d.label); 
-        },
-        queryTokenizer: Bloodhound.tokenizers.whitespace    
+    
+    //likes
+    $('#likes').click(() => {
+        console.log('hello');
     });
-
-    engine.initialize();
-
-    $('#tokenfield-typeahead').tokenfield({
-        typeahead: {
-            source: engine.ttAdapter(),
-            displayKey: 'label'
-        }
-    });
-}
-
+});

@@ -67,6 +67,8 @@
   <!-- My script-->
   <script src="{{ url('public/js/functions.js')}}"></script>
 
+  <script src="{{ url('public/js/myscript.js')}}"></script>
+
   </div>
   
 
