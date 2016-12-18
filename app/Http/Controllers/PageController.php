@@ -14,9 +14,9 @@ class PageController extends Controller
         $str = '';
         foreach($data as $d) {
             if($str === '')
-                $str = "<span><a href='/".$option."/".$d['alias']."'>".$d['name']."</a></span>";
+                $str = "<span><a href='/".$option."/".$d['id']."'>".$d['name']."</a></span>";
             else
-                $str .= ", <span><a href='/".$option."/".$d['alias']."'>".$d['name']."</a></span>";
+                $str .= ", <span><a href='/".$option."/".$d['id']."'>".$d['name']."</a></span>";
         }
 
         return $str;
@@ -35,8 +35,8 @@ class PageController extends Controller
         $links = Episode::find($episodeId)->link()->get()->toArray();
 
         // // convert data to array;
-        $arrGenres = $this->mapArray('webmovie/genre', $genres);
-        $arrProducers = $this->mapArray('webmovie/producer', $producers);
+        $arrGenres = $this->mapArray('webmovie.dev/genre/anime', $genres);
+        $arrProducers = $this->mapArray('webmovie.dev/producer/anime', $producers);
 
         return view('home.page', compact('links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'id', 'episodeId'));
         // echo '<pre>';

@@ -7,9 +7,9 @@
                 <div id="navbarResponsive" class="collapse navbar-toggleable-md">
                     <ul class="nav navbar-nav"> 
                         <li class="nav-item active hvr-underline-from-left"><a href="{{ route('home.index') }}" class="nav-link">Home</a></li>
-                        <li class="nav-item hvr-underline-from-left"><a href="#newanime" class="nav-link" >Genres</a></li>
-                        <li class="nav-item hvr-underline-from-left"><a href="#newanime" class="nav-link" >Producers</a></li>
-                        <li class="nav-item hvr-underline-from-left"><a href="#newanime" class="nav-link" >Years</a></li>
+                        <li class="nav-item hvr-underline-from-left"><a href="{{ route('genrepage.index') }}" class="nav-link" >Genres</a></li>
+                        <li class="nav-item hvr-underline-from-left"><a href="{{ route('producerpage.index') }}" class="nav-link" >Producers</a></li>
+                        <li class="nav-item hvr-underline-from-left"><a href="{{ route('yearpage.index') }}" class="nav-link" >Years</a></li>
                     </ul>
                 </div>
             </nav>

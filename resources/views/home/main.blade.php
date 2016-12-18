@@ -118,7 +118,8 @@
     @foreach($moviesRandom as $movie)
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" >
       <div class="main__citem-item">
-        <a href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$movie['current_episodes']]) }}">
+        <?php $lastEp = DB::table('episodes')->where('movie_id', $movie['id'])->orderBy('id', 'DESC')-> first() ?>
+        <a href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$lastEp->id]) }}">
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie['thumb'])}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">

@@ -23,12 +23,34 @@ Route::get('anime/{id}/episode/{episodeId}', [
 
 Route::group(['prefix'=>'genre'], function() {
     Route::get('', [
-        'as' => 'genre.index',
+        'as' => 'genrepage.index',
         'uses' => 'Home\GenrePageController@index'
     ]);
-    Route::get('anime', [
-        'as' => 'genre.show',
-        'uses' => 'Home\GenrePageController@index'
+    Route::get('anime/{id}', [
+        'as' => 'genrepage.show',
+        'uses' => 'Home\GenrePageController@show'
+    ]);
+});
+
+Route::group(['prefix'=>'producer'], function() {
+    Route::get('', [
+        'as' => 'producerpage.index',
+        'uses' => 'Home\ProducerPageController@index'
+    ]);
+    Route::get('anime/{id}', [
+        'as' => 'producerpage.show',
+        'uses' => 'Home\ProducerPageController@show'
+    ]);
+});
+
+Route::group(['prefix'=>'year'], function() {
+    Route::get('', [
+        'as' => 'yearpage.index',
+        'uses' => 'Home\YearPageController@index'
+    ]);
+    Route::get('anime/{id}', [
+        'as' => 'yearpage.show',
+        'uses' => 'Home\YearPageController@show'
     ]);
 });
 

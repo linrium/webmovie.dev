@@ -11,6 +11,6 @@ class Year extends Model
     public $timestamp = true;
 
     public function movie() {
-        return $this->hasMany('App\Year');
+        return $this->hasMany('App\Movie');
     }
 }
