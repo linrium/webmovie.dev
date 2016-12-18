@@ -14,9 +14,9 @@ class PageController extends Controller
         $str = '';
         foreach($data as $d) {
             if($str === '')
-                $str = "<span><a href='/".$option."/".$d['name']."'>".$d['name']."</a></span>";
+                $str = "<span><a href='/".$option."/".$d['alias']."'>".$d['name']."</a></span>";
             else
-                $str .= ", <span><a href='/".$option."/".$d['name']."'>".$d['name']."</a></span>";
+                $str .= ", <span><a href='/".$option."/".$d['alias']."'>".$d['name']."</a></span>";
         }
 
         return $str;
@@ -24,7 +24,7 @@ class PageController extends Controller
 
     public function index($id, $episodeId) {
         $movie = Movie::find($id)->toArray();
-        $movies = Movie::select('id', 'name', 'thumb', 'views')->orderByRaw("RAND()")->limit(10)->orderBy('id', 'DESC')->get()->toArray();
+        $movies = Movie::select('id', 'name', 'thumb', 'views', 'likes')->orderByRaw("RAND()")->limit(10)->orderBy('id', 'DESC')->get()->toArray();
 
         $episodes = Episode::where('movie_id', $id)->select('id', 'name', 'views', 'likes')->limit(10)->get()->toArray();
         $episode = Episode::find($episodeId)->toArray();
@@ -35,8 +35,8 @@ class PageController extends Controller
         $links = Episode::find($episodeId)->link()->get()->toArray();
 
         // // convert data to array;
-        $arrGenres = $this->mapArray('genre', $genres);
-        $arrProducers = $this->mapArray('producer', $producers);
+        $arrGenres = $this->mapArray('webmovie/genre', $genres);
+        $arrProducers = $this->mapArray('webmovie/producer', $producers);
 
         return view('home.page', compact('links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'id', 'episodeId'));
         // echo '<pre>';

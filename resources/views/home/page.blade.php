@@ -21,7 +21,11 @@
                                 <img src="{{ url('public/img/'.$movie['thumb']) }}" width="100%" alt=""/>
                             </div>
                         </a>
-                        <div class="main__watch-suggest-episode"> <a href="">Episode {!! $ep['name'] !!}</a><small>5 views</small></div>
+                        <div class="main__watch-suggest-episode">
+                            <a href="">Episode {!! $ep['name'] !!}</a>
+                            <small>{{ $ep['views'] }} views</small> <br>
+                            <small>{{ $ep['likes'] }} likes</small>
+                        </div>
                     </li>
                     @endforeach
                 </ul>
@@ -51,12 +55,17 @@
                     <ul>
                         @foreach($movies as $m)
                         <li class="hvr-bounce-to-right">
-                            <a>
+                            <?php $lastEp = DB::table('episodes')->where('movie_id', $m['id'])->orderBy('id', 'DESC')-> first() ?>
+                            <a href="{{ route('page.index', ['id'=>$m['id'], 'episodeId'=>$lastEp->id]) }}">
                                 <div class="list-video clearfix">
                                     <img src="{{ url('public/img/'.$m['thumb']) }}" alt="" width="100%"/>
                                 </div>
                             </a>
-                            <div class="main__watch-suggest-episode"> <a href="">{!! $m['name'] !!}</a><small>{!! $m['views'] !!} views</small></div>
+                            <div class="main__watch-suggest-episode">
+                                <a href="">{!! $m['name'] !!}</a>
+                                <small>{!! $m['views'] !!} views</small> <br>
+                                <small>{!! $m['likes'] !!} likes</small>
+                            </div>
                         </li>
                         @endforeach
                     </ul>
