@@ -26,18 +26,19 @@ class PageController extends Controller
         $movie = Movie::find($id)->toArray();
         $movies = Movie::select('id', 'name', 'thumb', 'views')->orderByRaw("RAND()")->limit(10)->orderBy('id', 'DESC')->get()->toArray();
 
-        $episodes = Episode::where('movie_id', $id)->select('id', 'name')->limit(10)->get()->toArray();
+        $episodes = Episode::where('movie_id', $id)->select('id', 'name', 'views', 'likes')->limit(10)->get()->toArray();
+        $episode = Episode::find($episodeId)->toArray();
 
-        // get data
+        // // get data
         $genres = Movie::find($id)->genre()->get()->toArray();
         $producers = Movie::find($id)->producer()->get()->toArray();
 
-        // convert data to array;
+        // // convert data to array;
         $arrGenres = $this->mapArray('genre', $genres);
         $arrProducers = $this->mapArray('producer', $producers);
 
-        return view('home.page', compact('movie', 'movies', 'episodes', 'arrGenres', 'arrProducers', 'episodeId'));
+        return view('home.page', compact('movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'episodeId'));
         // echo '<pre>';
-        // print_r($arrGenres);
+        // print_r($episode['views']);
     }
 }

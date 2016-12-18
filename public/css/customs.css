@@ -48,3 +48,20 @@ td.alt { background-color: #ffc; background-color: rgba(255, 255, 0, 0.2); }
 .span-inline span {
   display: initial;
 }
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+::-webkit-scrollbar-track {
+    background: white;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #ed215e;
+}

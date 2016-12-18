@@ -13,7 +13,7 @@
     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" >
       <div class="main__citem-item">
         <?php $movie = DB::table('movies')->where('id', $episode['movie_id'])->select('id', 'name', 'thumb', 'current_episodes')->get(); ?>
-        <a href="{{ route('page.index', ['id'=>$movie[0]->id, 'episodeId'=>$movie[0]->current_episodes]) }}">
+        <a href="{{ route('page.index', ['id'=>$movie[0]->id, 'episodeId'=>$episode['id']]) }}">
           <div class="overlay"><img src="{{ url('public/img/play.png')}}" /></div><img src="{{ url('public/img/'.$movie[0]->thumb)}}" alt="" class="img-responsive" />
         </a>
         <div class="main__citem-des">
