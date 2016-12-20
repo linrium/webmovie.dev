@@ -16,6 +16,7 @@ Route::get('/', [
     'uses' => 'HomeController@index'
 ]);
 
+// watch anime
 Route::get('anime/{id}/episode/{episodeId}', [
     'as' => 'page.index',
     'uses' => 'PageController@index'
@@ -54,27 +55,9 @@ Route::group(['prefix'=>'year'], function() {
     ]);
 });
 
-// sign up
-Route::get('signup', [
-    'as' => 'signup.create',
-    'uses' => 'Home\SignUpController@create'
-]);
-
-Route::post('signup', [
-    'as' => 'signup.store',
-    'uses' => 'Home\SignUpController@store'
-]);
-
-// sign in
-Route::get('signin', [
-    'as' => 'signin.create',
-    'uses' => 'Home\SignInController@create'
-]);
-
-Route::post('signin', [
-    'as' => 'signin.store',
-    'uses' => 'Home\SignInController@store'
-]);
+Route::group(['prefix'=>'member'], function() {
+    Route::resource('myaccount', 'Member\MyAccountController');
+});
 
 Route::get('admin', function() {
     return view('admin.year.index');

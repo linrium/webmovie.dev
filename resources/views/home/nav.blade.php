@@ -20,6 +20,10 @@
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('year.index') }}" class="nav-link" >Admin</a></li>
                         @endif
 
+                        @if($user['role'] === 'member')
+                        <li class="nav-item hvr-underline-from-left"><a href="{{ route('myaccount.index') }}" class="nav-link" >My Account</a></li>
+                        @endif
+
                         @if($user['role'] !== 'notuser')
                         <li class="nav-item hvr-underline-from-left">
                             <form action="{!! route('logout') !!}" method="post">
