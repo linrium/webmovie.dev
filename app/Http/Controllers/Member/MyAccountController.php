@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 use Auth;
 use App\User;
@@ -49,6 +50,12 @@ class MyAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'txtName' => 'required',
+        ], [
+            'txtName.required' => 'Please enter old password',
+        ]);
+
         $user = User::find($id);
         $user->username = $request->txtName;
         $user->save();
@@ -82,6 +89,20 @@ class MyAccountController extends Controller
      */
     public function updatePassword(Request $request, $id)
     {
+
+        $this->validate($request, [
+            'txtOldPassword' => 'required',
+            'txtNewPassword' => 'required|min:6',
+            'txtNewRepassword' => 'required|min:6|same:txtNewPassword'
+        ], [
+            'txtOldPassword.required' => 'Please enter old password',
+            'txtNewPassword.required'   => 'Please enter password',
+            'txtNewPassword.min'        => 'Password must least 6 character',
+            'txtNewRepassword.min'      => 'Repassword must least 6 character',
+            'txtNewRepassword.required' => 'Please enter repassword',
+            'txtNewRepassword.same'     => 'Repassword don\'t match'
+        ]);
+
         if(Hash::check($request->txtOldPassword, Auth::user()->password)) {
             $user = User::find($id);
             $user->password = Hash::make($request->txtNewPassword);
@@ -92,9 +113,9 @@ class MyAccountController extends Controller
                 'flash_message'=>'Password updated succesfully'
             ]);
         } else {
-            return redirect()->route('myaccount.editPassword')->with([
-                'flash_level'=>'success',
-                'flash_message'=>'Wrong password'
+            return redirect()->route('myaccount.editPassword', $id)->with([
+                'flash_level'=>'danger',
+                'flash_message'=>'Old password not match'
             ]);
         }
 

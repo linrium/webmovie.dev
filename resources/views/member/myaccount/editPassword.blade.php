@@ -15,6 +15,7 @@
                 <div class="panel-body">
                     <div class="col-lg-7">
                         @include('member.component.alertForm')
+                        @include('member.component.alert')
                         <form class="form-horizontal" action="{!! route('myaccount.updatePassword', $user['id']) !!}" method="post">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                             <input type="hidden" name="_method" value="PUT">
