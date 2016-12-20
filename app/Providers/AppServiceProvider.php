@@ -14,7 +14,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+        // this issue is caused by Auth::user() hasn't been initialized yet
+        view()->composer('*', function($view){
+            $this->currentUser = [
+                'role' => 'notuser'
+            ];
+            if(Auth::user())
+                $this->currentUser = Auth::user()->toArray();
+            $view->with('currentUser', $this->currentUser);
+        });
     }
 
     /**

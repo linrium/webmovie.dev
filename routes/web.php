@@ -55,6 +55,17 @@ Route::group(['prefix'=>'year'], function() {
     ]);
 });
 
+Route::group(['prefix'=>'keyword'], function() {
+    Route::get('', [
+        'as' => 'keywordpage.index',
+        'uses' => 'Home\KeywordPageController@index'
+    ]);
+    Route::get('anime/{id}', [
+        'as' => 'keywordpage.show',
+        'uses' => 'Home\KeywordPageController@show'
+    ]);
+});
+
 Route::group(['prefix'=>'member','middleware'=>'member'], function() {
     Route::group(['prefix'=>'myaccount'], function() {
         Route::get('', [

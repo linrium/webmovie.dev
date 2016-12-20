@@ -36,7 +36,6 @@
         <div class="col-md-8">
             <div class="main__watch-info">
                 <h1>{!! $movie['name'] !!}</h1>
-                <?php print_r($currentUser) ?>
                 <div class="row">
                     <div class="col-md-8" style="line-height: 50px;"><span id="likes"><i class="fa fa-heart"></i> <span id="count-likes" style="display: inline">{{ $episode['likes'] }}</span> likes</span></div>
                     <div class="col-md-4"><span id="views" class="hvr-underline-from-left"> <span id="count-views" style="display: inline">{{ Counter::showAndCount('episodes', $episode['id'] ) }}</span> views</span></div>
