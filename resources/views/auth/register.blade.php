@@ -1,76 +1,76 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebMovie - Dashboard</title>
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
-                        {{ csrf_field() }}
+<link href="{{ url('public/assets/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ url('public/assets/styles.css') }}" rel="stylesheet">
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+			<div class="login-panel panel panel-default">
+				<div class="panel-heading">Signup to WebMovie</div>
+				<div class="panel-body">
+					<form action="{!! route('signup.store') !!}" method="post">
+                            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                            <div class="form-group">
+                                <label for="txtName" class="control-label">Username</label>
+
+                                <input type="txt" class="form-control" id="txtName" value="{!! old('txtName') !!}" name="txtName" placeholder="Please enter user name">
+
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="txtEmail" class="control-label">Email</label>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                <input type="email" class="form-control" id="txtEmail" value="{!! old('txtEmail') !!}" name="txtEmail" placeholder="Please enter user name">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="txtPassword" class="control-label">Password</label>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                                <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="Please enter user name">
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="txtRepassword" class="control-label">Repassword</label>
 
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="txtRepassword" name="txtRepassword" placeholder="Please enter user name">
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
+                            <div class="form-group">
+                                <div class="">
+                                    <button type="submit" class="btn btn-success">Sign up</button>
+                                    <a class="btn btn-primary" href="{{ route('login') }}">Sign in</a>
+                                    <a class="btn btn-default"  href="{{ route('home.index') }}">Go Home</a>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+                        </form>
+					
+				</div>
+			</div>
+		</div><!-- /.col-->
+	</div><!-- /.row -->	
+	</div>
+	
+
+	<!-- jQuery-->
+	<script src="{{ url('public/components/jquery/dist/jquery.min.js')}}"></script>
+	<!-- tether-->
+	<script src="{{ url('public/components/tether/dist/js/tether.min.js')}}"></script>
+	<!-- bootstrap-->
+	<script src="{{ url('public/components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+</body>
+
+</html>

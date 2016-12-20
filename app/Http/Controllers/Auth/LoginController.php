@@ -53,10 +53,21 @@ class LoginController extends Controller
         // print_r(Auth::guard('admin'));
 
         if(Auth::attempt($userdata)) {
-            return redirect()->route('year.index');
+
+            $user = Auth::user()->toArray();
+
+            if($user['role'] === 'admin') {
+                return redirect()->route('year.index');
+            } else if($user['role'] === 'member') {
+                return redirect()->route('home.index');
+            }
+            
         } else {
             return redirect()->route('login');
         }
+
+        // echo '<pre>';
+        // print_r(Auth::attempt($userdata));
     }
 
     public function logout() {

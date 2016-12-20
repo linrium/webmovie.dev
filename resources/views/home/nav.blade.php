@@ -10,8 +10,8 @@
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('genrepage.index') }}" class="nav-link" >Genres</a></li>
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('producerpage.index') }}" class="nav-link" >Producers</a></li>
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('yearpage.index') }}" class="nav-link" >Years</a></li>
-                        <li class="nav-item hvr-underline-from-left"><a href="{{ route('signup.create') }}" class="nav-link" >Signup</a></li>
-                        <li class="nav-item hvr-underline-from-left"><a href="{{ route('signin.create') }}" class="nav-link" >Signin</a></li>
+                        <li class="nav-item hvr-underline-from-left"><a href="{{ url('/register') }}" class="nav-link" >Register</a></li>
+                        <li class="nav-item hvr-underline-from-left"><a href="{{ route('login') }}" class="nav-link" >Login</a></li>
                     </ul>
                 </div>
             </nav>
