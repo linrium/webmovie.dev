@@ -10,8 +10,23 @@
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('genrepage.index') }}" class="nav-link" >Genres</a></li>
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('producerpage.index') }}" class="nav-link" >Producers</a></li>
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('yearpage.index') }}" class="nav-link" >Years</a></li>
+                        
+                        @if($user['role'] === 'notuser')
                         <li class="nav-item hvr-underline-from-left"><a href="{{ url('/register') }}" class="nav-link" >Register</a></li>
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('login') }}" class="nav-link" >Login</a></li>
+                        @endif
+
+                        @if($user['role'] === 'admin')
+                        <li class="nav-item hvr-underline-from-left"><a href="{{ route('year.index') }}" class="nav-link" >Admin</a></li>
+                        @endif
+
+                        @if($user['role'] !== 'notuser')
+                        <li class="nav-item hvr-underline-from-left">
+                            <form action="{!! route('logout') !!}" method="post">
+                                <button type="submit" style="background: none; border: none; text-transform: uppercase; color: white; cursor: pointer">Logout</button>
+                            </form>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </nav>

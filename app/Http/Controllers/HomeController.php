@@ -18,6 +18,15 @@ class HomeController extends Controller
         $moviesMostLikes = Movie::select('id', 'name', 'thumb', 'current_episodes', 'likes')->limit(5)->orderBy('likes', 'DESC')->get()->toArray();
         $newEpisodes = Episode::select('id', 'name', 'alias', 'movie_id')->limit(6)->orderBy('id', 'DESC')->get()->toArray();
 
-        return view('home.main', compact('movies', 'moviesRandom', 'moviesMostViews', 'moviesMostLikes', 'newEpisodes'));
+        $user = [
+            'role' => 'notuser'
+        ];
+        if(Auth::user())
+            $user = Auth::user()->toArray();
+
+        // echo '<pre>';
+        // print_r($user);
+
+        return view('home.main', compact('user', 'movies', 'moviesRandom', 'moviesMostViews', 'moviesMostLikes', 'newEpisodes'));
     }
 }
