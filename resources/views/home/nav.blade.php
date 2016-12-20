@@ -11,20 +11,20 @@
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('producerpage.index') }}" class="nav-link" >Producers</a></li>
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('yearpage.index') }}" class="nav-link" >Years</a></li>
                         
-                        @if($user['role'] === 'notuser')
+                        @if($currentUser['role'] === 'notuser')
                         <li class="nav-item hvr-underline-from-left"><a href="{{ url('/register') }}" class="nav-link" >Register</a></li>
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('login') }}" class="nav-link" >Login</a></li>
                         @endif
 
-                        @if($user['role'] === 'admin')
+                        @if($currentUser['role'] === 'admin')
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('year.index') }}" class="nav-link" >Admin</a></li>
                         @endif
 
-                        @if($user['role'] === 'member')
+                        @if($currentUser['role'] === 'member')
                         <li class="nav-item hvr-underline-from-left"><a href="{{ route('myaccount.index') }}" class="nav-link" >My Account</a></li>
                         @endif
 
-                        @if($user['role'] !== 'notuser')
+                        @if($currentUser['role'] !== 'notuser')
                         <li class="nav-item hvr-underline-from-left">
                             <form action="{!! route('logout') !!}" method="post">
                                 <button type="submit" style="background: none; border: none; text-transform: uppercase; color: white; cursor: pointer">Logout</button>

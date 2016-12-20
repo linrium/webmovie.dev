@@ -39,15 +39,10 @@ class PageController extends Controller
         // // convert data to array;
         $arrGenres = $this->mapArray('webmovie.dev/genre/anime', $genres);
         $arrProducers = $this->mapArray('webmovie.dev/producer/anime', $producers);
-        $arrTags = $this->mapArray('webmovie.dev/producer/anime', $keywords);
+        $arrTags = $this->mapArray('webmovie.dev/keyword/anime', $keywords);
 
-        $user = [
-            'role' => 'notuser'
-        ];
-        if(Auth::user())
-            $user = Auth::user()->toArray();
 
-        return view('home.page', compact('user', 'links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'arrTags','id', 'episodeId'));
+        return view('home.page', compact('links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'arrTags','id', 'episodeId'));
         // echo '<pre>';
         // print_r($episode['views']);
     }

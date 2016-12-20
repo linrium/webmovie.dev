@@ -55,7 +55,7 @@ Route::group(['prefix'=>'year'], function() {
     ]);
 });
 
-Route::group(['prefix'=>'member'], function() {
+Route::group(['prefix'=>'member','middleware'=>'member'], function() {
     Route::group(['prefix'=>'myaccount'], function() {
         Route::get('', [
             'as' => 'myaccount.index',
