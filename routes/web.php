@@ -56,7 +56,30 @@ Route::group(['prefix'=>'year'], function() {
 });
 
 Route::group(['prefix'=>'member'], function() {
-    Route::resource('myaccount', 'Member\MyAccountController');
+    Route::group(['prefix'=>'myaccount'], function() {
+        Route::get('', [
+            'as' => 'myaccount.index',
+            'uses' => 'Member\MyAccountController@index'
+        ]);
+        Route::get('{id}/edit', [
+            'as' => 'myaccount.edit',
+            'uses' => 'Member\MyAccountController@edit'
+        ]);
+        Route::put('{id}', [
+            'as' => 'myaccount.update',
+            'uses' => 'Member\MyAccountController@update'
+        ]);
+
+        Route::get('{id}/editPassword', [
+            'as' => 'myaccount.editPassword',
+            'uses' => 'Member\MyAccountController@editPassword'
+        ]);
+        Route::put('{id}/updatePassword', [
+            'as' => 'myaccount.updatePassword',
+            'uses' => 'Member\MyAccountController@updatePassword'
+        ]);
+    });
+    
 });
 
 Route::get('admin', function() {

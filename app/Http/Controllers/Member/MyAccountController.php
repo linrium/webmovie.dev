@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Auth;
+use App\User;
+use Hash;
 
 class MyAccountController extends Controller
 {
@@ -26,38 +28,6 @@ class MyAccountController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -65,7 +35,9 @@ class MyAccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id)->toArray();
+
+        return view('member.myaccount.edit', compact('user'));
     }
 
     /**
@@ -77,17 +49,61 @@ class MyAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->username = $request->txtName;
+        $user->save();
+
+        return redirect()->route('myaccount.index')->with([
+            'flash_level'=>'success',
+            'flash_message'=>'Username updated succesfully'
+        ]);
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function editPassword($id)
     {
-        //
+        $user = User::find($id)->toArray();
+
+        return view('member.myaccount.editPassword', compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(Request $request, $id)
+    {
+        $this->validate($request, [
+            'txtPassword'   => 'required|min:6|confirmed',
+            'txtRepassword' => 'required|min:6|confirmed|same:txtPassword'
+        ]);
+
+        if(Hash::check($request->txtOldPassword, Auth::user()->password)) {
+            $user = User::find($id);
+            $user->password = $request->txtNewPassword;
+            $user->save();
+
+            return redirect()->route('myaccount.index')->with([
+                'flash_level'=>'success',
+                'flash_message'=>'Password updated succesfully'
+            ]);
+        } else {
+            return redirect()->route('myaccount.editPassword')->with([
+                'flash_level'=>'success',
+                'flash_message'=>'Wrong password'
+            ]);
+        }
+
+        
+
     }
 }
