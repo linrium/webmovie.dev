@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ed9df8b872992035f068a7fe461a635a",
-    "content-hash": "76036da3b5b55b91dbe1e1affa01bf9e",
+    "hash": "cfbde68d70f5035523fd8053a5a9740d",
+    "content-hash": "54b345ca7eac38bc1fa9a8d5b6b3df18",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -249,6 +249,54 @@
             "time": "2015-04-20 18:58:01"
         },
         {
+            "name": "jaybizzle/crawler-detect",
+            "version": "v1.2.26",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JayBizzle/Crawler-Detect.git",
+                "reference": "34d45b1dd0db13b55894af493df823741d22d59a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/34d45b1dd0db13b55894af493df823741d22d59a",
+                "reference": "34d45b1dd0db13b55894af493df823741d22d59a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jaybizzle\\CrawlerDetect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Beech",
+                    "email": "m@rkbee.ch",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
+            "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
+            "keywords": [
+                "crawler",
+                "crawler detect",
+                "crawler detector",
+                "crawlerdetect",
+                "php crawler detect"
+            ],
+            "time": "2016-12-15 21:48:05"
+        },
+        {
             "name": "jeremeamia/SuperClosure",
             "version": "2.2.0",
             "source": {
@@ -305,6 +353,45 @@
                 "tokenizer"
             ],
             "time": "2015-12-05 17:17:57"
+        },
+        {
+            "name": "kryptonit3/counter",
+            "version": "5.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kryptonit3/Counter.git",
+                "reference": "4ddafc961f7a680c389b940205d5cf5cb70368b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kryptonit3/Counter/zipball/4ddafc961f7a680c389b940205d5cf5cb70368b6",
+                "reference": "4ddafc961f7a680c389b940205d5cf5cb70368b6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "jaybizzle/crawler-detect": "1.*",
+                "php": ">=5.3.3",
+                "ramsey/uuid": "~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kryptonit3\\Counter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jesse Szypulski",
+                    "email": "jesse.szypulski@gmail.com"
+                }
+            ],
+            "description": "Hit counter for your pages.",
+            "time": "2016-09-26 17:31:00"
         },
         {
             "name": "laravel/framework",

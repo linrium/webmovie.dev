@@ -32,13 +32,15 @@ class PageController extends Controller
         // // get data
         $genres = Movie::find($id)->genre()->get()->toArray();
         $producers = Movie::find($id)->producer()->get()->toArray();
+        $keywords = Movie::find($id)->keyword()->get()->toArray();
         $links = Episode::find($episodeId)->link()->get()->toArray();
 
         // // convert data to array;
         $arrGenres = $this->mapArray('webmovie.dev/genre/anime', $genres);
         $arrProducers = $this->mapArray('webmovie.dev/producer/anime', $producers);
+        $arrTags = $this->mapArray('webmovie.dev/producer/anime', $keywords);
 
-        return view('home.page', compact('links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'id', 'episodeId'));
+        return view('home.page', compact('links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'arrTags','id', 'episodeId'));
         // echo '<pre>';
         // print_r($episode['views']);
     }

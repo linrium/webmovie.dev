@@ -43,7 +43,8 @@
             <h2>{!! $movie['name'] !!}</h2><span>{{ $movie['views'] }} views</span>
           </div>
           <div class="col-md-4 col-sm-2 main__ritem-icon">
-            <a class="btn btn-nooutline-primary" href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$movie['current_episodes']]) }}">PLAY</a>
+            <?php $lastEp = DB::table('episodes')->where('movie_id', $movie['id'])->orderBy('id', 'DESC')-> first() ?>
+            <a class="btn btn-nooutline-primary" href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$lastEp->id]) }}">PLAY</a>
             <button class="btn btn-nooutline-primary">LIKE</button>
           </div>
         </div>
@@ -70,7 +71,8 @@
             <h2>{!! $movie['name'] !!}</h2><span>{{ $movie['likes'] }} likes</span>
           </div>
           <div class="col-md-4 col-sm-2 main__ritem-icon">
-            <a class="btn btn-nooutline-primary" href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$movie['current_episodes']]) }}">PLAY</a>
+            <?php $lastEp = DB::table('episodes')->where('movie_id', $movie['id'])->orderBy('id', 'DESC')-> first() ?>
+            <a class="btn btn-nooutline-primary" href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$lastEp->id]) }}">PLAY</a>
             <button class="btn btn-nooutline-primary">LIKE</button>
           </div>
         </div>
