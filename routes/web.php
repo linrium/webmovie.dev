@@ -54,6 +54,28 @@ Route::group(['prefix'=>'year'], function() {
     ]);
 });
 
+// sign up
+Route::get('signup', [
+    'as' => 'signup.create',
+    'uses' => 'Home\SignUpController@create'
+]);
+
+Route::post('signup', [
+    'as' => 'signup.store',
+    'uses' => 'Home\SignUpController@store'
+]);
+
+// sign in
+Route::get('signin', [
+    'as' => 'signin.create',
+    'uses' => 'Home\SignInController@create'
+]);
+
+Route::post('signin', [
+    'as' => 'signin.store',
+    'uses' => 'Home\SignInController@store'
+]);
+
 Route::get('admin', function() {
     return view('admin.year.index');
 });

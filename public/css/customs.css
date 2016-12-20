@@ -74,3 +74,8 @@ html {
 .active-episode .main__watch-suggest-episode a{
   color: white;
 }
+
+.col-centerd {
+  float: none;
+  margin: 0 auto;
+}
