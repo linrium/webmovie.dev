@@ -3,7 +3,10 @@
         <div class="wrapper">
         <div class="header__search row">
             <div class="col-md-4 header__search--center">
-            <input type="search" placeholder="What are you looking for ?" id="search-bar" class="form-control"/>
+                <form action="{{ route('search.show') }}" method="get">
+                    <input type="search" placeholder="What are you looking for ?" name="q" id="search-bar" class="form-control"/>
+                </form>
+            
             </div>
         </div>
         <div class="header__album">

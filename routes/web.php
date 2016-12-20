@@ -16,6 +16,17 @@ Route::get('/', [
     'uses' => 'HomeController@index'
 ]);
 
+
+Route::get('404', function() {
+    return view('404');
+});
+
+// search
+Route::get('search', [
+    'as' => 'search.show',
+    'uses' => 'Home\SearchController@show'
+]);
+
 // watch anime
 Route::get('anime/{id}/episode/{episodeId}', [
     'as' => 'page.index',
@@ -66,6 +77,7 @@ Route::group(['prefix'=>'keyword'], function() {
     ]);
 });
 
+// member routes
 Route::group(['prefix'=>'member','middleware'=>'member'], function() {
     Route::group(['prefix'=>'myaccount'], function() {
         Route::get('', [
@@ -93,12 +105,10 @@ Route::group(['prefix'=>'member','middleware'=>'member'], function() {
     
 });
 
+
+// admin routes
 Route::get('admin', function() {
     return view('admin.year.index');
-});
-
-Route::get('404', function() {
-    return view('404');
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
@@ -143,4 +153,5 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::resource('user', 'UserController');
 });
 
+// Authentication routes
 Route::Auth();
