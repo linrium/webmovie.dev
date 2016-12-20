@@ -86,6 +86,10 @@ Route::get('admin', function() {
     return view('admin.year.index');
 });
 
+Route::get('404', function() {
+    return view('404');
+});
+
 Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function() {
     Route::resource('year', 'YearController');
     Route::resource('season', 'SeasonController');

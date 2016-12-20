@@ -75,6 +75,8 @@ class UserController extends Controller
         $user = User::find($id)->toArray();
 
         return view('admin.user.edit', compact('user'));
+        // echo '<pre>';
+        // print_r($user);
     }
 
     /**
@@ -89,7 +91,10 @@ class UserController extends Controller
         $user = User::find($id);
         $user->username = $request->txtName;
         $user->email = $request->txtEmail;
-        $user->password = Hash::make($request->txtPassword);
+        if(!$request->txtPassword)
+            $user->password = Hash::make($request->txtPassword);
+        else
+            $user->password = $user->password;
         $user->role = $request->radioRole;
         $user->save();
 

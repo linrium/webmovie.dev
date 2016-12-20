@@ -15,8 +15,10 @@
                 <div class="panel-body">
                     <div class="col-lg-7">
                         @include('admin.component.alertForm')
-                        <form class="form-horizontal" action="{!! route('user.store') !!}" method="post">
+                        <form class="form-horizontal" action="{!! route('user.update', $user['id']) !!}" method="post">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="id" value="{{ $user['id'] }}">
                             <div class="form-group">
                                 <label for="txtName" class="col-sm-3 control-label">Username</label>
                                 <div class="col-sm-9">
@@ -44,8 +46,8 @@
                             <div class="form-group">
                                 <label for="txtRepassword" class="col-sm-3 control-label">Role</label>
                                 <div class="col-sm-9">
-                                    <input type="radio" {!! $user['role'] == 'admin' ? 'checked' : '' !!} id="radioRole" value="1" name="radioRole"> Admin
-                                    <input type="radio" {!! $user['role'] == 'member' ? 'checked' : '' !!} id="radioRole" value="0" name="radioRole"> User
+                                    <input type="radio" {!! $user['role'] == 'admin' ? 'checked' : '' !!} id="radioRole" value="admin" name="radioRole"> Admin
+                                    <input type="radio" {!! $user['role'] == 'member' ? 'checked' : '' !!} id="radioRole" value="member" name="radioRole"> User
                                 </div>
                             </div>
                             <div class="form-group">

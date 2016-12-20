@@ -19,7 +19,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Signup to WebMovie</div>
 				<div class="panel-body">
@@ -28,25 +28,25 @@
                             <div class="form-group">
                                 <label for="txtName" class="control-label">Username</label>
 
-                                <input type="txt" class="form-control" id="txtName" value="{!! old('txtName') !!}" name="txtName" placeholder="Please enter user name">
+                                <input type="txt" class="form-control" id="txtName" value="{!! old('txtName') !!}" name="txtName" placeholder="Please enter username">
 
                             </div>
                             <div class="form-group">
                                 <label for="txtEmail" class="control-label">Email</label>
 
-                                <input type="email" class="form-control" id="txtEmail" value="{!! old('txtEmail') !!}" name="txtEmail" placeholder="Please enter user name">
+                                <input type="email" class="form-control" id="txtEmail" value="{!! old('txtEmail') !!}" name="txtEmail" placeholder="Please enter email">
 
                             </div>
                             <div class="form-group">
                                 <label for="txtPassword" class="control-label">Password</label>
 
-                                <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="Please enter user name">
+                                <input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="Please enter password">
 
                             </div>
                             <div class="form-group">
                                 <label for="txtRepassword" class="control-label">Repassword</label>
 
-                                <input type="password" class="form-control" id="txtRepassword" name="txtRepassword" placeholder="Please enter user name">
+                                <input type="password" class="form-control" id="txtRepassword" name="txtRepassword" placeholder="Please enter repassword">
 
                             </div>
                             <div class="form-group">
