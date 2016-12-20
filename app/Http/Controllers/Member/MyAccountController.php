@@ -82,11 +82,6 @@ class MyAccountController extends Controller
      */
     public function updatePassword(Request $request, $id)
     {
-        $this->validate($request, [
-            'txtPassword'   => 'required|min:6|confirmed',
-            'txtRepassword' => 'required|min:6|confirmed|same:txtPassword'
-        ]);
-
         if(Hash::check($request->txtOldPassword, Auth::user()->password)) {
             $user = User::find($id);
             $user->password = Hash::make($request->txtNewPassword);

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Movie;
 use App\Episode;
 use App\Genres;
+use Auth;
 
 class PageController extends Controller
 {
@@ -40,7 +41,13 @@ class PageController extends Controller
         $arrProducers = $this->mapArray('webmovie.dev/producer/anime', $producers);
         $arrTags = $this->mapArray('webmovie.dev/producer/anime', $keywords);
 
-        return view('home.page', compact('links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'arrTags','id', 'episodeId'));
+        $user = [
+            'role' => 'notuser'
+        ];
+        if(Auth::user())
+            $user = Auth::user()->toArray();
+
+        return view('home.page', compact('user', 'links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'arrTags','id', 'episodeId'));
         // echo '<pre>';
         // print_r($episode['views']);
     }
