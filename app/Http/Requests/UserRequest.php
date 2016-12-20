@@ -38,6 +38,8 @@ class UserRequest extends FormRequest
             'txtEmail.unique'        => 'Email is exists',
             'txtEmail.regex'         => 'Email syntax error',
             'txtPassword.required'   => 'Please enter password',
+            'txtPassword.min'        => 'Password must least 6 character',
+            'txtRepassword.min'      => 'Repassword must least 6 character',
             'txtRepassword.required' => 'Please enter repassword',
             'txtRepassword.same'     => 'Repassword don\'t match'
         ];

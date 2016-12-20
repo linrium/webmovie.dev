@@ -27,7 +27,7 @@ class ProducerRequest extends FormRequest
             'txtName'=>'required|unique:producers,name'
         ];
     }
-    public function message() {
+    public function messages() {
         return [
             'txtName.required'=>'Please enter the name of producer',
             'txtName.unique'=>'This name of producer is exist'

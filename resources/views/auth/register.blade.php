@@ -23,7 +23,7 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Signup to WebMovie</div>
 				<div class="panel-body">
-					<form action="{!! route('signup.store') !!}" method="post">
+					<form action="{!! url('/register') !!}" method="post">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                             <div class="form-group">
                                 <label for="txtName" class="control-label">Username</label>

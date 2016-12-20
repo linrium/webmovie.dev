@@ -27,7 +27,7 @@ class FansubRequest extends FormRequest
             'txtName'=>'required|unique:fansubs,name'
         ];
     }
-    public function message() {
+    public function messages() {
         return [
             'txtName.required'=>'Please enter the name of fansub',
             'txtName.unique'=>'This name of fansub is exist'

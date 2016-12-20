@@ -55,16 +55,20 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MovieRequest $request)
     {
-        // movie request
-        $fileName = $request->file('fileThumb')->getClientOriginalName();
+        //movie request
+        $fileOriginalName = $request->file('fileThumb');
+        if($fileOriginalName !== null) {
+            $fileName = $request->file('fileThumb')->getClientOriginalName();
+             // save file
+            $fileOriginalName->move('public/upload/', $fileName);
+        }
 
         $movie                   = new Movie();
         $movie->name             = $request->txtName;
         $movie->alias            = changeTitle($request->txtName);
         $movie->status           = $request->txtStatus;
-        $movie->thumb            = $fileName;
         $movie->views            = 0;
         $movie->likes            = 0;
         $movie->current_episodes = 0;
@@ -72,6 +76,13 @@ class MovieController extends Controller
         $movie->description      = $request->txtDescription;
         $movie->year_id          = $request->txtYear;
         $movie->season_id        = $request->txtSeason;
+
+        if($fileOriginalName === null) {
+            $movie->thumb = $movie->thumb;
+        } else {
+            $movie->thumb = $fileName;
+        }
+
         $movie->save();
 
         // save file

@@ -27,7 +27,7 @@ class GenreRequest extends FormRequest
             'txtName'=>'required|unique:genres,name'
         ];
     }
-    public function message() {
+    public function messages() {
         return [
             'txtName.required'=>'Please enter the name of genre',
             'txtName.unique'=>'This name of genre is exist'

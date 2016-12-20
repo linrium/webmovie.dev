@@ -27,7 +27,7 @@ class KeywordRequest extends FormRequest
             'txtName'=>'required|unique:keywords,name'
         ];
     }
-    public function message() {
+    public function messages() {
         return [
             'txtName.required'=>'Please enter the name of keyword',
             'txtName.unique'=>'This name of keyword is exist'

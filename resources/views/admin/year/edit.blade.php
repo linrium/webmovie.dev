@@ -26,8 +26,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default">Update</button>
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-success">Update</button>
+                                    <a href="{{ route('year.index') }}" class="btn btn-default">Cancel</a>
                                 </div>
                             </div>
                         </form>

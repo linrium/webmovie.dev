@@ -89,7 +89,7 @@ class MyAccountController extends Controller
 
         if(Hash::check($request->txtOldPassword, Auth::user()->password)) {
             $user = User::find($id);
-            $user->password = $request->txtNewPassword;
+            $user->password = Hash::make($request->txtNewPassword);
             $user->save();
 
             return redirect()->route('myaccount.index')->with([

@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <label for="txtName" class="col-sm-3 control-label">Movie name</label>
                                 <div class="col-sm-9">
-                                    <input type="txt" class="form-control" id="txtName" name="txtName" placeholder="Please enter movie name">
+                                    <input type="txt" class="form-control" id="txtName" name="txtName" value="{!! old('txtName') !!}" placeholder="Please enter movie name">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -46,13 +46,13 @@
                             <div class="form-group">
                                 <label for="txtNumber" class="col-sm-3 control-label">Total Episodes</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="txtNumber" name="txtNumber" placeholder="Please enter total episode">
+                                    <input type="number" class="form-control" id="txtNumber" value="{!! old('txtNumber') !!}" name="txtNumber" placeholder="Please enter total episode">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="txtDescription" class="col-sm-3 control-label">Description</label>
                                 <div class="col-sm-9">
-                                    <textarea id="txtDescription" name="txtDescription" class="form-control" rows="5" id="comment" placeholder="Please enter description"></textarea>
+                                    <textarea id="txtDescription" name="txtDescription" class="form-control" rows="5" id="comment" placeholder="Please enter description">{!! old('txtDescription') !!}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">

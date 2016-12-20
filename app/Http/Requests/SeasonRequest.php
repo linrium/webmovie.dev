@@ -27,7 +27,7 @@ class SeasonRequest extends FormRequest
             'txtName'=>'required|unique:seasons,name'
         ];
     }
-    public function message() {
+    public function messages() {
         return [
             'txtName.required'=>'Please enter the name of season',
             'txtName.unique'=>'This name of season is exist'
