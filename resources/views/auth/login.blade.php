@@ -60,6 +60,7 @@
 	<script src="{{ url('public/components/tether/dist/js/tether.min.js')}}"></script>
 	<!-- bootstrap-->
 	<script src="{{ url('public/components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+	<script src="{{ url('public/js/myscript.js') }}"></script>
 </body>
 
 </html>

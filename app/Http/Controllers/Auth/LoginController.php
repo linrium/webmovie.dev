@@ -63,7 +63,10 @@ class LoginController extends Controller
             }
             
         } else {
-            return redirect()->route('login');
+            return redirect()->route('login')->with([
+                'flash_level'=>'error',
+                'flash_message'=>'Wrong email or password'
+            ]);
         }
 
         // echo '<pre>';

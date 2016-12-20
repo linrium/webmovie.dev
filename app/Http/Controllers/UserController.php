@@ -91,10 +91,10 @@ class UserController extends Controller
         $user = User::find($id);
         $user->username = $request->txtName;
         $user->email = $request->txtEmail;
-        if(!$request->txtPassword)
-            $user->password = Hash::make($request->txtPassword);
-        else
+        if($request->txtPassword == '')
             $user->password = $user->password;
+        else
+            $user->password = Hash::make($request->txtPassword);
         $user->role = $request->radioRole;
         $user->save();
 

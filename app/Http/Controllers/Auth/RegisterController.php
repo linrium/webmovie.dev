@@ -46,21 +46,6 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(Request $request)
-    {
-        return Validator::make($data, [
-            'username' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
-    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -68,6 +53,24 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
+        $messages = [
+            'txtName.required'       => 'Please enter username',
+            'txtEmail.required'      => 'Please enter email',
+            'txtEmail.unique'        => 'Email is exists',
+            'txtEmail.regex'         => 'Email syntax error',
+            'txtPassword.required'   => 'Please enter password',
+            'txtPassword.min'        => 'Password must least 6 character',
+            'txtRepassword.min'      => 'Repassword must least 6 character',
+            'txtRepassword.required' => 'Please enter repassword',
+            'txtRepassword.same'     => 'Repassword don\'t match'
+        ];
+
+        $this->validate($request, [
+            'txtName'       => 'required|max:255|unique',
+            'txtEmail'      => 'required|max:255|unique:users,email',
+            'txtPassword'   => 'required|min:6',
+            'txtRepassword' => 'required|min:6|same:txtPassword'
+        ], $messages);
 
         $user = new User();
         $user->username = $request->txtName;

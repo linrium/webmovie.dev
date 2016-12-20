@@ -23,6 +23,7 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Signup to WebMovie</div>
 				<div class="panel-body">
+                    @include('admin.component.alertForm')
 					<form action="{!! url('/register') !!}" method="post">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                             <div class="form-group">
@@ -71,6 +72,7 @@
 	<script src="{{ url('public/components/tether/dist/js/tether.min.js')}}"></script>
 	<!-- bootstrap-->
 	<script src="{{ url('public/components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{ url('public/js/myscript.js') }}"></script>
 </body>
 
 </html>

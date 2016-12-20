@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2016 at 08:30 AM
+-- Generation Time: Dec 20, 2016 at 10:24 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -56,8 +56,8 @@ INSERT INTO `episodes` (`id`, `name`, `alias`, `views`, `likes`, `movie_id`, `cr
 (18, '2', '2', '0', '0', 4, '2016-12-17 23:33:49', '2016-12-17 23:33:49'),
 (19, '1', '1', '0', '0', 3, '2016-12-17 23:34:17', '2016-12-17 23:34:17'),
 (20, '2', '2', '0', '0', 3, '2016-12-17 23:34:37', '2016-12-17 23:34:37'),
-(21, '1', '1', '0', '0', 2, '2016-12-17 23:35:07', '2016-12-17 23:35:07'),
-(22, '2', '2', '0', '0', 2, '2016-12-17 23:35:20', '2016-12-17 23:35:20');
+(21, '1', '1', '1', '0', 2, '2016-12-17 23:35:07', '2016-12-17 23:35:07'),
+(22, '2', '2', '2', '0', 2, '2016-12-17 23:35:20', '2016-12-17 23:35:20');
 
 -- --------------------------------------------------------
 
@@ -391,6 +391,81 @@ INSERT INTO `keywords` (`id`, `name`, `alias`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kryptonit3_counter_page`
+--
+
+CREATE TABLE `kryptonit3_counter_page` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `page` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `kryptonit3_counter_page`
+--
+
+INSERT INTO `kryptonit3_counter_page` (`id`, `page`) VALUES
+(1, '032a71c8-b350-53f6-9d87-bf8ebe6c3d67'),
+(3, '168ec8b1-3868-5985-889a-3ce083f9a185'),
+(5, '1af1a769-f765-5927-bea9-2126c7ea4a38'),
+(9, '235f7050-129d-5cc9-a41e-ceedc5693f20'),
+(8, '54fd4a24-a451-5ed8-89ee-3e854dae1cf4'),
+(2, '88ed4702-5369-52eb-bdfc-9b3140a096f8'),
+(4, '9f5bf574-0b29-5a67-b4f1-9ce86e29ad6e'),
+(7, 'a57d26c0-c0f9-571a-9ef4-4fdee2a5d929'),
+(6, 'd3a9c355-6b95-5b20-9026-652306211cb0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kryptonit3_counter_page_visitor`
+--
+
+CREATE TABLE `kryptonit3_counter_page_visitor` (
+  `page_id` bigint(20) UNSIGNED NOT NULL,
+  `visitor_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `kryptonit3_counter_page_visitor`
+--
+
+INSERT INTO `kryptonit3_counter_page_visitor` (`page_id`, `visitor_id`, `created_at`) VALUES
+(1, 1, '2016-12-19 04:55:50'),
+(1, 2, '2016-12-20 01:08:14'),
+(2, 2, '2016-12-19 04:56:42'),
+(3, 2, '2016-12-19 04:56:53'),
+(4, 2, '2016-12-20 01:09:24'),
+(5, 2, '2016-12-19 05:00:07'),
+(6, 2, '2016-12-19 05:00:07'),
+(7, 2, '2016-12-19 05:00:52'),
+(8, 2, '2016-12-19 05:01:34'),
+(9, 2, '2016-12-19 05:02:48'),
+(4, 3, '2016-12-19 05:10:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kryptonit3_counter_visitor`
+--
+
+CREATE TABLE `kryptonit3_counter_visitor` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `visitor` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `kryptonit3_counter_visitor`
+--
+
+INSERT INTO `kryptonit3_counter_visitor` (`id`, `visitor`) VALUES
+(3, '41a893dc49f3107ede61c7f513b6dce59487455a2235f770259ef072cd586df5'),
+(1, '62d3597f088c49a60c4ecd59c882cb337fe6f21a49d6e273bbd9455604eaee64'),
+(2, 'b9d5ae03884b571e913e8e468a7ddb1ee05ea2bb14be1b54b141678c59bcca7e');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -422,7 +497,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (31, '2016_11_22_070555_create_episode_keyword_table', 1),
 (32, '2016_11_24_104211_create_producer_movie_table', 1),
 (36, '2016_12_18_071409_add_views_episodes_table', 2),
-(37, '2016_12_18_072538_add_likes_episodes_table', 3);
+(37, '2016_12_18_072538_add_likes_episodes_table', 3),
+(38, '2015_06_21_181359_create_kryptonit3_counter_page_table', 4),
+(39, '2015_06_21_193003_create_kryptonit3_counter_visitor_table', 4),
+(40, '2015_06_21_193059_create_kryptonit3_counter_page_visitor_table', 4);
 
 -- --------------------------------------------------------
 
@@ -650,7 +728,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `role`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@webmovie.dev', 'admin', '$2y$10$qQO9kSFcUQfpcu8/oIL58uZYpMGF2Z86zsUeQ2kAAc/r8E1p/Dbxq', 'uRPKIL8rd6g2uH1enBtq9677fMrqZLx4LO7juHlZfmlAJ2AvpvObQp6t6p1V', '2016-12-17 20:59:10', '2016-12-17 21:00:32');
+(1, 'admin', 'admin@webmovie.dev', 'admin', '$2y$10$qQO9kSFcUQfpcu8/oIL58uZYpMGF2Z86zsUeQ2kAAc/r8E1p/Dbxq', 'XzVHLbmEqK73goXbA50XE3TXsv2KYuqO5NG97wbMf21cvhQEMZlCQjTqStIF', '2016-12-17 20:59:10', '2016-12-20 02:21:16'),
+(3, 'linh111', 'linh111@gmail.com', 'member', '$2y$10$p.AaA8ileIk665L.8hBD/.tD67tzxtZXVNpvMTkA7gD04oxAwBBUS', 'd2n8O4crTyQC7STOBGnpyZumICkUBl6XxP5QJ9ddJJlsBz8DL4FlykDoCklJ', '2016-12-19 21:47:55', '2016-12-20 02:15:36'),
+(8, 'linhxyz', 'linhxyz@gmail.com', 'member', '$2y$10$tGR46/zW/9EbTsh.5LLNT.2zgc0BIpmQ4PcqKdNcy44Z5IrzpqTVO', 'TNe0j0juM7rWMwFNr1NOluvps38syqr5gXTDL6Bl', '2016-12-20 02:03:49', '2016-12-20 02:03:49'),
+(9, 'lin', 'lin@gmail.com', 'admin', '$2y$10$Y5CdC07H/1kzJq7Rh9sgaOgxyWfvT9nPEgMWeG.jl5i4WjWaQ.fyq', '8IoOhBUi4iM9KbR4IpdupOu65XaRLACNd2uZd8IeRNeP593eXPdSGBJoeLuy', '2016-12-20 02:18:02', '2016-12-20 02:21:14');
 
 -- --------------------------------------------------------
 
@@ -674,7 +755,7 @@ INSERT INTO `years` (`id`, `name`, `alias`, `created_at`, `updated_at`) VALUES
 (1, '1999', '1999', '2016-12-17 21:05:41', '2016-12-17 21:05:41'),
 (2, '2007', '2007', '2016-12-17 21:59:07', '2016-12-17 21:59:07'),
 (3, '2009', '2009', '2016-12-17 22:12:34', '2016-12-17 22:12:34'),
-(4, '0', '', '2016-12-17 22:14:01', '2016-12-17 22:14:01'),
+(4, '0', '0', '2016-12-17 22:14:01', '2016-12-17 22:14:01'),
 (5, '2004', '2004', '2016-12-17 22:20:14', '2016-12-17 22:20:14'),
 (6, '2015', '2015', '2016-12-17 22:31:53', '2016-12-17 22:31:53'),
 (7, '2014', '2014', '2016-12-17 22:41:09', '2016-12-17 22:41:09'),
@@ -741,6 +822,27 @@ ALTER TABLE `genre_movies`
 --
 ALTER TABLE `keywords`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `kryptonit3_counter_page`
+--
+ALTER TABLE `kryptonit3_counter_page`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kryptonit3_counter_page_page_unique` (`page`);
+
+--
+-- Indexes for table `kryptonit3_counter_page_visitor`
+--
+ALTER TABLE `kryptonit3_counter_page_visitor`
+  ADD KEY `kryptonit3_counter_page_visitor_page_id_index` (`page_id`),
+  ADD KEY `kryptonit3_counter_page_visitor_visitor_id_index` (`visitor_id`);
+
+--
+-- Indexes for table `kryptonit3_counter_visitor`
+--
+ALTER TABLE `kryptonit3_counter_visitor`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kryptonit3_counter_visitor_visitor_unique` (`visitor`);
 
 --
 -- Indexes for table `migrations`
@@ -853,10 +955,20 @@ ALTER TABLE `genre_movies`
 ALTER TABLE `keywords`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
+-- AUTO_INCREMENT for table `kryptonit3_counter_page`
+--
+ALTER TABLE `kryptonit3_counter_page`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `kryptonit3_counter_visitor`
+--
+ALTER TABLE `kryptonit3_counter_visitor`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `movies`
 --
@@ -886,7 +998,7 @@ ALTER TABLE `seasons`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `years`
 --
@@ -928,6 +1040,13 @@ ALTER TABLE `fansub_movies`
 ALTER TABLE `genre_movies`
   ADD CONSTRAINT `genre_movies_genre_id_foreign` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `genre_movies_movie_id_foreign` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `kryptonit3_counter_page_visitor`
+--
+ALTER TABLE `kryptonit3_counter_page_visitor`
+  ADD CONSTRAINT `kryptonit3_counter_page_visitor_page_id_foreign` FOREIGN KEY (`page_id`) REFERENCES `kryptonit3_counter_page` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `kryptonit3_counter_page_visitor_visitor_id_foreign` FOREIGN KEY (`visitor_id`) REFERENCES `kryptonit3_counter_visitor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `movies`

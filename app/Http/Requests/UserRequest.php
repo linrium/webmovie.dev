@@ -26,8 +26,8 @@ class UserRequest extends FormRequest
         return [
             'txtName'       => 'required|max:255',
             'txtEmail'      => 'required|max:255|unique:users,email',
-            'txtPassword'   => 'required|min:6|confirmed',
-            'txtRepassword' => 'required|min:6|confirmed|same:txtPassword'
+            'txtPassword'   => 'required|min:6',
+            'txtRepassword' => 'required|min:6|same:txtPassword'
         ];
     }
 
