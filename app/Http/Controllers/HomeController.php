@@ -8,6 +8,7 @@ use Auth;
 
 use App\Movie;
 use App\Episode;
+use App\Counter;
 
 class HomeController extends Controller
 {
@@ -19,5 +20,7 @@ class HomeController extends Controller
         $newEpisodes = Episode::select('id', 'name', 'alias', 'movie_id')->limit(6)->orderBy('id', 'DESC')->get()->toArray();
 
         return view('home.main', compact('movies', 'moviesRandom', 'moviesMostViews', 'moviesMostLikes', 'newEpisodes'));
+        // echo '<pre>';
+        // print_r(Counter::show('movies', 3));
     }
 }

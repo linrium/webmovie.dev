@@ -57,6 +57,7 @@
                         </span>
                     </div>
                     <div class="col-md-4"><span id="views" class="hvr-underline-from-left"> <span id="count-views" style="display: inline">{{ Counter::showAndCount('episodes', $episode['id'] ) }}</span> views</span></div>
+                    {{ Counter::count('movies', $movie['id'] ) }}
                 </div>
                 <span class="span-inline"><i class="fa fa-list"></i> Genre: {!! $arrGenres !!}</span>
                 <span class="span-inline"><i class="fa fa-building"></i> Producer: {!! $arrProducers !!}</span>
@@ -85,7 +86,7 @@
                             </a>
                             <div class="main__watch-suggest-episode">
                                 <a href="">{!! $m['name'] !!}</a>
-                                <small>{!! $m['views'] !!} views</small> <br>
+                                <small>{{ Counter::show('movies', $m['id'] ) }} views</small> <br>
                                 <small>{!! $m['likes'] !!} likes</small>
                             </div>
                         </li>

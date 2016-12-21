@@ -22,14 +22,17 @@ Route::get('404', function() {
 });
 
 // like
-Route::post('anime/like/{id}', [
-    'as' => 'episode.like',
-    'uses' => 'LikeController@like'
-]);
-Route::delete('anime/unlike/{id}', [
-    'as' => 'episode.unlike',
-    'uses' => 'LikeController@unlike'
-]);
+Route::group(['prefix'=>'anime', 'middleware'=>'auth'], function() {
+    Route::post('like/{id}', [
+        'as' => 'episode.like',
+        'uses' => 'LikeController@like'
+    ]);
+    Route::delete('unlike/{id}', [
+        'as' => 'episode.unlike',
+        'uses' => 'LikeController@unlike'
+    ]);
+});
+
 
 // search
 Route::get('search', [

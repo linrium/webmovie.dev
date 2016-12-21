@@ -39,13 +39,12 @@
         <div class="row main__ritem-item">
           <div class="col-md-1 col-sm-1 col-xs-1 main__ritem-numberic"><span>{!! $i++ !!}</span></div>
           <div class="col-md-2 col-sm-2 col-xs-2 main__ritem-thumb"><img src="{{ url('public/img/'.$movie['thumb']) }}" alt="" /></div>
-          <div class="col-md-5 col-sm-7 col-xs-5 main__ritem-title">
-            <h2>{!! $movie['name'] !!}</h2><span>{{ $movie['views'] }} views</span>
+          <div class="col-md-7 col-sm-7 col-xs-5 main__ritem-title">
+            <h2>{!! $movie['name'] !!}</h2><span>{{ Counter::show('movies', $movie['id'] ) }} views</span>
           </div>
-          <div class="col-md-4 col-sm-2 main__ritem-icon">
+          <div class="col-md-2 col-sm-2 main__ritem-icon">
             <?php $lastEp = DB::table('episodes')->where('movie_id', $movie['id'])->orderBy('id', 'DESC')-> first() ?>
             <a class="btn btn-nooutline-primary" href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$lastEp->id]) }}">PLAY</a>
-            <button class="btn btn-nooutline-primary">LIKE</button>
           </div>
         </div>
       </div>
@@ -67,13 +66,12 @@
         <div class="row main__ritem-item">
           <div class="col-md-1 col-sm-1 col-xs-1 main__ritem-numberic"><span>{!! $i++ !!}</span></div>
           <div class="col-md-2 col-sm-2 col-xs-2 main__ritem-thumb"><img src="{{ url('public/img/'.$movie['thumb']) }}" alt="" /></div>
-          <div class="col-md-5 col-sm-7 col-xs-5 main__ritem-title">
+          <div class="col-md-7 col-sm-7 col-xs-5 main__ritem-title">
             <h2>{!! $movie['name'] !!}</h2><span>{{ $movie['likes'] }} likes</span>
           </div>
-          <div class="col-md-4 col-sm-2 main__ritem-icon">
+          <div class="col-md-2 col-sm-2 main__ritem-icon">
             <?php $lastEp = DB::table('episodes')->where('movie_id', $movie['id'])->orderBy('id', 'DESC')-> first() ?>
             <a class="btn btn-nooutline-primary" href="{{ route('page.index', ['id'=>$movie['id'], 'episodeId'=>$lastEp->id]) }}">PLAY</a>
-            <button class="btn btn-nooutline-primary">LIKE</button>
           </div>
         </div>
       </div>
