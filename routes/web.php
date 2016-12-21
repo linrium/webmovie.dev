@@ -21,6 +21,12 @@ Route::get('404', function() {
     return view('404');
 });
 
+// like
+Route::get('anime/like/{id}', [
+    'as' => 'movie.like',
+    'uses' => 'LikeController@likeMovie'
+]);
+
 // search
 Route::get('search', [
     'as' => 'search.show',

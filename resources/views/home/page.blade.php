@@ -37,7 +37,14 @@
             <div class="main__watch-info">
                 <h1>{!! $movie['name'] !!}</h1>
                 <div class="row">
-                    <div class="col-md-8" style="line-height: 50px;"><span id="likes"><i class="fa fa-heart"></i> <span id="count-likes" style="display: inline">{{ $episode['likes'] }}</span> likes</span></div>
+                    <div class="col-md-8" style="line-height: 50px;"><span id="likes"><i class="fa fa-heart"></i> <span id="count-likes" style="display: inline">{{ $episode['likes'] }}</span>
+                    <?php print_r($movie) ?>
+                    @if ($movie->isLiked)
+                        <a href="{{ route('movie.like', $movie->id) }}">Unlike</a>
+                    @else
+                        <a href="{{ route('movie.like', $movie->id) }}">Like</a>
+                    @endif
+                    </span></div>
                     <div class="col-md-4"><span id="views" class="hvr-underline-from-left"> <span id="count-views" style="display: inline">{{ Counter::showAndCount('episodes', $episode['id'] ) }}</span> views</span></div>
                 </div>
                 <span class="span-inline"><i class="fa fa-list"></i> Genre: {!! $arrGenres !!}</span>
