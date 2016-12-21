@@ -46,7 +46,7 @@
                     <div class="cold-md-6 col-md-offset-3">
                         <a class="btn btn-default" href="{{ route('home.index') }}">Go Home</a>
                         @if($currentUser['role'] == 'admin')
-                            <a class="btn btn-default" href="{{ route('admin.year.index') }}">Go Admin</a>
+                            <a class="btn btn-default" href="{{ route('year.index') }}">Go Admin</a>
                         @else
                             <a class="btn btn-default" href="{{ route('myaccount.index') }}">Go My Account</a>
                         @endif

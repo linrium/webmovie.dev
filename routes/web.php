@@ -88,7 +88,7 @@ Route::group(['prefix'=>'keyword'], function() {
 });
 
 // member routes
-Route::group(['prefix'=>'member','middleware'=>['member']], function() {
+Route::group(['prefix'=>'member','middleware'=>['auth']], function() {
     Route::group(['prefix'=>'myaccount'], function() {
         Route::get('', [
             'as' => 'myaccount.index',
