@@ -37,14 +37,25 @@
             <div class="main__watch-info">
                 <h1>{!! $movie['name'] !!}</h1>
                 <div class="row">
-                    <div class="col-md-8" style="line-height: 50px;"><span id="likes"><i class="fa fa-heart"></i> <span id="count-likes" style="display: inline">{{ $episode['likes'] }}</span>
-                    <?php print_r($movie) ?>
-                    @if ($movie->isLiked)
-                        <a href="{{ route('movie.like', $movie->id) }}">Unlike</a>
-                    @else
-                        <a href="{{ route('movie.like', $movie->id) }}">Like</a>
-                    @endif
-                    </span></div>
+                    <div class="col-md-8" style="line-height: 50px;">
+                        <span id="likes">
+                            <i class="fa fa-heart"></i>
+                            {{ $totalLiked }}
+                            @if ($isLiked)
+                                <form action="{{ route('episode.unlike', $likeId) }}" method="post" style="display: inline">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="id" value="{{ $likeId }}">
+                                    <button style="background: none; border: none; padding: 0; cursor: pointer; margin-top: -5px" type="submit" class="btn btn-error" >Unlike</button>
+                                </form>
+                            @else
+                                <form action="{{ route('episode.like', $episode['id']) }}" method="post" style="display: inline">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <button style="background: none; border: none; padding: 0; cursor: pointer; margin-top: -5px" type="submit" class="btn btn-error" >Like</button>
+                                </form>
+                            @endif
+                        </span>
+                    </div>
                     <div class="col-md-4"><span id="views" class="hvr-underline-from-left"> <span id="count-views" style="display: inline">{{ Counter::showAndCount('episodes', $episode['id'] ) }}</span> views</span></div>
                 </div>
                 <span class="span-inline"><i class="fa fa-list"></i> Genre: {!! $arrGenres !!}</span>

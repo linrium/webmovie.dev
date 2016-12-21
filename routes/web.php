@@ -22,9 +22,13 @@ Route::get('404', function() {
 });
 
 // like
-Route::get('anime/like/{id}', [
-    'as' => 'movie.like',
-    'uses' => 'LikeController@likeMovie'
+Route::post('anime/like/{id}', [
+    'as' => 'episode.like',
+    'uses' => 'LikeController@like'
+]);
+Route::delete('anime/unlike/{id}', [
+    'as' => 'episode.unlike',
+    'uses' => 'LikeController@unlike'
 ]);
 
 // search

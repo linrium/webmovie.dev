@@ -26,8 +26,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function likedMovie() {
-        return $this->morphedByMany('App\Movie', 'likeable')->whereDeletedAt(null);
-    }
 }

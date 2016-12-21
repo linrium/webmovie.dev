@@ -33,13 +33,4 @@ class Movie extends Model
     public function keyword() {
         return $this->belongsToMany('App\Keyword', 'movie_keywords')->withTimestamps();
     }
-
-    public function likes(){
-        return $this->morphToMany('App\User', 'likeable')->whereDeletedAt(null);
-    }
-
-    public function getIsLikedAttribute(){
-        $like = $this->likes()->whereUserId(Auth::id())->first();
-        return (!is_null($like)) ? true : false;
-    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Movie;
 use App\Episode;
 use App\Genres;
+use App\Like;
 use Auth;
 
 class PageController extends Controller
@@ -23,6 +24,16 @@ class PageController extends Controller
         return $str;
     }
 
+    public function getUserLiked($arrLike, &$likeId) {
+        foreach($arrLike as $like) {
+            if($like['user_id'] == Auth::id()) {
+                $likeId = $like['id'];
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function index($id, $episodeId) {
         $movie = Movie::find($id)->toArray();
         $movies = Movie::select('id', 'name', 'thumb', 'views', 'likes')->orderByRaw("RAND()")->limit(10)->orderBy('id', 'DESC')->get()->toArray();
@@ -30,20 +41,26 @@ class PageController extends Controller
         $episodes = Episode::where('movie_id', $id)->select('id', 'name', 'views', 'likes')->limit(10)->get()->toArray();
         $episode = Episode::find($episodeId)->toArray();
 
-        // // get data
+        // get data
         $genres = Movie::find($id)->genre()->get()->toArray();
         $producers = Movie::find($id)->producer()->get()->toArray();
         $keywords = Movie::find($id)->keyword()->get()->toArray();
         $links = Episode::find($episodeId)->link()->get()->toArray();
 
-        // // convert data to array;
+        // convert data to array;
         $arrGenres = $this->mapArray('webmovie.dev/genre/anime', $genres);
         $arrProducers = $this->mapArray('webmovie.dev/producer/anime', $producers);
         $arrTags = $this->mapArray('webmovie.dev/keyword/anime', $keywords);
 
+        // like
+        $like = Like::where('episode_id','=',$episodeId)->get()->toArray();
+        $totalLiked = count($like);
+        $likeId = 0;
+        $isLiked = $this->getUserLiked($like, $likeId);
 
-        return view('home.page', compact('links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'arrTags','id', 'episodeId'));
+        return view('home.page', compact('likeId','isLiked','totalLiked','links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'arrTags','id', 'episodeId'));
         // echo '<pre>';
-        // print_r($episode['views']);
+        // print_r($likeId);
     }
+    
 }
