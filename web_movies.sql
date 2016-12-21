@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2016 at 10:24 AM
+-- Generation Time: Dec 21, 2016 at 05:38 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -56,8 +56,8 @@ INSERT INTO `episodes` (`id`, `name`, `alias`, `views`, `likes`, `movie_id`, `cr
 (18, '2', '2', '0', '0', 4, '2016-12-17 23:33:49', '2016-12-17 23:33:49'),
 (19, '1', '1', '0', '0', 3, '2016-12-17 23:34:17', '2016-12-17 23:34:17'),
 (20, '2', '2', '0', '0', 3, '2016-12-17 23:34:37', '2016-12-17 23:34:37'),
-(21, '1', '1', '1', '0', 2, '2016-12-17 23:35:07', '2016-12-17 23:35:07'),
-(22, '2', '2', '2', '0', 2, '2016-12-17 23:35:20', '2016-12-17 23:35:20');
+(21, '1', '1', '0', '0', 2, '2016-12-17 23:35:07', '2016-12-17 23:35:07'),
+(22, '2', '2', '0', '0', 2, '2016-12-17 23:35:20', '2016-12-17 23:35:20');
 
 -- --------------------------------------------------------
 
@@ -432,14 +432,14 @@ CREATE TABLE `kryptonit3_counter_page_visitor` (
 
 INSERT INTO `kryptonit3_counter_page_visitor` (`page_id`, `visitor_id`, `created_at`) VALUES
 (1, 1, '2016-12-19 04:55:50'),
-(1, 2, '2016-12-20 01:08:14'),
+(1, 2, '2016-12-20 03:51:23'),
 (2, 2, '2016-12-19 04:56:42'),
 (3, 2, '2016-12-19 04:56:53'),
-(4, 2, '2016-12-20 01:09:24'),
+(4, 2, '2016-12-20 19:15:57'),
 (5, 2, '2016-12-19 05:00:07'),
-(6, 2, '2016-12-19 05:00:07'),
+(6, 2, '2016-12-20 19:50:35'),
 (7, 2, '2016-12-19 05:00:52'),
-(8, 2, '2016-12-19 05:01:34'),
+(8, 2, '2016-12-20 03:50:23'),
 (9, 2, '2016-12-19 05:02:48'),
 (4, 3, '2016-12-19 05:10:26');
 
@@ -462,6 +462,28 @@ INSERT INTO `kryptonit3_counter_visitor` (`id`, `visitor`) VALUES
 (3, '41a893dc49f3107ede61c7f513b6dce59487455a2235f770259ef072cd586df5'),
 (1, '62d3597f088c49a60c4ecd59c882cb337fe6f21a49d6e273bbd9455604eaee64'),
 (2, 'b9d5ae03884b571e913e8e468a7ddb1ee05ea2bb14be1b54b141678c59bcca7e');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likeables`
+--
+
+CREATE TABLE `likeables` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `episode_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `likeables`
+--
+
+INSERT INTO `likeables` (`id`, `user_id`, `episode_id`, `created_at`, `updated_at`) VALUES
+(8, 9, 19, '2016-12-20 19:16:11', '2016-12-20 19:16:11'),
+(9, 1, 19, '2016-12-20 19:16:48', '2016-12-20 19:16:48');
 
 -- --------------------------------------------------------
 
@@ -500,7 +522,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (37, '2016_12_18_072538_add_likes_episodes_table', 3),
 (38, '2015_06_21_181359_create_kryptonit3_counter_page_table', 4),
 (39, '2015_06_21_193003_create_kryptonit3_counter_visitor_table', 4),
-(40, '2015_06_21_193059_create_kryptonit3_counter_page_visitor_table', 4);
+(40, '2015_06_21_193059_create_kryptonit3_counter_page_visitor_table', 4),
+(42, '2016_12_21_002435_create_likeables_table', 5);
 
 -- --------------------------------------------------------
 
@@ -728,10 +751,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `role`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@webmovie.dev', 'admin', '$2y$10$qQO9kSFcUQfpcu8/oIL58uZYpMGF2Z86zsUeQ2kAAc/r8E1p/Dbxq', 'XzVHLbmEqK73goXbA50XE3TXsv2KYuqO5NG97wbMf21cvhQEMZlCQjTqStIF', '2016-12-17 20:59:10', '2016-12-20 02:21:16'),
+(1, 'admin', 'admin@webmovie.dev', 'admin', '$2y$10$qQO9kSFcUQfpcu8/oIL58uZYpMGF2Z86zsUeQ2kAAc/r8E1p/Dbxq', 'RmwsgZI3mZIdNN7jS8caXTGNMm5Nc97wKzbBTVF7HX3qK74zVmKle3HaelRE', '2016-12-17 20:59:10', '2016-12-20 20:39:43'),
 (3, 'linh111', 'linh111@gmail.com', 'member', '$2y$10$p.AaA8ileIk665L.8hBD/.tD67tzxtZXVNpvMTkA7gD04oxAwBBUS', 'd2n8O4crTyQC7STOBGnpyZumICkUBl6XxP5QJ9ddJJlsBz8DL4FlykDoCklJ', '2016-12-19 21:47:55', '2016-12-20 02:15:36'),
 (8, 'linhxyz', 'linhxyz@gmail.com', 'member', '$2y$10$tGR46/zW/9EbTsh.5LLNT.2zgc0BIpmQ4PcqKdNcy44Z5IrzpqTVO', 'TNe0j0juM7rWMwFNr1NOluvps38syqr5gXTDL6Bl', '2016-12-20 02:03:49', '2016-12-20 02:03:49'),
-(9, 'lin', 'lin@gmail.com', 'admin', '$2y$10$Y5CdC07H/1kzJq7Rh9sgaOgxyWfvT9nPEgMWeG.jl5i4WjWaQ.fyq', '8IoOhBUi4iM9KbR4IpdupOu65XaRLACNd2uZd8IeRNeP593eXPdSGBJoeLuy', '2016-12-20 02:18:02', '2016-12-20 02:21:14');
+(9, 'lin', 'lin@gmail.com', 'member', '$2y$10$DFy8vb4oj0d0r5ZK1KGWO.gq/rFn03b8/fGRkSeDLlC.sQ/QUkpCC', 'zRkMvnDc9ageDOvHuzvYOz3YWImnmEdDF3sTwYHSgxWk8cZNIpeBsepInk3G', '2016-12-20 02:18:02', '2016-12-20 20:39:53'),
+(12, 'lin1', 'lin1@gmail.com', 'member', '$2y$10$lZ1Av2APImtRn6I3Oip4Hufxz8iZIihTCBcNXsr.HF3HhzlmZQwda', 'AOOsPnKocLtpEBjq02iXIr6VCc3V1z7Jvsl1LvMgP6a67cMQi1qYqyeQ8a1T', '2016-12-20 02:51:14', '2016-12-20 03:14:37');
 
 -- --------------------------------------------------------
 
@@ -843,6 +867,12 @@ ALTER TABLE `kryptonit3_counter_page_visitor`
 ALTER TABLE `kryptonit3_counter_visitor`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `kryptonit3_counter_visitor_visitor_unique` (`visitor`);
+
+--
+-- Indexes for table `likeables`
+--
+ALTER TABLE `likeables`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -965,10 +995,15 @@ ALTER TABLE `kryptonit3_counter_page`
 ALTER TABLE `kryptonit3_counter_visitor`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `likeables`
+--
+ALTER TABLE `likeables`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `movies`
 --
@@ -998,7 +1033,7 @@ ALTER TABLE `seasons`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `years`
 --
