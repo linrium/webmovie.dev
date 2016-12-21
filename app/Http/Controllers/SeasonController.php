@@ -15,7 +15,7 @@ class SeasonController extends Controller
      */
     public function index()
     {
-        $data = Season::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
+        $data = Season::select('id', 'name')->orderBy('id', 'DESC')->paginate(5);
 
         return view('admin.season.index', compact('data'));
     }

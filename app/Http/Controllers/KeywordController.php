@@ -15,7 +15,7 @@ class KeywordController extends Controller
      */
     public function index()
     {
-        $data = Keyword::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
+        $data = Keyword::select('id', 'name')->orderBy('id', 'DESC')->paginate(5);
 
         return view('admin.keyword.index', compact('data'));
     }

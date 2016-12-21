@@ -15,7 +15,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $data = Genre::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
+        $data = Genre::select('id', 'name')->orderBy('id', 'DESC')->paginate(5);
 
         return view('admin.genre.index', compact('data'));
     }

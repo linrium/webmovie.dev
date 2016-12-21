@@ -26,8 +26,7 @@ class MovieController extends Controller
     {
         $data = Movie::select('id', 'name', 'alias', 'status', 'thumb', 'views', 'likes', 'current_episodes', 'total_episodes', 'description', 'year_id', 'season_id')
         ->orderBy('id', 'DESC')
-        ->get()
-        ->toArray();
+        ->paginate(5);
 
         return view('admin.movie.index', compact('data'));
     }

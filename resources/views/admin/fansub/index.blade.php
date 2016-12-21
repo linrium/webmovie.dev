@@ -16,6 +16,7 @@
                     <a class="btn btn-success" href="{!! route('fansub.create') !!}">Create Fansub</a>
                 </div>
                 <div class="panel-body">
+                    <h3>{{ $data->total() }} fansubs</h3>
                     <table class="table table-hover">
                         <thead>
                             <th>#</th>
@@ -49,6 +50,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

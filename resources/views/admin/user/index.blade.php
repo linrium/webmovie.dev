@@ -16,6 +16,7 @@
                     <a class="btn btn-success" href="{!! route('user.create') !!}">Create User</a>
                 </div>
                 <div class="panel-body">
+                    <h3>{{ $data->total() }} users</h3>
                     <table class="table table-hover">
                         <thead>
                             <th>#</th>
@@ -47,6 +48,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

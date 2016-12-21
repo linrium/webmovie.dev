@@ -15,7 +15,7 @@ class ProducerController extends Controller
      */
     public function index()
     {
-        $data = Producer::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
+        $data = Producer::select('id', 'name')->orderBy('id', 'DESC')->paginate(5);
 
         return view('admin.producer.index', compact('data'));
     }

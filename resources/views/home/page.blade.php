@@ -23,7 +23,7 @@
                         </a>
                         <div class="main__watch-suggest-episode">
                             <a href="">Episode {!! $ep['name'] !!}</a>
-                            <small>{{ $ep['views'] }} views</small> <br>
+                            <small>{{ Counter::show('episodes', $ep['id'] ) }} views</small> <br>
                             <small>{{ $ep['likes'] }} likes</small>
                         </div>
                     </li>

@@ -1,5 +1,7 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <ul class="nav menu">
+        
+        <li><a href="{!! route('myaccount.index') !!}">{{$currentUser['username']}}</a></li>
         <li><a href="{!! route('home.index') !!}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Home</a></li>
         <li><a href="{!! route('year.index') !!}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Years</a></li>
         <li><a href="{!! route('season.index') !!}"><svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg> Seasons</a></li>

@@ -15,7 +15,7 @@ class YearController extends Controller
      */
     public function index()
     {
-        $data = Year::select('id','name')->orderBy('id', 'DESC')->get()->toArray();
+        $data = Year::select('id','name')->orderBy('id', 'DESC')->paginate(5);
         
         return view('admin.year.index', compact('data'));
     }

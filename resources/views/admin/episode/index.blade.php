@@ -18,6 +18,7 @@
                     <a type="button" class="btn btn-default" href="{!! route('movie.index') !!}">Close</a>
                 </div>
                 <div class="panel-body">
+                    <h3>{{ $data->total() }} episodes</h3>
                     <table class="table table-hover">
                         <thead>
                             <th>#</th>
@@ -47,6 +48,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

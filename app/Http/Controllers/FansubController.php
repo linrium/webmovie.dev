@@ -15,7 +15,7 @@ class FansubController extends Controller
      */
     public function index()
     {
-        $data = Fansub::select('id', 'name')->orderBy('id', 'DESC')->get()->toArray();
+        $data = Fansub::select('id', 'name')->orderBy('id', 'DESC')->paginate(5);
 
         return view('admin.fansub.index', compact('data'));
     }

@@ -16,6 +16,7 @@
                     <a class="btn btn-success" href="{!! route('year.create') !!}">Create Year</a>
                 </div>
                 <div class="panel-body">
+                    <h3>{{ $data->total() }} years</h3>
                     <table class="table table-hover">
                         <thead>
                             <th>#</th>
@@ -50,6 +51,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

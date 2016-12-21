@@ -17,7 +17,7 @@ class EpisodeController extends Controller
      */
     public function index($id)
     {
-        $data = Movie::find($id)->episode()->orderBy('id','DESC')->get()->toArray();
+        $data = Movie::find($id)->episode()->orderBy('id','DESC')->paginate(5);
 
         return view('admin.episode.index', compact('data','id'));
     }
