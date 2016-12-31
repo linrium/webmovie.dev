@@ -51,6 +51,10 @@
 
                             </div>
                             <div class="form-group">
+                               {!! captcha_img() !!}
+                               <input type="text" class="form-control" id="txtCaptcha" name="txtCaptcha" placeholder="Please enter captcha">
+                            </div>
+                            <div class="form-group">
                                 <div class="">
                                     <button type="submit" class="btn btn-success">Sign up</button>
                                     <a class="btn btn-primary" href="{{ route('login') }}">Sign in</a>

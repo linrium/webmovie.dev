@@ -62,14 +62,17 @@ class RegisterController extends Controller
             'txtPassword.min'        => 'Password must least 6 character',
             'txtRepassword.min'      => 'Repassword must least 6 character',
             'txtRepassword.required' => 'Please enter repassword',
-            'txtRepassword.same'     => 'Repassword don\'t match'
+            'txtRepassword.same'     => 'Repassword don\'t match',
+            'txtCaptcha.required'    => 'Please enter captcha',
+            'txtCaptcha.captcha'     => 'Captcha don\'t match',
         ];
 
         $this->validate($request, [
             'txtName'       => 'required|max:255',
             'txtEmail'      => 'required|max:255|unique:users,email',
             'txtPassword'   => 'required|min:6',
-            'txtRepassword' => 'required|min:6|same:txtPassword'
+            'txtRepassword' => 'required|min:6|same:txtPassword',
+            'txtCaptcha'    => 'required|captcha'
         ], $messages);
 
         $user = new User();

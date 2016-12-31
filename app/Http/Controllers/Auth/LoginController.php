@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use App\Http\Requests\LoginRequest;
 use Auth;
 
@@ -29,6 +30,8 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/admin/year';
 
+    protected $maxLoginAttempts = 10;
+    protected $lockoutTime = 300;
     /**
      * Create a new controller instance.
      *
