@@ -35,7 +35,7 @@
                                         <a class="btn btn-default" href="{!! URL::route('year.edit', $item['id']) !!}">Edit</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('year.destroy', $item['id']) }}" method="post"  onsubmit='return confirmDelete()'>
+                                        <form action="{{ route('year.destroy', $item['id']) }}" method="post" onsubmit='return confirmDelete()'>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="id" value="{{ $item['id'] }}">

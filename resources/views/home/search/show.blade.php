@@ -4,7 +4,7 @@
 <div id="random" class="main__citem animated fadeInDown">
   <div class="row main__header">
     <div class="col-md-9 col-sm-7 col-xs-5">
-      <h3>Keyword {{ $keyword }}</h3>
+      <h3>Keyword {{ $keyword }}, total {{ $movies->total() }}</h3>
     </div>
   </div>
 
@@ -35,9 +35,10 @@
       </div>
     </div>
     @endif
-
+    
     
   </div>
+  {{ $movies->links() }}
 </div>
 
 

@@ -17,9 +17,10 @@ class SearchController extends Controller
 {
     public function show(Request $request) {
         $keyword = $request->q;
-        $movies = Movie::where('name', 'LIKE', "%$keyword%")->get()->toArray();
+        $movies = Movie::where('name', 'LIKE', "%$keyword%")->paginate(3);
         $genres = Genre::where('name', 'LIKE', "%$keyword%")->get()->toArray();
+        $total = count($movies);
 
-        return view('home.search.show', compact('movies','genres','keyword'));
+        return view('home.search.show', compact('movies','genres','keyword','total'));
     }
 }

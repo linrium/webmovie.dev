@@ -61,9 +61,7 @@
 	<script>
 		function confirmDelete() {
 		var result = confirm('Are you sure you want to delete?');
-
 		if (result) {
-				swal("Here's a message!")
 				return true;
 			} else {
 				return false;

@@ -24,7 +24,7 @@ class MovieRequest extends FormRequest
     public function rules()
     {
         return [
-            'txtName'        => 'required|unique:movies,name',
+            'txtName'        => 'required',
             'txtStatus'      => 'required',
             'txtNumber'      => 'required',
             'txtDescription' => 'required',
