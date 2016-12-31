@@ -22,7 +22,6 @@
                             <th>#</th>
                             <th>Year</th>
                             <th>Edit</th>
-                            <th>View</th>
                             <th>Delete</th>
                         </thead>
                         <tbody>
@@ -36,14 +35,11 @@
                                         <a class="btn btn-default" href="{!! URL::route('year.edit', $item['id']) !!}">Edit</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-default" href="{!! URL::route('year.show', $item['id']) !!}">View</a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('year.destroy', $item['id']) }}" method="post">
+                                        <form action="{{ route('year.destroy', $item['id']) }}" method="post"  onsubmit='return confirmDelete()'>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="id" value="{{ $item['id'] }}">
-                                            <button type="button" class="btn btn-error" data-toggle="modal" data-target="#myModal">Delete</button>
+                                            <button type="submit" class="btn btn-error">Delete</button>
                                             @include('admin.component.modal')
                                         </form>
                                     </td>

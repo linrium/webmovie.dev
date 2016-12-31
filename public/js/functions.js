@@ -20,7 +20,7 @@ $(document).ready(() => {
 
     setInterval(function () {
         let random = Math.floor(Math.random() * 28) + 1;
-        $('.header').css('background-image', 'url("./public/img/' + random + '.jpg")');
+        $('.header').css('background-image', 'url("http://webmovie.dev/public/img/' + random + '.jpg")');
         $('.header__album h2').html(animeName[random - 1]);
     }, 5000);
 
@@ -38,4 +38,6 @@ $(document).ready(() => {
             }
         });
     });
+
+    
 })

@@ -4,7 +4,7 @@
         <div class="header__search row">
             <div class="col-md-4 header__search--center">
                 <form action="{{ route('search.show') }}" method="get">
-                    <input type="search" placeholder="What are you looking for ?" name="q" id="search-bar" class="form-control"/>
+                    <input type="search" placeholder="What are you looking for ?" name="q" id="search-bar" class="form-control" required/>
                 </form>
             
             </div>

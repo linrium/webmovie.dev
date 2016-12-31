@@ -11,6 +11,7 @@
 <link href="{{ url('public/assets/bootstrap-select.min.css') }}" rel="stylesheet">
 <link href="{{ url('public/assets/tokenfield-typeahead.min.css') }}" rel="stylesheet">
 <link href="{{ url('public/assets/bootstrap-tokenfield.min.css') }}" rel="stylesheet">
+<link href="{{ url('public/components/sweetalert/dist/sweetalert.css') }}" rel="stylesheet">
 
 <!--Icons-->
 <script src="{{ url('public/js/lumino.glyphs.js') }}"></script>
@@ -56,6 +57,19 @@
 	<script src="{{ url('public/js/typeahead.bundle.min.js') }}"></script>
 	<script src="{{ url('public/js/jquery.uploadPreview.min.js') }}"></script>
 	<script src="{{ url('public/js/myscript.js') }}"></script>
+	<script src="{{ url('public/components/sweetalert/dist/sweetalert.min.js') }}"></script>
+	<script>
+		function confirmDelete() {
+		var result = confirm('Are you sure you want to delete?');
+
+		if (result) {
+				swal("Here's a message!")
+				return true;
+			} else {
+				return false;
+			}
+		}
+	</script>
 </body>
 
 </html>

@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-success" href="{!! route('genre.create') !!}">Create Genre</a>
+                    <a class="btn btn-success" href="{!! route('genre.create') !!}" onsubmit='return confirmDelete()'>Create Genre</a>
                 </div>
                 <div class="panel-body">
                     <h3>{{ $data->total() }} genres</h3>
@@ -22,7 +22,6 @@
                             <th>#</th>
                             <th>Genre</th>
                             <th>Edit</th>
-                            <th>View</th>
                             <th>Delete</th>
                         </thead>
                         <tbody>
@@ -34,9 +33,6 @@
                                     <td>{!! $item['name'] !!}</td>
                                     <td>
                                         <a class="btn btn-default" href="{!! URL::route('genre.edit', $item['id']) !!}">Edit</a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-default" href="{!! URL::route('genre.show', $item['id']) !!}">View</a>
                                     </td>
                                     <td>
                                         <form action="{{ route('genre.destroy', $item['id']) }}" method="post">

@@ -22,7 +22,6 @@
                             <th>#</th>
                             <th>Fansub</th>
                             <th>Edit</th>
-                            <th>View</th>
                             <th>Delete</th>
                         </thead>
                         <tbody>
@@ -36,10 +35,7 @@
                                         <a class="btn btn-default" href="{!! URL::route('fansub.edit', $item['id']) !!}">Edit</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-default" href="{!! URL::route('fansub.show', $item['id']) !!}">View</a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('fansub.destroy', $item['id']) }}" method="post">
+                                        <form action="{{ route('fansub.destroy', $item['id']) }}" method="post" onsubmit='return confirmDelete()'>
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="id" value="{{ $item['id'] }}">
