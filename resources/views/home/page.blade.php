@@ -69,6 +69,7 @@
                 <span class="span-inline"><i class="fa fa-building"></i> Producer: {!! $arrProducers !!}</span>
                 <?php $year = DB::table('years')->where('id','=', $movie['id'])->get()->toArray() ?>
                 <span class="span-inline"><i class="fa fa-clock-o"></i> Year: <span><a href="{!! route('yearpage.show', $movie['id']) !!}">{{ $year[0]->name }}</a></span></span>
+                <span class="span-inline"><i class="fa fa-tags"></i> Fansubs: {!! $arrFansubs !!}</span>
                 <span class="span-inline"><i class="fa fa-tags"></i> Tags: {!! $arrTags !!}</span>
                 <span class="span-inline"><i class="fa fa-info-circle"></i> Description</span>
 

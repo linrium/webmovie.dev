@@ -45,12 +45,14 @@ class PageController extends Controller
         $genres = Movie::find($id)->genre()->get()->toArray();
         $producers = Movie::find($id)->producer()->get()->toArray();
         $keywords = Movie::find($id)->keyword()->get()->toArray();
+        $fansubs = Movie::find($id)->fansub()->get()->toArray();
         $links = Episode::find($episodeId)->link()->get()->toArray();
 
         // convert data to array;
-        $arrGenres = $this->mapArray('webmovie.dev/genre/anime', $genres);
-        $arrProducers = $this->mapArray('webmovie.dev/producer/anime', $producers);
-        $arrTags = $this->mapArray('webmovie.dev/keyword/anime', $keywords);
+        $arrGenres = $this->mapArray('genre/anime', $genres);
+        $arrProducers = $this->mapArray('producer/anime', $producers);
+        $arrTags = $this->mapArray('keyword/anime', $keywords);
+        $arrFansubs = $this->mapArray('fansub/anime', $fansubs);
 
         // like
         $like = Like::where('episode_id','=',$episodeId)->get()->toArray();
@@ -58,7 +60,7 @@ class PageController extends Controller
         $likeId = 0;
         $isLiked = $this->getUserLiked($like, $likeId);
 
-        return view('home.page', compact('likeId','isLiked','totalLiked','links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'arrTags','id', 'episodeId'));
+        return view('home.page', compact('likeId','isLiked','totalLiked','links', 'movie', 'movies', 'episodes', 'episode', 'arrGenres', 'arrProducers', 'arrTags', 'arrFansubs', 'id', 'episodeId'));
         // echo '<pre>';
         // print_r($likeId);
     }

@@ -90,6 +90,17 @@ Route::group(['prefix'=>'keyword'], function() {
     ]);
 });
 
+Route::group(['prefix'=>'fansub'], function() {
+    Route::get('', [
+        'as' => 'fansubpage.index',
+        'uses' => 'Home\FansubPageController@index'
+    ]);
+    Route::get('anime/{id}', [
+        'as' => 'fansubpage.show',
+        'uses' => 'Home\FansubPageController@show'
+    ]);
+});
+
 // member routes
 Route::group(['prefix'=>'member','middleware'=>['auth']], function() {
     Route::group(['prefix'=>'myaccount'], function() {
