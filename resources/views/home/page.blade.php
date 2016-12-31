@@ -58,6 +58,12 @@
                     </div>
                     <div class="col-md-4"><span id="views" class="hvr-underline-from-left"> <span id="count-views" style="display: inline">{{ Counter::showAndCount('episodes', $episode['id'] ) }}</span> views</span></div>
                     {{ Counter::count('movies', $movie['id'] ) }}
+                    <?php
+                        $count = Counter::show('movies', $movie['id'] );
+                        if($count !== $movie['views']) {
+                            DB::table('movies')->where('id','=',$movie['id'])->update(['views' => $count ]);
+                        }
+                    ?>
                 </div>
                 <span class="span-inline"><i class="fa fa-list"></i> Genre: {!! $arrGenres !!}</span>
                 <span class="span-inline"><i class="fa fa-building"></i> Producer: {!! $arrProducers !!}</span>
