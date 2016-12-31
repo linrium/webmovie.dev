@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.4.15.7
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 21, 2016 at 05:38 AM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Host: 127.0.0.1:3306
+-- Generation Time: Dec 31, 2016 at 06:50 AM
+-- Server version: 5.7.13
+-- PHP Version: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,38 +26,38 @@ SET time_zone = "+00:00";
 -- Table structure for table `episodes`
 --
 
-CREATE TABLE `episodes` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `episodes` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `views` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `likes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `movie_id` int(10) UNSIGNED NOT NULL,
+  `movie_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `episodes`
 --
 
 INSERT INTO `episodes` (`id`, `name`, `alias`, `views`, `likes`, `movie_id`, `created_at`, `updated_at`) VALUES
-(7, '1', '1', '0', '0', 1, '2016-12-17 21:54:46', '2016-12-17 21:54:46'),
-(8, '2', '2', '0', '0', 1, '2016-12-17 21:55:06', '2016-12-17 21:55:06'),
-(9, '3', '3', '0', '0', 1, '2016-12-17 21:56:21', '2016-12-17 21:56:21'),
-(10, '1', '1', '0', '0', 8, '2016-12-17 23:21:51', '2016-12-17 23:21:51'),
-(11, '2', '2', '0', '0', 8, '2016-12-17 23:27:26', '2016-12-17 23:27:26'),
+(7, '1', '1', '0', '1', 1, '2016-12-17 21:54:46', '2016-12-30 20:14:15'),
+(8, '2', '2', '0', '1', 1, '2016-12-17 21:55:06', '2016-12-30 20:14:10'),
+(9, '3', '3', '0', '1', 1, '2016-12-17 21:56:21', '2016-12-30 20:14:05'),
+(10, '1', '1', '0', '0', 8, '2016-12-17 23:21:51', '2016-12-30 19:56:59'),
+(11, '2', '2', '0', '0', 8, '2016-12-17 23:27:26', '2016-12-30 19:57:11'),
 (12, '1', '1', '0', '0', 7, '2016-12-17 23:28:06', '2016-12-17 23:28:06'),
 (13, '1', '1', '0', '0', 6, '2016-12-17 23:30:44', '2016-12-17 23:30:44'),
 (14, '2', '2', '0', '0', 6, '2016-12-17 23:31:54', '2016-12-17 23:31:54'),
-(15, '1', '1', '0', '0', 5, '2016-12-17 23:32:41', '2016-12-17 23:32:41'),
-(16, '2', '2', '0', '0', 5, '2016-12-17 23:33:07', '2016-12-17 23:33:07'),
-(17, '1', '1', '0', '0', 4, '2016-12-17 23:33:36', '2016-12-17 23:33:36'),
+(15, '1', '1', '0', '0', 5, '2016-12-17 23:32:41', '2016-12-30 19:42:02'),
+(16, '2', '2', '0', '0', 5, '2016-12-17 23:33:07', '2016-12-30 19:42:05'),
+(17, '1', '1', '0', '0', 4, '2016-12-17 23:33:36', '2016-12-30 19:44:03'),
 (18, '2', '2', '0', '0', 4, '2016-12-17 23:33:49', '2016-12-17 23:33:49'),
-(19, '1', '1', '0', '0', 3, '2016-12-17 23:34:17', '2016-12-17 23:34:17'),
-(20, '2', '2', '0', '0', 3, '2016-12-17 23:34:37', '2016-12-17 23:34:37'),
-(21, '1', '1', '0', '0', 2, '2016-12-17 23:35:07', '2016-12-17 23:35:07'),
-(22, '2', '2', '0', '0', 2, '2016-12-17 23:35:20', '2016-12-17 23:35:20');
+(19, '1', '1', '0', '1', 3, '2016-12-17 23:34:17', '2016-12-30 20:13:33'),
+(20, '2', '2', '0', '0', 3, '2016-12-17 23:34:37', '2016-12-30 20:13:53'),
+(21, '1', '1', '0', '1', 2, '2016-12-17 23:35:07', '2016-12-30 20:49:17'),
+(22, '2', '2', '0', '1', 2, '2016-12-17 23:35:20', '2016-12-30 20:49:30');
 
 -- --------------------------------------------------------
 
@@ -65,10 +65,10 @@ INSERT INTO `episodes` (`id`, `name`, `alias`, `views`, `likes`, `movie_id`, `cr
 -- Table structure for table `episode_keywords`
 --
 
-CREATE TABLE `episode_keywords` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `episode_id` int(10) UNSIGNED NOT NULL,
-  `keyword_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `episode_keywords` (
+  `id` int(10) unsigned NOT NULL,
+  `episode_id` int(10) unsigned NOT NULL,
+  `keyword_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -79,13 +79,13 @@ CREATE TABLE `episode_keywords` (
 -- Table structure for table `episode_links`
 --
 
-CREATE TABLE `episode_links` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `episode_links` (
+  `id` int(10) unsigned NOT NULL,
   `link` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `episode_id` int(10) UNSIGNED NOT NULL,
+  `episode_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `episode_links`
@@ -179,13 +179,13 @@ INSERT INTO `episode_links` (`id`, `link`, `episode_id`, `created_at`, `updated_
 -- Table structure for table `fansubs`
 --
 
-CREATE TABLE `fansubs` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fansubs` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `fansubs`
@@ -214,13 +214,13 @@ INSERT INTO `fansubs` (`id`, `name`, `alias`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `fansub_movies`
 --
 
-CREATE TABLE `fansub_movies` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `movie_id` int(10) UNSIGNED NOT NULL,
-  `fansub_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fansub_movies` (
+  `id` int(10) unsigned NOT NULL,
+  `movie_id` int(10) unsigned NOT NULL,
+  `fansub_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `fansub_movies`
@@ -251,13 +251,13 @@ INSERT INTO `fansub_movies` (`id`, `movie_id`, `fansub_id`, `created_at`, `updat
 -- Table structure for table `genres`
 --
 
-CREATE TABLE `genres` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `genres` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `genres`
@@ -287,13 +287,13 @@ INSERT INTO `genres` (`id`, `name`, `alias`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `genre_movies`
 --
 
-CREATE TABLE `genre_movies` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `movie_id` int(10) UNSIGNED NOT NULL,
-  `genre_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `genre_movies` (
+  `id` int(10) unsigned NOT NULL,
+  `movie_id` int(10) unsigned NOT NULL,
+  `genre_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `genre_movies`
@@ -358,13 +358,13 @@ INSERT INTO `genre_movies` (`id`, `movie_id`, `genre_id`, `created_at`, `updated
 -- Table structure for table `keywords`
 --
 
-CREATE TABLE `keywords` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `keywords` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `keywords`
@@ -394,10 +394,10 @@ INSERT INTO `keywords` (`id`, `name`, `alias`, `created_at`, `updated_at`) VALUE
 -- Table structure for table `kryptonit3_counter_page`
 --
 
-CREATE TABLE `kryptonit3_counter_page` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `kryptonit3_counter_page` (
+  `id` bigint(20) unsigned NOT NULL,
   `page` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `kryptonit3_counter_page`
@@ -405,14 +405,29 @@ CREATE TABLE `kryptonit3_counter_page` (
 
 INSERT INTO `kryptonit3_counter_page` (`id`, `page`) VALUES
 (1, '032a71c8-b350-53f6-9d87-bf8ebe6c3d67'),
+(11, '0dc54eb9-1897-5e4e-8d97-7bc3ab3ee685'),
 (3, '168ec8b1-3868-5985-889a-3ce083f9a185'),
 (5, '1af1a769-f765-5927-bea9-2126c7ea4a38'),
 (9, '235f7050-129d-5cc9-a41e-ceedc5693f20'),
+(13, '24fff3ce-9db0-52a2-8364-6e99c0d68ea0'),
+(15, '33e240ad-559e-5afe-8ec4-7cca4e44691a'),
+(23, '34fcf4ce-6979-5855-aea4-a897214915a2'),
+(17, '3e7b1af7-2181-55af-86bf-a1de77e8687b'),
+(19, '409ff08f-4154-5dd0-93a1-9296db404dc5'),
 (8, '54fd4a24-a451-5ed8-89ee-3e854dae1cf4'),
+(22, '63e9518f-f969-51c7-bbe4-267bb4a0ccce'),
+(21, '63fb5213-a75e-556e-a764-e2a1d5a84210'),
+(12, '86a92a67-e3a3-5748-b67c-d37679b76c86'),
 (2, '88ed4702-5369-52eb-bdfc-9b3140a096f8'),
 (4, '9f5bf574-0b29-5a67-b4f1-9ce86e29ad6e'),
 (7, 'a57d26c0-c0f9-571a-9ef4-4fdee2a5d929'),
-(6, 'd3a9c355-6b95-5b20-9026-652306211cb0');
+(20, 'a63e82c6-2b5c-57a7-b469-9ef165ba8d07'),
+(14, 'a6436f34-e1c2-56bc-ab8c-980b0de6ea79'),
+(16, 'c4f63cbb-3ae8-57bd-acbd-cb569ccbc040'),
+(6, 'd3a9c355-6b95-5b20-9026-652306211cb0'),
+(18, 'ee3f2e72-1799-5a6d-a540-69fbf6e2ccd8'),
+(10, 'f4e88cdc-89dc-5340-8d37-0241a4c2f0ef'),
+(24, 'fb48ac31-9736-5b6a-a060-8afe1bd21050');
 
 -- --------------------------------------------------------
 
@@ -420,9 +435,9 @@ INSERT INTO `kryptonit3_counter_page` (`id`, `page`) VALUES
 -- Table structure for table `kryptonit3_counter_page_visitor`
 --
 
-CREATE TABLE `kryptonit3_counter_page_visitor` (
-  `page_id` bigint(20) UNSIGNED NOT NULL,
-  `visitor_id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `kryptonit3_counter_page_visitor` (
+  `page_id` bigint(20) unsigned NOT NULL,
+  `visitor_id` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -441,7 +456,37 @@ INSERT INTO `kryptonit3_counter_page_visitor` (`page_id`, `visitor_id`, `created
 (7, 2, '2016-12-19 05:00:52'),
 (8, 2, '2016-12-20 03:50:23'),
 (9, 2, '2016-12-19 05:02:48'),
-(4, 3, '2016-12-19 05:10:26');
+(4, 3, '2016-12-19 05:10:26'),
+(4, 4, '2016-12-30 20:45:29'),
+(5, 4, '2016-12-30 20:45:29'),
+(8, 4, '2016-12-30 20:31:44'),
+(7, 4, '2016-12-30 20:31:44'),
+(6, 4, '2016-12-30 20:34:45'),
+(16, 4, '2016-12-30 19:44:03'),
+(11, 4, '2016-12-30 19:44:03'),
+(19, 4, '2016-12-30 20:02:11'),
+(13, 4, '2016-12-30 20:02:11'),
+(18, 4, '2016-12-30 19:56:59'),
+(9, 4, '2016-12-30 20:32:16'),
+(10, 4, '2016-12-30 20:32:16'),
+(21, 4, '2016-12-30 20:14:10'),
+(20, 4, '2016-12-30 20:14:15'),
+(22, 4, '2016-12-30 20:29:39'),
+(14, 4, '2016-12-30 20:29:39'),
+(22, 5, '2016-12-30 20:19:49'),
+(14, 5, '2016-12-30 20:19:49'),
+(1, 4, '2016-12-30 20:31:40'),
+(8, 6, '2016-12-30 20:49:17'),
+(7, 6, '2016-12-30 20:49:30'),
+(9, 6, '2016-12-30 20:48:15'),
+(10, 6, '2016-12-30 20:48:15'),
+(4, 6, '2016-12-30 20:47:22'),
+(5, 6, '2016-12-30 20:47:22'),
+(1, 6, '2016-12-30 20:49:30'),
+(19, 6, '2016-12-30 20:47:51'),
+(13, 6, '2016-12-30 20:47:51'),
+(24, 6, '2016-12-30 20:47:59'),
+(15, 6, '2016-12-30 20:47:59');
 
 -- --------------------------------------------------------
 
@@ -449,10 +494,10 @@ INSERT INTO `kryptonit3_counter_page_visitor` (`page_id`, `visitor_id`, `created
 -- Table structure for table `kryptonit3_counter_visitor`
 --
 
-CREATE TABLE `kryptonit3_counter_visitor` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `kryptonit3_counter_visitor` (
+  `id` bigint(20) unsigned NOT NULL,
   `visitor` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `kryptonit3_counter_visitor`
@@ -461,7 +506,10 @@ CREATE TABLE `kryptonit3_counter_visitor` (
 INSERT INTO `kryptonit3_counter_visitor` (`id`, `visitor`) VALUES
 (3, '41a893dc49f3107ede61c7f513b6dce59487455a2235f770259ef072cd586df5'),
 (1, '62d3597f088c49a60c4ecd59c882cb337fe6f21a49d6e273bbd9455604eaee64'),
-(2, 'b9d5ae03884b571e913e8e468a7ddb1ee05ea2bb14be1b54b141678c59bcca7e');
+(6, 'b256bc715b4f0b24f259ef7fa07005ec6c9f05eec81a512dd4cfbb846dda93df'),
+(2, 'b9d5ae03884b571e913e8e468a7ddb1ee05ea2bb14be1b54b141678c59bcca7e'),
+(5, 'cc2d90b783002bc958f8ea899ec80b9c55d89be84714da6213847bd06645ee9b'),
+(4, 'f5217a72fa7c5339464458081e33cd9cf9fd3928ef26435186301040f2885b59');
 
 -- --------------------------------------------------------
 
@@ -469,21 +517,25 @@ INSERT INTO `kryptonit3_counter_visitor` (`id`, `visitor`) VALUES
 -- Table structure for table `likeables`
 --
 
-CREATE TABLE `likeables` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `likeables` (
+  `id` int(10) unsigned NOT NULL,
   `user_id` int(11) NOT NULL,
   `episode_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `likeables`
 --
 
 INSERT INTO `likeables` (`id`, `user_id`, `episode_id`, `created_at`, `updated_at`) VALUES
-(8, 9, 19, '2016-12-20 19:16:11', '2016-12-20 19:16:11'),
-(9, 1, 19, '2016-12-20 19:16:48', '2016-12-20 19:16:48');
+(31, 1, 19, '2016-12-30 20:13:32', '2016-12-30 20:13:32'),
+(33, 1, 9, '2016-12-30 20:14:05', '2016-12-30 20:14:05'),
+(34, 1, 8, '2016-12-30 20:14:10', '2016-12-30 20:14:10'),
+(35, 1, 7, '2016-12-30 20:14:15', '2016-12-30 20:14:15'),
+(36, 13, 21, '2016-12-30 20:49:17', '2016-12-30 20:49:17'),
+(37, 13, 22, '2016-12-30 20:49:30', '2016-12-30 20:49:30');
 
 -- --------------------------------------------------------
 
@@ -491,11 +543,11 @@ INSERT INTO `likeables` (`id`, `user_id`, `episode_id`, `created_at`, `updated_a
 -- Table structure for table `migrations`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int(10) unsigned NOT NULL,
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -531,36 +583,36 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `movies`
 --
 
-CREATE TABLE `movies` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `movies` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `thumb` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `views` int(10) UNSIGNED NOT NULL,
-  `likes` int(10) UNSIGNED NOT NULL,
+  `views` int(10) unsigned NOT NULL,
+  `likes` int(10) unsigned NOT NULL,
   `current_episodes` int(11) NOT NULL,
   `total_episodes` int(11) NOT NULL,
   `description` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `year_id` int(10) UNSIGNED NOT NULL,
-  `season_id` int(10) UNSIGNED NOT NULL,
+  `year_id` int(10) unsigned NOT NULL,
+  `season_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `movies`
 --
 
 INSERT INTO `movies` (`id`, `name`, `alias`, `status`, `thumb`, `views`, `likes`, `current_episodes`, `total_episodes`, `description`, `year_id`, `season_id`, `created_at`, `updated_at`) VALUES
-(1, 'One Piece', 'One-Piece', 'continue', '1.jpg', 0, 0, 3, 0, 'One Piece xoay quanh 1 nhóm cướp biển được gọi là Băng Hải tặc Mũ Rơm - Straw Hat Pirates - được thành lập và lãnh đạo bởi thuyền trưởng Monkey D. Luffy. Cậu bé Luffy có ước mơ tìm thấy kho báu vĩ đại nhất, One Piece, của Vua Hải Tặc đời trước Gold D. Roger và trở thành Vua Hải Tặc đời kế tiếp.', 1, 1, '2016-12-17 21:12:18', '2016-12-17 21:56:21'),
-(2, 'Naruto Shippuuden', 'Naruto-Shippuuden', 'continue', '2.jpg', 0, 0, 2, 0, '12 năm trước, hồ ly 9 đuôi tấn công làng ninja Mộc Diệp, Hokage Đệ Tứ đã đánh bại và phong ấn vào cậu bé Naruto.Từ đó, Naruto bị mọi người xa lánh, vậy nên cậu tìm ra cách được thừa nhận và chú ý duy nhất – qua các trò phá phách và nghịch ngợm.Câu chuyện chính bám theo sự trưởng thành và tiến bộ của Naruto và bạn cậu khi làm ninja, và nhấn mạnh mối quan hệ giữa họ và sự ảnh hưởng của quá khứ đến tính cách họ. Naruto tìm được hai người bạn đồng hành cùng là Uchiha Sasuke và Haruno Sakura, cuộc phiêu lưu bắt đầu.', 1, 1, '2016-12-17 22:07:01', '2016-12-17 23:35:20'),
-(3, 'Fairy Tail', 'Fairy-Tail', 'stoped', '3.jpg', 0, 0, 2, 175, 'Câu chuyện về một cô thiếu nữ tên Lucy Heartfilia, khao khát của cô là gia nhập Hội Pháp sư nổi tiếng Fairy Tail. Trên đường phiêu lưu, Lucy đã vô tình gặp gỡ Natsu "Salamander" Dragneel, một thành viên của Fairy Tail, người sở hữu pháp thuật cổ đại Sát Long. Thế rồi Lucy được Natsu giới thiệu vào Hội Pháp sư Fairy Tail và cùng anh chàng này tham gia vô số nhiệm vụ khó khăn nhưng cũng không kém phần thú vị.', 2, 2, '2016-12-17 22:15:31', '2016-12-17 23:34:37'),
+(1, 'One Piece', 'One-Piece', 'continue', '1.jpg', 2, 3, 3, 0, 'One Piece xoay quanh 1 nhóm cướp biển được gọi là Băng Hải tặc Mũ Rơm - Straw Hat Pirates - được thành lập và lãnh đạo bởi thuyền trưởng Monkey D. Luffy. Cậu bé Luffy có ước mơ tìm thấy kho báu vĩ đại nhất, One Piece, của Vua Hải Tặc đời trước Gold D. Roger và trở thành Vua Hải Tặc đời kế tiếp.', 1, 1, '2016-12-17 21:12:18', '2016-12-30 20:14:15'),
+(2, 'Naruto Shippuuden', 'Naruto-Shippuuden', 'continue', '2.jpg', 3, 2, 2, 0, '12 năm trước, hồ ly 9 đuôi tấn công làng ninja Mộc Diệp, Hokage Đệ Tứ đã đánh bại và phong ấn vào cậu bé Naruto.Từ đó, Naruto bị mọi người xa lánh, vậy nên cậu tìm ra cách được thừa nhận và chú ý duy nhất – qua các trò phá phách và nghịch ngợm.Câu chuyện chính bám theo sự trưởng thành và tiến bộ của Naruto và bạn cậu khi làm ninja, và nhấn mạnh mối quan hệ giữa họ và sự ảnh hưởng của quá khứ đến tính cách họ. Naruto tìm được hai người bạn đồng hành cùng là Uchiha Sasuke và Haruno Sakura, cuộc phiêu lưu bắt đầu.', 1, 1, '2016-12-17 22:07:01', '2016-12-30 20:49:30'),
+(3, 'Fairy Tail', 'Fairy-Tail', 'stoped', '3.jpg', 3, 1, 2, 175, 'Câu chuyện về một cô thiếu nữ tên Lucy Heartfilia, khao khát của cô là gia nhập Hội Pháp sư nổi tiếng Fairy Tail. Trên đường phiêu lưu, Lucy đã vô tình gặp gỡ Natsu "Salamander" Dragneel, một thành viên của Fairy Tail, người sở hữu pháp thuật cổ đại Sát Long. Thế rồi Lucy được Natsu giới thiệu vào Hội Pháp sư Fairy Tail và cùng anh chàng này tham gia vô số nhiệm vụ khó khăn nhưng cũng không kém phần thú vị.', 2, 2, '2016-12-17 22:15:31', '2016-12-30 20:13:53'),
 (4, 'Bleach', 'Bleach', 'continue', '4.jpg', 0, 0, 2, 366, 'Ichigo Kurosaki là một thiếu niên hung hăng, hay gây rắc rối và cậu có được một năng lực đặc bệt là có thể nhìn thấy linh hồn. Câu chuyện bắt đầu với sự xuất hiện bất ngờ của một người lạ ngay trong phòng ngủ của Ichigo. Người lạ mặt này chính là Shinigami (thần chết) Rukia Kuchiki, vô cùng ngạc nhiên trước việc Ichigo có thể nhìn thấy cô. Cuộc hội thoại của họ bị cắt ngang bằng việc một ác ma tấn công vào nhà của Ichigo. Sau khi bị thương tích đầy mình vì phải ra tay bảo vệ Ichigo, cô quyết định truyền một nửa năng lực thần chết của mình cho Ichigo để Ichigo tiêu diệt ác ma đó nhưng Ichigo lại vô tình lấy hết năng lượng của cô, giúp cậu tiêu diệt ác ma đó một cách dễ dàng. Ngày hôm sau, Rukia xuất hiện trong lớp học của Ichigo với tư cách là học sinh mới chuyển đến. Càng ngạc nhiên hơn nữa khi cậu biết rằng Rukia bây giờ là một người bình thường. Cô đặt giả thiết rằng chính năng lực kỳ lạ của Ichigo đã hút hết năng lực của cô, khiến cô bị mắc kẹt lại nhân gian, không trở lại Cõi Âm được nữa. Rukia đã chuyển linh hồn cô vào trong một gigai - một cơ thể nhân tạo - trong khi phục hồi lại năng lượng của mình. Trong thời gian này, cô phải chuyển giao công việc của mình cho Ichigo, tiệu diệt ác ma và đưa những linh hồn lạc lối đến Cõi Âm.', 1, 1, '2016-12-17 22:22:03', '2016-12-17 23:33:50'),
 (5, 'One Punch Man', 'One-Punch-Man', 'completed', '5.jpg', 0, 0, 2, 12, 'Câu chuyện diễn ra tại thành phố Z của Nhật Bản tại thời điểm thế giới đầy những quái vật bí ẩn với sức mạnh ghê ghớm đã xuất hiện và gây ra biết bao nhiêu thảm họa. Nhưng cũng chính tại đây xuất hiện 1 siêu anh hùng đấm phát chết luôn, có thể dễ dàng đánh bại và tiêu diệt những con quái vật này. Cũng chính vì tài năng hiếm có này mà có rất nhiều nghi ngại về khả năng thực sự của vị siêu anh hùng, thậm chí anh không bao giờ nhận được bất kỳ lòng tin nào từ dân chúng. Câu chuyện sẽ tiếp diễn như thế nào? Mời các bạn theo dõi anime One Punch Man để cùng tham gia vào những cuộc phưu lưu của Saitama, vị anh hùng với sức mạnh không tưởng nhé. Tập 1 và 2 sẽ được giới thiệu tại một buổi chiếu tại Trung tâm Văn hóa thành phố Saitama (Small Hall) vào ngày 06 tháng 9, 2015. phát sóng đầy đủ chính thức sẽ bắt đầu vào ngày 05 tháng 10 2015.', 6, 6, '2016-12-17 22:35:16', '2016-12-17 23:33:07'),
-(6, 'Dragon Ball Super', 'Dragon-Ball-Super', 'continue', '6.jpg', 0, 0, 2, 0, 'Dragon Ball Serie mới có tên là Super hoặc Chou dài tập chiếu trên truyền hình, bối cảnh nối tiếp sau cuộc chiến với Ma nhân Buu !!!', 6, 7, '2016-12-17 22:39:46', '2016-12-17 23:31:54'),
-(7, 'Attack on Titan', 'Attack-On-Titan', 'completed', '12.jpg', 0, 0, 1, 1, 'Movie Recap từ tập 1-13.', 7, 8, '2016-12-17 22:44:25', '2016-12-17 23:28:06'),
-(8, 'Gintama', 'Gintama', 'continue', '28.jpg', 0, 0, 2, 265, 'Đất nước của những Samurai. Có một thời đất nước chúng tôi được gọi như vậy. 20 năm trước… Những kẻ ngoài hành tinh tự xưng là Amanto đột ngột đổ bộ xuống và thiết lập lệnh cấm mang kiếm. Samurai giờ đây bị khinh rẻ, coi thường. Trong thời đại như thế, vẫn còn một người đầy tinh thần samurai. Tên anh ta là Sakata Gintoki. Và tôi, Shimura Shinpachi, cùng Kagura-chan vì một số việc đưa đẩy mà bắt đầu làm việc cho cái tên vô trách nhiệm, hảo ngọt đó tại Vạn Sự Ốc. 3 người Vạn Sự Ốc chúng tôi sẽ cùng nhau dọn sạch Edo hủ bại này. Ừm, anime này là vậy thì phải?', 8, 9, '2016-12-17 22:50:01', '2016-12-17 23:28:25');
+(6, 'Dragon Ball Super', 'Dragon-Ball-Super', 'continue', '6.jpg', 1, 0, 2, 0, 'Dragon Ball Serie mới có tên là Super hoặc Chou dài tập chiếu trên truyền hình, bối cảnh nối tiếp sau cuộc chiến với Ma nhân Buu !!!', 6, 7, '2016-12-17 22:39:46', '2016-12-17 23:31:54'),
+(7, 'Attack on Titan', 'Attack-On-Titan', 'completed', '12.jpg', 2, 0, 1, 1, 'Movie Recap từ tập 1-13.', 7, 8, '2016-12-17 22:44:25', '2016-12-17 23:28:06'),
+(8, 'Gintama', 'Gintama', 'continue', '28.jpg', 2, 0, 2, 265, 'Đất nước của những Samurai. Có một thời đất nước chúng tôi được gọi như vậy. 20 năm trước… Những kẻ ngoài hành tinh tự xưng là Amanto đột ngột đổ bộ xuống và thiết lập lệnh cấm mang kiếm. Samurai giờ đây bị khinh rẻ, coi thường. Trong thời đại như thế, vẫn còn một người đầy tinh thần samurai. Tên anh ta là Sakata Gintoki. Và tôi, Shimura Shinpachi, cùng Kagura-chan vì một số việc đưa đẩy mà bắt đầu làm việc cho cái tên vô trách nhiệm, hảo ngọt đó tại Vạn Sự Ốc. 3 người Vạn Sự Ốc chúng tôi sẽ cùng nhau dọn sạch Edo hủ bại này. Ừm, anime này là vậy thì phải?', 8, 9, '2016-12-17 22:50:01', '2016-12-30 20:07:27');
 
 -- --------------------------------------------------------
 
@@ -568,13 +620,13 @@ INSERT INTO `movies` (`id`, `name`, `alias`, `status`, `thumb`, `views`, `likes`
 -- Table structure for table `movie_keywords`
 --
 
-CREATE TABLE `movie_keywords` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `movie_id` int(10) UNSIGNED NOT NULL,
-  `keyword_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `movie_keywords` (
+  `id` int(10) unsigned NOT NULL,
+  `movie_id` int(10) unsigned NOT NULL,
+  `keyword_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `movie_keywords`
@@ -617,7 +669,7 @@ INSERT INTO `movie_keywords` (`id`, `movie_id`, `keyword_id`, `created_at`, `upd
 -- Table structure for table `password_resets`
 --
 
-CREATE TABLE `password_resets` (
+CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
@@ -629,13 +681,13 @@ CREATE TABLE `password_resets` (
 -- Table structure for table `producers`
 --
 
-CREATE TABLE `producers` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `producers` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `producers`
@@ -665,13 +717,13 @@ INSERT INTO `producers` (`id`, `name`, `alias`, `created_at`, `updated_at`) VALU
 -- Table structure for table `producer_movies`
 --
 
-CREATE TABLE `producer_movies` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `movie_id` int(10) UNSIGNED NOT NULL,
-  `producer_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `producer_movies` (
+  `id` int(10) unsigned NOT NULL,
+  `movie_id` int(10) unsigned NOT NULL,
+  `producer_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `producer_movies`
@@ -706,13 +758,13 @@ INSERT INTO `producer_movies` (`id`, `movie_id`, `producer_id`, `created_at`, `u
 -- Table structure for table `seasons`
 --
 
-CREATE TABLE `seasons` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `seasons` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `seasons`
@@ -735,8 +787,8 @@ INSERT INTO `seasons` (`id`, `name`, `alias`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) unsigned NOT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `role` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -744,18 +796,20 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `role`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@webmovie.dev', 'admin', '$2y$10$qQO9kSFcUQfpcu8/oIL58uZYpMGF2Z86zsUeQ2kAAc/r8E1p/Dbxq', 'RmwsgZI3mZIdNN7jS8caXTGNMm5Nc97wKzbBTVF7HX3qK74zVmKle3HaelRE', '2016-12-17 20:59:10', '2016-12-20 20:39:43'),
+(1, 'admin', 'admin@webmovie.dev', 'admin', '$2y$10$qQO9kSFcUQfpcu8/oIL58uZYpMGF2Z86zsUeQ2kAAc/r8E1p/Dbxq', 'XokTXFPZwlN34ntJBnBTwc2wvPIJV3PuqsGuqgdHMyIkKeX5zgFiaFf2P0UG', '2016-12-17 20:59:10', '2016-12-30 19:57:15'),
 (3, 'linh111', 'linh111@gmail.com', 'member', '$2y$10$p.AaA8ileIk665L.8hBD/.tD67tzxtZXVNpvMTkA7gD04oxAwBBUS', 'd2n8O4crTyQC7STOBGnpyZumICkUBl6XxP5QJ9ddJJlsBz8DL4FlykDoCklJ', '2016-12-19 21:47:55', '2016-12-20 02:15:36'),
 (8, 'linhxyz', 'linhxyz@gmail.com', 'member', '$2y$10$tGR46/zW/9EbTsh.5LLNT.2zgc0BIpmQ4PcqKdNcy44Z5IrzpqTVO', 'TNe0j0juM7rWMwFNr1NOluvps38syqr5gXTDL6Bl', '2016-12-20 02:03:49', '2016-12-20 02:03:49'),
 (9, 'lin', 'lin@gmail.com', 'member', '$2y$10$DFy8vb4oj0d0r5ZK1KGWO.gq/rFn03b8/fGRkSeDLlC.sQ/QUkpCC', 'zRkMvnDc9ageDOvHuzvYOz3YWImnmEdDF3sTwYHSgxWk8cZNIpeBsepInk3G', '2016-12-20 02:18:02', '2016-12-20 20:39:53'),
-(12, 'lin1', 'lin1@gmail.com', 'member', '$2y$10$lZ1Av2APImtRn6I3Oip4Hufxz8iZIihTCBcNXsr.HF3HhzlmZQwda', 'AOOsPnKocLtpEBjq02iXIr6VCc3V1z7Jvsl1LvMgP6a67cMQi1qYqyeQ8a1T', '2016-12-20 02:51:14', '2016-12-20 03:14:37');
+(12, 'lin1', 'lin1@gmail.com', 'member', '$2y$10$lZ1Av2APImtRn6I3Oip4Hufxz8iZIihTCBcNXsr.HF3HhzlmZQwda', 'AOOsPnKocLtpEBjq02iXIr6VCc3V1z7Jvsl1LvMgP6a67cMQi1qYqyeQ8a1T', '2016-12-20 02:51:14', '2016-12-20 03:14:37'),
+(13, '456', 'linh123@gmail.com', 'member', '$2y$10$Z0dNQ0QvR9yHrIoSjfhn9OXxJGhR6xZfqRLLPottftlK49ishK/Dy', 'mnglWDVvQZB586AaADhUCLDDtElhna0RMA4X7WZIXYePuzBJUR7YtlSNsf0o', '2016-12-30 18:34:59', '2016-12-30 18:35:40'),
+(14, 'linh456', 'linh456@gmail.com', 'member', '$2y$10$WzaAxVOLXWAaI0TJj4ijaOZchX/dYux2FQWWxVd5HTMoO7Pm0ivf.', 'CSFMzNCRLb59YJmLfh9LfQMn06FzHWl7rde0GNqDpZgPAxUBl80gObnrvP6f', '2016-12-30 19:03:38', '2016-12-30 19:23:18');
 
 -- --------------------------------------------------------
 
@@ -763,13 +817,13 @@ INSERT INTO `users` (`id`, `username`, `email`, `role`, `password`, `remember_to
 -- Table structure for table `years`
 --
 
-CREATE TABLE `years` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `years` (
+  `id` int(10) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `years`
@@ -948,97 +1002,97 @@ ALTER TABLE `years`
 -- AUTO_INCREMENT for table `episodes`
 --
 ALTER TABLE `episodes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `episode_keywords`
 --
 ALTER TABLE `episode_keywords`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `episode_links`
 --
 ALTER TABLE `episode_links`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=111;
 --
 -- AUTO_INCREMENT for table `fansubs`
 --
 ALTER TABLE `fansubs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `fansub_movies`
 --
 ALTER TABLE `fansub_movies`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `genre_movies`
 --
 ALTER TABLE `genre_movies`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `keywords`
 --
 ALTER TABLE `keywords`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `kryptonit3_counter_page`
 --
 ALTER TABLE `kryptonit3_counter_page`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `kryptonit3_counter_visitor`
 --
 ALTER TABLE `kryptonit3_counter_visitor`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `likeables`
 --
 ALTER TABLE `likeables`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `movie_keywords`
 --
 ALTER TABLE `movie_keywords`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `producers`
 --
 ALTER TABLE `producers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `producer_movies`
 --
 ALTER TABLE `producer_movies`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `seasons`
 --
 ALTER TABLE `seasons`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `years`
 --
 ALTER TABLE `years`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- Constraints for dumped tables
 --
