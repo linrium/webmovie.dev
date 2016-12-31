@@ -101,7 +101,7 @@ class EpisodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $episode        = Episode:: find($id);
+        $episode        = Episode::find($id);
         $episode->name  = $request->txtName;
         $episode->alias = changeTitle($request->txtName);
         $episode->views = $episode->views;

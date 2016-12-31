@@ -23,6 +23,8 @@
                         <thead>
                             <th>#</th>
                             <th>Episode</th>
+                            <th>Views</th>
+                            <th>Likes</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </thead>
@@ -33,6 +35,8 @@
                                 <tr>
                                     <th>{!! $stt !!}</th>
                                     <td>Episode {!! $item['name'] !!}</td>
+                                    <td>{!! $item['views'] !!}</td>
+                                    <td>{!! $item['likes'] !!}</td>
                                     <td>
                                         <a class="btn btn-default" href="{!! URL::route('episode.edit', $item['id']) !!}">Edit</a>
                                     </td>

@@ -42,14 +42,14 @@
                             <i class="fa fa-heart"></i>
                             {{ $totalLiked }}
                             @if ($isLiked)
-                                <form action="{{ route('episode.unlike', $likeId) }}" method="post" style="display: inline">
+                                <form action="{{ route('episode.unlike', ['id' => $likeId, 'epsiode_id' => $episode['id'], 'movie_id' => $movie['id']]) }}" method="post" style="display: inline">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="id" value="{{ $likeId }}">
                                     <button style="background: none; border: none; padding: 0; cursor: pointer; margin-top: -5px" type="submit" class="btn btn-error" >Unlike</button>
                                 </form>
                             @else
-                                <form action="{{ route('episode.like', $episode['id']) }}" method="post" style="display: inline">
+                                <form action="{{ route('episode.like', [ 'id' => $episode['id'], 'movie_id' => $movie['id']]) }}" method="post" style="display: inline">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <button style="background: none; border: none; padding: 0; cursor: pointer; margin-top: -5px" type="submit" class="btn btn-error" >Like</button>
                                 </form>

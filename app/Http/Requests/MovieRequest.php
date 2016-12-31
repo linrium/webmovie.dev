@@ -29,12 +29,11 @@ class MovieRequest extends FormRequest
             'txtNumber'      => 'required',
             'txtDescription' => 'required',
             'txtYear'        => 'required',
-            'fileThumb'        => 'required',
             'txtSeason'      => 'required',
-            'txtProducer'=>'required',
-            'txtGenre' => 'required',
-            'txtFansub' => 'required',
-            'txtKeyword' => 'required'
+            'txtProducer'    => 'required',
+            'txtGenre'       => 'required',
+            'txtFansub'      => 'required',
+            'txtKeyword'     => 'required'
         ];
     }
     public function messages() {

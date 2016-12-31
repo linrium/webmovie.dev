@@ -23,11 +23,11 @@ Route::get('404', function() {
 
 // like
 Route::group(['prefix'=>'anime', 'middleware'=>'auth'], function() {
-    Route::post('like/{id}', [
+    Route::post('like/{id}/movie/{movie_id}', [
         'as' => 'episode.like',
         'uses' => 'LikeController@like'
     ]);
-    Route::delete('unlike/{id}', [
+    Route::delete('unlike/{id}/episode/{epsiode_id}/movie/{movie_id}', [
         'as' => 'episode.unlike',
         'uses' => 'LikeController@unlike'
     ]);

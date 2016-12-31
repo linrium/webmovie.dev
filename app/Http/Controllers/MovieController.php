@@ -163,6 +163,7 @@ class MovieController extends Controller
         $movie->alias            = changeTitle($request->txtName);
         $movie->status           = $request->txtStatus;
         $movie->views            = $movie->views;
+        $movie->likes            = $movie->likes;
         $movie->current_episodes = $movie->current_episodes;
         $movie->total_episodes   = $request->txtNumber;
         $movie->description      = $request->txtDescription;
